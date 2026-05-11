@@ -3,38 +3,57 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taxi Ride Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>TAXI COMMAND CENTER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@300;500;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
 ```
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    :root {
+        --bg-primary: #0a0e14;
+        --bg-secondary: #13171f;
+        --bg-card: #1a1f2e;
+        --accent-yellow: #ffd600;
+        --accent-cyan: #00f7ff;
+        --accent-magenta: #ff00ff;
+        --accent-green: #00ff88;
+        --accent-red: #ff3366;
+        --text-primary: #ffffff;
+        --text-secondary: #8b92a8;
+        --border: #2a2f3f;
+        --shadow: rgba(0, 247, 255, 0.2);
     }
 
-    :root {
-        --bg-dark: #0a0e1a;
-        --bg-card: #141824;
-        --accent-yellow: #ffd93d;
-        --accent-green: #6bcf7f;
-        --accent-blue: #4a9eff;
-        --accent-red: #ff6b6b;
-        --text-primary: #e8edf4;
-        --text-secondary: #8b95a8;
-        --border: #1e2433;
+    [data-theme="light"] {
+        --bg-primary: #f5f5f5;
+        --bg-secondary: #ffffff;
+        --bg-card: #ffffff;
+        --accent-yellow: #ffb700;
+        --accent-cyan: #0088cc;
+        --accent-magenta: #cc00cc;
+        --accent-green: #00cc66;
+        --accent-red: #ff3366;
+        --text-primary: #1a1f2e;
+        --text-secondary: #6b7280;
+        --border: #e5e7eb;
+        --shadow: rgba(0, 0, 0, 0.1);
     }
 
     body {
-        font-family: 'JetBrains Mono', monospace;
-        background: linear-gradient(135deg, var(--bg-dark) 0%, #0f1419 100%);
+        font-family: 'Rajdhani', sans-serif;
+        background: var(--bg-primary);
         color: var(--text-primary);
         min-height: 100vh;
-        padding: 20px;
-        position: relative;
         overflow-x: hidden;
+        position: relative;
     }
 
     body::before {
@@ -45,8 +64,9 @@
         right: 0;
         bottom: 0;
         background: 
-            radial-gradient(circle at 20% 30%, rgba(255, 217, 61, 0.05) 0%, transparent 50%),
-            radial-gradient(circle at 80% 70%, rgba(74, 158, 255, 0.05) 0%, transparent 50%);
+            radial-gradient(circle at 20% 30%, var(--accent-cyan) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, var(--accent-magenta) 0%, transparent 50%);
+        opacity: 0.03;
         pointer-events: none;
         z-index: 0;
     }
@@ -54,100 +74,158 @@
     .container {
         max-width: 600px;
         margin: 0 auto;
+        padding: 20px;
         position: relative;
         z-index: 1;
+        padding-bottom: 80px;
     }
 
+    /* HEADER */
     .header {
         text-align: center;
         margin-bottom: 30px;
-        animation: slideDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     @keyframes slideDown {
-        from {
-            opacity: 0;
-            transform: translateY(-30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(-50px) scale(0.9); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .header h1 {
-        font-family: 'Space Mono', monospace;
-        font-size: 2rem;
-        font-weight: 700;
-        margin-bottom: 8px;
-        background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-green) 100%);
+        font-family: 'Orbitron', monospace;
+        font-size: 2.5rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-magenta) 50%, var(--accent-yellow) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         text-transform: uppercase;
-        letter-spacing: 2px;
+        letter-spacing: 3px;
+        margin-bottom: 8px;
+        text-shadow: 0 0 30px var(--shadow);
     }
 
     .header p {
         color: var(--text-secondary);
-        font-size: 0.85rem;
-        font-weight: 300;
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
     }
 
-    .quick-add {
+    /* NAV TABS */
+    .nav-tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+        overflow-x: auto;
+        animation: fadeIn 0.8s ease 0.2s backwards;
+        padding-bottom: 10px;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .nav-tab {
+        flex: 1;
+        min-width: 100px;
+        background: var(--bg-card);
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        padding: 12px;
+        color: var(--text-secondary);
+        font-family: 'Orbitron', monospace;
+        font-size: 0.75rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .nav-tab::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+        transition: left 0.5s;
+    }
+
+    .nav-tab:hover::before {
+        left: 100%;
+    }
+
+    .nav-tab.active {
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
+        background: rgba(0, 247, 255, 0.1);
+        box-shadow: 0 0 20px var(--shadow);
+    }
+
+    /* CARD STYLE */
+    .card {
         background: var(--bg-card);
         border: 1px solid var(--border);
         border-radius: 16px;
         padding: 20px;
         margin-bottom: 20px;
-        animation: fadeIn 0.6s ease 0.2s backwards;
+        animation: fadeIn 0.8s ease backwards;
+        position: relative;
+        overflow: hidden;
     }
 
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta), var(--accent-yellow));
     }
 
-    .quick-add h3 {
+    .card h3 {
+        font-family: 'Orbitron', monospace;
         font-size: 0.9rem;
         text-transform: uppercase;
-        letter-spacing: 1.5px;
+        letter-spacing: 2px;
         margin-bottom: 15px;
-        color: var(--text-secondary);
-        font-weight: 500;
+        color: var(--accent-cyan);
     }
 
+    /* INPUT STYLES */
     .input-row {
         display: flex;
         gap: 10px;
         margin-bottom: 15px;
     }
 
-    input[type="number"], 
-    input[type="text"], 
-    input[type="time"], 
-    input[type="date"] {
+    input, select {
         flex: 1;
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid var(--border);
         border-radius: 8px;
         padding: 12px;
         color: var(--text-primary);
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9rem;
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
         transition: all 0.3s ease;
     }
 
-    input:focus {
+    input:focus, select:focus {
         outline: none;
-        border-color: var(--accent-yellow);
-        background: rgba(255, 217, 61, 0.05);
+        border-color: var(--accent-cyan);
+        background: rgba(0, 247, 255, 0.05);
+        box-shadow: 0 0 15px var(--shadow);
     }
 
     input::placeholder {
@@ -155,28 +233,76 @@
         opacity: 0.5;
     }
 
-    .now-btn {
-        background: rgba(107, 207, 127, 0.1);
-        border: 2px solid var(--accent-green);
+    /* BUTTONS */
+    .btn {
+        border: none;
         border-radius: 8px;
-        padding: 12px 20px;
-        color: var(--accent-green);
-        font-family: 'JetBrains Mono', monospace;
+        padding: 14px 20px;
+        font-family: 'Orbitron', monospace;
         font-size: 0.85rem;
         font-weight: 700;
         cursor: pointer;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 2px;
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+
+    .btn:active::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+        color: #000;
+        box-shadow: 0 5px 20px var(--shadow);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px var(--shadow);
+    }
+
+    .btn-secondary {
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid var(--border);
+        color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+        border-color: var(--accent-cyan);
+        background: rgba(0, 247, 255, 0.1);
+    }
+
+    .now-btn {
+        background: rgba(0, 255, 136, 0.1);
+        border: 2px solid var(--accent-green);
+        color: var(--accent-green);
+        padding: 12px 20px;
         white-space: nowrap;
     }
 
     .now-btn:hover {
         background: var(--accent-green);
-        color: var(--bg-dark);
-        transform: scale(1.05);
+        color: #000;
     }
 
+    /* TYPE SELECTOR */
     .type-selector {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -190,9 +316,9 @@
         border-radius: 8px;
         padding: 12px;
         color: var(--text-secondary);
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.8rem;
-        font-weight: 500;
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
         cursor: pointer;
         transition: all 0.3s ease;
         text-transform: uppercase;
@@ -200,100 +326,53 @@
     }
 
     .type-btn:hover {
-        transform: translateY(-2px);
+        transform: scale(1.02);
     }
 
     .type-btn.active {
         border-color: currentColor;
         background: currentColor;
-        color: #0a0e1a;
-        font-weight: 700;
+        color: #000;
+        box-shadow: 0 0 20px currentColor;
     }
 
     .type-btn[data-type="card"] { color: var(--accent-yellow); }
     .type-btn[data-type="cash"] { color: var(--accent-green); }
     .type-btn[data-type="invoice"] { color: var(--accent-red); }
-    .type-btn[data-type="wheelchair"] { color: var(--accent-blue); }
+    .type-btn[data-type="wheelchair"] { color: var(--accent-cyan); }
 
-    .add-btn {
-        width: 100%;
-        background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-green) 100%);
-        border: none;
-        border-radius: 8px;
-        padding: 14px;
-        color: var(--bg-dark);
-        font-family: 'Space Mono', monospace;
-        font-size: 0.9rem;
+    /* CATEGORY SELECTOR */
+    .category-selector {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 15px;
+        overflow-x: auto;
+    }
+
+    .category-btn {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 8px 16px;
+        color: var(--text-secondary);
+        font-size: 0.75rem;
         font-weight: 700;
         cursor: pointer;
-        text-transform: uppercase;
-        letter-spacing: 2px;
         transition: all 0.3s ease;
+        white-space: nowrap;
     }
 
-    .add-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(255, 217, 61, 0.3);
+    .category-btn.active {
+        border-color: var(--accent-magenta);
+        background: rgba(255, 0, 255, 0.1);
+        color: var(--accent-magenta);
     }
 
-    .add-btn:active {
-        transform: translateY(0);
-    }
-
-    .shift-section {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 20px;
-        margin-bottom: 20px;
-        animation: fadeIn 0.6s ease 0.3s backwards;
-    }
-
-    .shift-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 15px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid var(--border);
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .shift-date {
-        font-family: 'Space Mono', monospace;
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--accent-yellow);
-    }
-
-    .shift-time {
-        font-size: 0.85rem;
-        color: var(--text-secondary);
-    }
-
-    .shift-total {
-        text-align: right;
-    }
-
-    .total-label {
-        font-size: 0.75rem;
-        color: var(--text-secondary);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .total-amount {
-        font-family: 'Space Mono', monospace;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--accent-green);
-    }
-
+    /* RIDES LIST */
     .rides-list {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 10px;
     }
 
     .ride-item {
@@ -303,20 +382,16 @@
         background: rgba(255, 255, 255, 0.02);
         border-left: 3px solid;
         border-radius: 8px;
-        padding: 12px;
+        padding: 15px;
         transition: all 0.3s ease;
-        animation: slideIn 0.4s ease backwards;
+        animation: slideIn 0.5s ease backwards;
+        cursor: pointer;
+        position: relative;
     }
 
     @keyframes slideIn {
-        from {
-            opacity: 0;
-            transform: translateX(-20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
     }
 
     .ride-item:hover {
@@ -327,10 +402,15 @@
     .ride-item[data-type="card"] { border-left-color: var(--accent-yellow); }
     .ride-item[data-type="cash"] { border-left-color: var(--accent-green); }
     .ride-item[data-type="invoice"] { border-left-color: var(--accent-red); }
-    .ride-item[data-type="wheelchair"] { border-left-color: var(--accent-blue); }
+    .ride-item[data-type="wheelchair"] { border-left-color: var(--accent-cyan); }
+
+    .ride-item.swiped-left {
+        transform: translateX(-100px);
+        opacity: 0.5;
+    }
 
     .ride-type-badge {
-        padding: 4px 10px;
+        padding: 6px 12px;
         border-radius: 6px;
         font-size: 0.7rem;
         font-weight: 700;
@@ -340,44 +420,61 @@
     }
 
     .ride-item[data-type="card"] .ride-type-badge {
-        background: rgba(255, 217, 61, 0.15);
+        background: rgba(255, 214, 0, 0.15);
         color: var(--accent-yellow);
     }
 
     .ride-item[data-type="cash"] .ride-type-badge {
-        background: rgba(107, 207, 127, 0.15);
+        background: rgba(0, 255, 136, 0.15);
         color: var(--accent-green);
     }
 
     .ride-item[data-type="invoice"] .ride-type-badge {
-        background: rgba(255, 107, 107, 0.15);
+        background: rgba(255, 51, 102, 0.15);
         color: var(--accent-red);
     }
 
     .ride-item[data-type="wheelchair"] .ride-type-badge {
-        background: rgba(74, 158, 255, 0.15);
-        color: var(--accent-blue);
+        background: rgba(0, 247, 255, 0.15);
+        color: var(--accent-cyan);
     }
 
     .ride-details {
         flex: 1;
         display: flex;
-        gap: 8px;
-        align-items: center;
-        font-size: 0.85rem;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 4px;
         min-width: 0;
+    }
+
+    .ride-time {
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+        font-weight: 500;
     }
 
     .ride-note {
         color: var(--text-secondary);
         font-style: italic;
+        font-size: 0.85rem;
         overflow: hidden;
         text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .ride-category {
+        display: inline-block;
+        background: rgba(255, 0, 255, 0.1);
+        color: var(--accent-magenta);
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
     }
 
     .ride-tip {
-        background: rgba(107, 207, 127, 0.15);
+        background: rgba(0, 255, 136, 0.15);
         color: var(--accent-green);
         padding: 2px 8px;
         border-radius: 4px;
@@ -387,16 +484,16 @@
     }
 
     .ride-amount {
-        font-family: 'Space Mono', monospace;
-        font-size: 1.1rem;
-        font-weight: 700;
+        font-family: 'Orbitron', monospace;
+        font-size: 1.2rem;
+        font-weight: 900;
         color: var(--text-primary);
         margin-left: auto;
     }
 
-    .delete-btn {
-        background: rgba(255, 107, 107, 0.1);
-        border: 1px solid rgba(255, 107, 107, 0.3);
+    .delete-btn, .edit-btn {
+        background: rgba(255, 51, 102, 0.1);
+        border: 1px solid rgba(255, 51, 102, 0.3);
         border-radius: 6px;
         padding: 6px 10px;
         color: var(--accent-red);
@@ -405,176 +502,754 @@
         transition: all 0.3s ease;
     }
 
-    .delete-btn:hover {
-        background: rgba(255, 107, 107, 0.2);
-        transform: scale(1.05);
+    .edit-btn {
+        background: rgba(0, 247, 255, 0.1);
+        border-color: rgba(0, 247, 255, 0.3);
+        color: var(--accent-cyan);
     }
 
-    .export-section {
-        display: flex;
-        gap: 10px;
-        margin-top: 20px;
-        animation: fadeIn 0.6s ease 0.4s backwards;
+    .delete-btn:hover, .edit-btn:hover {
+        transform: scale(1.1);
     }
 
-    .export-btn {
-        flex: 1;
-        background: rgba(74, 158, 255, 0.1);
-        border: 2px solid var(--accent-blue);
-        border-radius: 8px;
-        padding: 14px;
-        color: var(--accent-blue);
-        font-family: 'Space Mono', monospace;
-        font-size: 0.85rem;
-        font-weight: 700;
-        cursor: pointer;
+    /* STATS GRID */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .stat-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
         text-transform: uppercase;
-        letter-spacing: 1.5px;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+
+    .stat-value {
+        font-family: 'Orbitron', monospace;
+        font-size: 2rem;
+        font-weight: 900;
+        color: var(--accent-cyan);
+    }
+
+    /* PROGRESS BAR */
+    .progress-bar {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        height: 20px;
+        overflow: hidden;
+        margin: 15px 0;
+        position: relative;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+        transition: width 0.5s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .progress-fill::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    .progress-text {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+    }
+
+    /* CHART */
+    .chart-container {
+        height: 200px;
+        margin: 20px 0;
+        position: relative;
+    }
+
+    .chart-bars {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-around;
+        height: 100%;
+        gap: 8px;
+    }
+
+    .chart-bar {
+        flex: 1;
+        background: linear-gradient(to top, var(--accent-cyan), var(--accent-magenta));
+        border-radius: 8px 8px 0 0;
+        position: relative;
+        transition: all 0.5s ease;
+        animation: growBar 1s ease backwards;
+    }
+
+    @keyframes growBar {
+        from { transform: scaleY(0); }
+        to { transform: scaleY(1); }
+    }
+
+    .chart-bar:hover {
+        transform: scaleX(1.1);
+        box-shadow: 0 0 20px var(--shadow);
+    }
+
+    .chart-label {
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.7rem;
+        color: var(--text-secondary);
+        white-space: nowrap;
+    }
+
+    /* THEME TOGGLE */
+    .theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background: var(--bg-card);
+        border: 2px solid var(--border);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .theme-toggle:hover {
+        transform: rotate(180deg) scale(1.1);
+        box-shadow: 0 0 20px var(--shadow);
+    }
+
+    /* BOTTOM NAV */
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--bg-card);
+        border-top: 2px solid var(--border);
+        display: flex;
+        justify-content: space-around;
+        padding: 15px 0;
+        z-index: 1000;
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .bottom-nav-btn {
+        flex: 1;
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 10px;
+    }
+
+    .bottom-nav-btn:hover,
+    .bottom-nav-btn.active {
+        color: var(--accent-cyan);
+        transform: scale(1.2);
+    }
+
+    /* MODAL */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(10px);
+        z-index: 2000;
+        animation: fadeIn 0.3s ease;
+    }
+
+    .modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content {
+        background: var(--bg-card);
+        border: 2px solid var(--border);
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 500px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(50px) scale(0.9); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .modal-title {
+        font-family: 'Orbitron', monospace;
+        font-size: 1.2rem;
+        font-weight: 900;
+        color: var(--accent-cyan);
+        text-transform: uppercase;
+    }
+
+    .modal-close {
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 1.5rem;
+        cursor: pointer;
         transition: all 0.3s ease;
     }
 
-    .export-btn:hover {
-        background: var(--accent-blue);
-        color: var(--bg-dark);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(74, 158, 255, 0.3);
-    }
-
-    .clear-btn {
-        background: rgba(255, 107, 107, 0.1);
-        border: 2px solid var(--accent-red);
+    .modal-close:hover {
         color: var(--accent-red);
+        transform: rotate(90deg);
     }
 
-    .clear-btn:hover {
-        background: var(--accent-red);
-        color: var(--bg-dark);
-        box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
-    }
-
+    /* EMPTY STATE */
     .empty-state {
         text-align: center;
-        padding: 40px 20px;
+        padding: 60px 20px;
         color: var(--text-secondary);
-        font-size: 0.9rem;
     }
 
     .empty-state-icon {
-        font-size: 3rem;
-        margin-bottom: 10px;
+        font-size: 4rem;
+        margin-bottom: 20px;
         opacity: 0.3;
+        animation: pulse 2s infinite;
     }
 
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    /* LOADING */
+    .loading {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: 'Orbitron', monospace;
+        font-size: 1.5rem;
+        color: var(--accent-cyan);
+        z-index: 3000;
+    }
+
+    .loading.active {
+        display: block;
+        animation: pulse 1s infinite;
+    }
+
+    /* VOICE INPUT */
+    .voice-btn {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--accent-red), var(--accent-magenta));
+        border: none;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: 0 5px 20px rgba(255, 0, 255, 0.5);
+        transition: all 0.3s ease;
+        z-index: 999;
+    }
+
+    .voice-btn:hover {
+        transform: scale(1.1);
+    }
+
+    .voice-btn.listening {
+        animation: pulse 0.5s infinite;
+        background: var(--accent-green);
+    }
+
+    /* RESPONSIVE */
     @media (max-width: 600px) {
         .header h1 {
-            font-size: 1.5rem;
+            font-size: 2rem;
         }
-        
+
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+
         .type-selector {
             grid-template-columns: 1fr;
         }
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--bg-secondary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--accent-cyan);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-magenta);
     }
 </style>
 ```
 
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>🚕 Ride Tracker</h1>
-            <p>Dein persönlicher Schicht-Assistent</p>
-        </div>
+<body data-theme="dark">
+    <div class="theme-toggle" id="themeToggle">🌙</div>
+    <div class="loading" id="loading">LOADING...</div>
 
 ```
-    <div class="quick-add">
-        <h3>Neue Fahrt</h3>
-        
-        <div class="input-row">
-            <input type="date" id="rideDate">
-            <input type="time" id="rideTime">
-            <button class="now-btn" id="nowBtn">Jetzt</button>
-        </div>
-
-        <div class="input-row">
-            <input type="number" step="0.01" id="amount" placeholder="Betrag (€)" min="0">
-            <input type="number" step="0.01" id="tip" placeholder="Trinkgeld (€)" min="0">
-        </div>
-
-        <div class="input-row">
-            <input type="text" id="note" placeholder="Notiz (optional)">
-        </div>
-
-        <div class="type-selector">
-            <button class="type-btn active" data-type="card">💳 Karte</button>
-            <button class="type-btn" data-type="cash">💵 Bar</button>
-            <button class="type-btn" data-type="invoice">🧾 Rechnung</button>
-            <button class="type-btn" data-type="wheelchair">♿ Rollstuhl</button>
-        </div>
-
-        <button class="add-btn" id="addBtn">+ Fahrt hinzufügen</button>
+<div class="container">
+    <div class="header">
+        <h1>🚕 TAXI CMD</h1>
+        <p>Command Center Online</p>
     </div>
 
-    <div id="shiftsContainer"></div>
+    <!-- NAV TABS -->
+    <div class="nav-tabs">
+        <div class="nav-tab active" data-tab="add">ADD</div>
+        <div class="nav-tab" data-tab="stats">STATS</div>
+        <div class="nav-tab" data-tab="history">HISTORY</div>
+        <div class="nav-tab" data-tab="settings">SETTINGS</div>
+    </div>
 
-    <div class="export-section">
-        <button class="export-btn" id="exportBtn">📊 Export</button>
-        <button class="export-btn clear-btn" id="clearBtn">🗑️ Löschen</button>
+    <!-- TAB: ADD RIDE -->
+    <div class="tab-content active" data-content="add">
+        <div class="card">
+            <h3>⚡ NEUE FAHRT</h3>
+            
+            <div class="input-row">
+                <input type="date" id="rideDate">
+                <input type="time" id="rideTime">
+                <button class="btn now-btn" id="nowBtn">JETZT</button>
+            </div>
+
+            <div class="input-row">
+                <input type="number" step="0.01" id="amount" placeholder="Betrag">
+                <select id="currency">
+                    <option value="€">€</option>
+                    <option value="$">$</option>
+                    <option value="£">£</option>
+                    <option value="¥">¥</option>
+                </select>
+            </div>
+
+            <div class="input-row">
+                <input type="number" step="0.01" id="tip" placeholder="Trinkgeld">
+            </div>
+
+            <div class="type-selector">
+                <button class="type-btn active" data-type="card">💳 KARTE</button>
+                <button class="type-btn" data-type="cash">💵 BAR</button>
+                <button class="type-btn" data-type="invoice">🧾 RECHNUNG</button>
+                <button class="type-btn" data-type="wheelchair">♿ ROLLSTUHL</button>
+            </div>
+
+            <div class="category-selector">
+                <button class="category-btn" data-category="city">🏙️ City</button>
+                <button class="category-btn" data-category="airport">✈️ Airport</button>
+                <button class="category-btn" data-category="long">🛣️ Long</button>
+                <button class="category-btn" data-category="vip">⭐ VIP</button>
+            </div>
+
+            <div class="input-row">
+                <input type="text" id="note" placeholder="Notiz / Kunde">
+            </div>
+
+            <button class="btn btn-primary" id="addBtn" style="width: 100%;">+ FAHRT HINZUFÜGEN</button>
+        </div>
+
+        <!-- SHIFT TRACKER -->
+        <div class="card">
+            <h3>⏱️ SCHICHT</h3>
+            <div class="input-row">
+                <button class="btn btn-secondary" id="shiftStartBtn" style="flex: 1;">START</button>
+                <button class="btn btn-secondary" id="shiftEndBtn" style="flex: 1;">ENDE</button>
+            </div>
+            <div id="shiftStatus" style="text-align: center; margin-top: 10px; color: var(--text-secondary);"></div>
+        </div>
+    </div>
+
+    <!-- TAB: STATS -->
+    <div class="tab-content" data-content="stats">
+        <div class="card">
+            <h3>📊 STATISTICS</h3>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Heute</div>
+                    <div class="stat-value" id="statToday">0€</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Diese Woche</div>
+                    <div class="stat-value" id="statWeek">0€</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Dieser Monat</div>
+                    <div class="stat-value" id="statMonth">0€</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Gesamt</div>
+                    <div class="stat-value" id="statTotal">0€</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GOAL TRACKER -->
+        <div class="card">
+            <h3>🎯 TAGESZIEL</h3>
+            <div class="input-row">
+                <input type="number" id="goalAmount" placeholder="Ziel (€)">
+                <button class="btn btn-secondary" id="setGoalBtn">SET</button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="goalProgress" style="width: 0%"></div>
+            </div>
+            <div class="progress-text" id="goalText">Kein Ziel gesetzt</div>
+        </div>
+
+        <!-- CHART -->
+        <div class="card">
+            <h3>📈 LETZTE 7 TAGE</h3>
+            <div class="chart-container">
+                <div class="chart-bars" id="chartBars"></div>
+            </div>
+        </div>
+
+        <!-- BREAKDOWN -->
+        <div class="card">
+            <h3>💰 BREAKDOWN</h3>
+            <div id="breakdown"></div>
+        </div>
+    </div>
+
+    <!-- TAB: HISTORY -->
+    <div class="tab-content" data-content="history">
+        <div class="card">
+            <h3>📜 FAHRTEN HISTORIE</h3>
+            <div class="input-row">
+                <input type="text" id="searchInput" placeholder="Suchen...">
+                <select id="filterType">
+                    <option value="all">Alle</option>
+                    <option value="card">Karte</option>
+                    <option value="cash">Bar</option>
+                    <option value="invoice">Rechnung</option>
+                    <option value="wheelchair">Rollstuhl</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="shiftsContainer"></div>
+    </div>
+
+    <!-- TAB: SETTINGS -->
+    <div class="tab-content" data-content="settings">
+        <div class="card">
+            <h3>⚙️ EINSTELLUNGEN</h3>
+            
+            <button class="btn btn-secondary" id="exportBtn" style="width: 100%; margin-bottom: 10px;">📊 EXPORT TXT</button>
+            <button class="btn btn-secondary" id="exportCSVBtn" style="width: 100%; margin-bottom: 10px;">📄 EXPORT CSV</button>
+            <button class="btn btn-secondary" id="backupBtn" style="width: 100%; margin-bottom: 10px;">💾 BACKUP JSON</button>
+            <button class="btn btn-secondary" id="restoreBtn" style="width: 100%; margin-bottom: 10px;">📥 RESTORE JSON</button>
+            <button class="btn btn-secondary" id="clearBtn" style="width: 100%; background: rgba(255, 51, 102, 0.1); border-color: var(--accent-red); color: var(--accent-red);">🗑️ ALLES LÖSCHEN</button>
+            <input type="file" id="restoreFile" accept=".json" style="display: none;">
+        </div>
+
+        <div class="card">
+            <h3>ℹ️ INFO</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                <strong>Version:</strong> 2.0 ULTIMATE<br>
+                <strong>Fahrten:</strong> <span id="totalRides">0</span><br>
+                <strong>Storage:</strong> LocalStorage<br>
+                <strong>Swipe left:</strong> Löschen<br>
+                <strong>Tap:</strong> Bearbeiten
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+    <button class="bottom-nav-btn active" data-tab="add">➕</button>
+    <button class="bottom-nav-btn" data-tab="stats">📊</button>
+    <button class="bottom-nav-btn" data-tab="history">📜</button>
+    <button class="bottom-nav-btn" data-tab="settings">⚙️</button>
+</div>
+
+<!-- VOICE BUTTON -->
+<button class="voice-btn" id="voiceBtn">🎤</button>
+
+<!-- EDIT MODAL -->
+<div class="modal" id="editModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">FAHRT BEARBEITEN</div>
+            <button class="modal-close" id="closeEditModal">×</button>
+        </div>
+        
+        <div class="input-row">
+            <input type="date" id="editDate">
+            <input type="time" id="editTime">
+        </div>
+
+        <div class="input-row">
+            <input type="number" step="0.01" id="editAmount" placeholder="Betrag">
+            <input type="number" step="0.01" id="editTip" placeholder="Trinkgeld">
+        </div>
+
+        <div class="input-row">
+            <input type="text" id="editNote" placeholder="Notiz">
+        </div>
+
+        <div class="type-selector" id="editTypeSelector">
+            <button class="type-btn" data-type="card">💳 KARTE</button>
+            <button class="type-btn" data-type="cash">💵 BAR</button>
+            <button class="type-btn" data-type="invoice">🧾 RECHNUNG</button>
+            <button class="type-btn" data-type="wheelchair">♿ ROLLSTUHL</button>
+        </div>
+
+        <button class="btn btn-primary" id="saveEditBtn" style="width: 100%;">💾 SPEICHERN</button>
     </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const STORAGE_KEY = 'taxi_shifts';
-        let selectedType = 'card';
-        let shifts = [];
+    // ==================== CORE DATA ====================
+    const STORAGE_KEY = 'taxi_shifts_ultimate';
+    const SETTINGS_KEY = 'taxi_settings';
+    let shifts = [];
+    let settings = {
+        currency: '€',
+        theme: 'dark',
+        goal: 0,
+        shiftStart: null,
+        shiftEnd: null
+    };
+    let selectedType = 'card';
+    let selectedCategory = null;
+    let currentEditRide = null;
 
-        // Load data
-        function loadData() {
+    // ==================== INIT ====================
+    document.addEventListener('DOMContentLoaded', function() {
+        loadData();
+        initEventListeners();
+        setCurrentDateTime();
+        updateStats();
+        renderShifts();
+        updateShiftStatus();
+    });
+
+    // ==================== DATA MANAGEMENT ====================
+    function loadData() {
         try {
             const stored = localStorage.getItem(STORAGE_KEY);
-            if (stored) {
-                shifts = JSON.parse(stored);
+            if (stored) shifts = JSON.parse(stored);
+            
+            const storedSettings = localStorage.getItem(SETTINGS_KEY);
+            if (storedSettings) {
+                settings = { ...settings, ...JSON.parse(storedSettings) };
+                document.getElementById('currency').value = settings.currency;
+                setTheme(settings.theme);
+                if (settings.goal > 0) {
+                    document.getElementById('goalAmount').value = settings.goal;
+                }
             }
         } catch (e) {
             console.error('Load error:', e);
-            shifts = [];
         }
-        renderShifts();
     }
 
-    // Save data
     function saveData() {
         try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(shifts));
+            localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
         } catch (e) {
             console.error('Save error:', e);
             alert('Fehler beim Speichern!');
         }
     }
 
-    // Type selector
-    document.querySelectorAll('.type-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            selectedType = this.getAttribute('data-type');
+    // ==================== EVENT LISTENERS ====================
+    function initEventListeners() {
+        // Tab navigation
+        document.querySelectorAll('.nav-tab, .bottom-nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tab = this.getAttribute('data-tab');
+                switchTab(tab);
+            });
         });
-    });
 
-    // Now button
-    document.getElementById('nowBtn').addEventListener('click', function() {
+        // Type selector
+        document.querySelectorAll('.type-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                selectedType = this.getAttribute('data-type');
+            });
+        });
+
+        // Category selector
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.classList.contains('active')) {
+                    this.classList.remove('active');
+                    selectedCategory = null;
+                } else {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedCategory = this.getAttribute('data-category');
+                }
+            });
+        });
+
+        // Now button
+        document.getElementById('nowBtn').addEventListener('click', setCurrentDateTime);
+
+        // Add ride
+        document.getElementById('addBtn').addEventListener('click', addRide);
+
+        // Shift tracking
+        document.getElementById('shiftStartBtn').addEventListener('click', startShift);
+        document.getElementById('shiftEndBtn').addEventListener('click', endShift);
+
+        // Theme toggle
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+        // Currency change
+        document.getElementById('currency').addEventListener('change', function() {
+            settings.currency = this.value;
+            saveData();
+            updateStats();
+            renderShifts();
+        });
+
+        // Goal
+        document.getElementById('setGoalBtn').addEventListener('click', setGoal);
+
+        // Search & filter
+        document.getElementById('searchInput').addEventListener('input', renderShifts);
+        document.getElementById('filterType').addEventListener('change', renderShifts);
+
+        // Export/Import
+        document.getElementById('exportBtn').addEventListener('click', exportTXT);
+        document.getElementById('exportCSVBtn').addEventListener('click', exportCSV);
+        document.getElementById('backupBtn').addEventListener('click', backupJSON);
+        document.getElementById('restoreBtn').addEventListener('click', () => document.getElementById('restoreFile').click());
+        document.getElementById('restoreFile').addEventListener('change', restoreJSON);
+        document.getElementById('clearBtn').addEventListener('click', clearAll);
+
+        // Edit modal
+        document.getElementById('closeEditModal').addEventListener('click', closeEditModal);
+        document.getElementById('saveEditBtn').addEventListener('click', saveEdit);
+        
+        // Edit type selector
+        document.querySelectorAll('#editTypeSelector .type-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#editTypeSelector .type-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Voice input
+        document.getElementById('voiceBtn').addEventListener('click', startVoiceInput);
+    }
+
+    // ==================== TAB SWITCHING ====================
+    function switchTab(tab) {
+        document.querySelectorAll('.nav-tab, .bottom-nav-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-tab') === tab);
+        });
+
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.toggle('active', content.getAttribute('data-content') === tab);
+        });
+
+        if (tab === 'stats') updateStats();
+        if (tab === 'history') renderShifts();
+    }
+
+    // ==================== ADD RIDE ====================
+    function setCurrentDateTime() {
         const now = new Date();
         document.getElementById('rideDate').value = now.toISOString().split('T')[0];
         document.getElementById('rideTime').value = now.toTimeString().substring(0, 5);
-    });
+    }
 
-    // Add ride
-    document.getElementById('addBtn').addEventListener('click', function() {
+    function addRide() {
         const amount = parseFloat(document.getElementById('amount').value);
         const tip = parseFloat(document.getElementById('tip').value) || 0;
         const note = document.getElementById('note').value.trim();
         const rideDate = document.getElementById('rideDate').value;
         const rideTime = document.getElementById('rideTime').value;
+        const currency = document.getElementById('currency').value;
 
         if (!amount || amount <= 0) {
             alert('Bitte gültigen Betrag eingeben');
@@ -599,6 +1274,8 @@
             amount: amount,
             tip: tip,
             totalAmount: amount + tip,
+            currency: currency,
+            category: selectedCategory,
             note: note,
             time: rideTime,
             timestamp: new Date(rideDate + 'T' + rideTime).toISOString()
@@ -607,96 +1284,308 @@
         shift.rides.sort((a, b) => a.time.localeCompare(b.time));
 
         saveData();
+        updateStats();
         renderShifts();
 
+        // Clear form
         document.getElementById('amount').value = '';
         document.getElementById('tip').value = '';
         document.getElementById('note').value = '';
-    });
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        selectedCategory = null;
 
-    // Render shifts
+        // Show success
+        showNotification('Fahrt hinzugefügt! 🚕');
+    }
+
+    // ==================== SHIFT TRACKING ====================
+    function startShift() {
+        settings.shiftStart = new Date().toISOString();
+        settings.shiftEnd = null;
+        saveData();
+        updateShiftStatus();
+        showNotification('Schicht gestartet! ⏱️');
+    }
+
+    function endShift() {
+        if (!settings.shiftStart) {
+            alert('Keine aktive Schicht!');
+            return;
+        }
+        settings.shiftEnd = new Date().toISOString();
+        saveData();
+        updateShiftStatus();
+        showNotification('Schicht beendet! ✅');
+    }
+
+    function updateShiftStatus() {
+        const status = document.getElementById('shiftStatus');
+        if (!settings.shiftStart) {
+            status.textContent = 'Keine aktive Schicht';
+            return;
+        }
+
+        if (settings.shiftEnd) {
+            const duration = Math.round((new Date(settings.shiftEnd) - new Date(settings.shiftStart)) / 1000 / 60);
+            status.textContent = `Letzte Schicht: ${duration} min`;
+            status.style.color = 'var(--accent-green)';
+        } else {
+            const duration = Math.round((new Date() - new Date(settings.shiftStart)) / 1000 / 60);
+            status.textContent = `Aktive Schicht: ${duration} min`;
+            status.style.color = 'var(--accent-cyan)';
+            setTimeout(updateShiftStatus, 60000); // Update every minute
+        }
+    }
+
+    // ==================== STATS ====================
+    function updateStats() {
+        const today = new Date().toISOString().split('T')[0];
+        const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+        const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
+
+        let todayTotal = 0;
+        let weekTotal = 0;
+        let monthTotal = 0;
+        let allTotal = 0;
+
+        shifts.forEach(shift => {
+            const shiftTotal = shift.rides.reduce((sum, ride) => sum + ride.totalAmount, 0);
+            
+            if (shift.date === today) todayTotal += shiftTotal;
+            if (shift.date >= weekAgo) weekTotal += shiftTotal;
+            if (shift.date >= monthStart) monthTotal += shiftTotal;
+            allTotal += shiftTotal;
+        });
+
+        document.getElementById('statToday').textContent = todayTotal.toFixed(2) + settings.currency;
+        document.getElementById('statWeek').textContent = weekTotal.toFixed(2) + settings.currency;
+        document.getElementById('statMonth').textContent = monthTotal.toFixed(2) + settings.currency;
+        document.getElementById('statTotal').textContent = allTotal.toFixed(2) + settings.currency;
+
+        // Update goal progress
+        if (settings.goal > 0) {
+            const progress = Math.min((todayTotal / settings.goal) * 100, 100);
+            document.getElementById('goalProgress').style.width = progress + '%';
+            document.getElementById('goalText').textContent = 
+                `${todayTotal.toFixed(2)}${settings.currency} / ${settings.goal}${settings.currency} (${Math.round(progress)}%)`;
+        }
+
+        // Update chart
+        updateChart();
+
+        // Update breakdown
+        updateBreakdown();
+
+        // Update total rides count
+        const totalRides = shifts.reduce((sum, shift) => sum + shift.rides.length, 0);
+        document.getElementById('totalRides').textContent = totalRides;
+    }
+
+    function setGoal() {
+        const goal = parseFloat(document.getElementById('goalAmount').value);
+        if (goal > 0) {
+            settings.goal = goal;
+            saveData();
+            updateStats();
+            showNotification('Ziel gesetzt! 🎯');
+        }
+    }
+
+    function updateChart() {
+        const chartBars = document.getElementById('chartBars');
+        chartBars.innerHTML = '';
+
+        const last7Days = [];
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date(Date.now() - i * 24 * 60 * 60 * 1000);
+            const dateStr = date.toISOString().split('T')[0];
+            const shift = shifts.find(s => s.date === dateStr);
+            const total = shift ? shift.rides.reduce((sum, ride) => sum + ride.totalAmount, 0) : 0;
+            last7Days.push({ date: dateStr, total: total });
+        }
+
+        const maxTotal = Math.max(...last7Days.map(d => d.total), 1);
+
+        last7Days.forEach((day, index) => {
+            const bar = document.createElement('div');
+            bar.className = 'chart-bar';
+            const height = (day.total / maxTotal) * 100;
+            bar.style.height = height + '%';
+            bar.style.animationDelay = (index * 0.1) + 's';
+            
+            const label = document.createElement('div');
+            label.className = 'chart-label';
+            label.textContent = new Date(day.date).toLocaleDateString('de-DE', { weekday: 'short' });
+            
+            bar.appendChild(label);
+            bar.title = `${day.total.toFixed(2)}${settings.currency}`;
+            chartBars.appendChild(bar);
+        });
+    }
+
+    function updateBreakdown() {
+        const breakdown = document.getElementById('breakdown');
+        const byType = {
+            card: { label: '💳 Karte', total: 0, count: 0, color: 'var(--accent-yellow)' },
+            cash: { label: '💵 Bar', total: 0, count: 0, color: 'var(--accent-green)' },
+            invoice: { label: '🧾 Rechnung', total: 0, count: 0, color: 'var(--accent-red)' },
+            wheelchair: { label: '♿ Rollstuhl', total: 0, count: 0, color: 'var(--accent-cyan)' }
+        };
+
+        shifts.forEach(shift => {
+            shift.rides.forEach(ride => {
+                byType[ride.type].total += ride.totalAmount;
+                byType[ride.type].count++;
+            });
+        });
+
+        breakdown.innerHTML = '';
+        Object.values(byType).forEach(type => {
+            if (type.count > 0) {
+                const item = document.createElement('div');
+                item.style.cssText = `
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 10px;
+                    margin: 5px 0;
+                    background: rgba(255, 255, 255, 0.02);
+                    border-left: 3px solid ${type.color};
+                    border-radius: 8px;
+                `;
+                item.innerHTML = `
+                    <span>${type.label} (${type.count}x)</span>
+                    <span style="font-family: Orbitron; font-weight: 700;">${type.total.toFixed(2)}${settings.currency}</span>
+                `;
+                breakdown.appendChild(item);
+            }
+        });
+    }
+
+    // ==================== RENDER SHIFTS ====================
     function renderShifts() {
         const container = document.getElementById('shiftsContainer');
-        
-        if (shifts.length === 0) {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const filterType = document.getElementById('filterType').value;
+
+        let filteredShifts = shifts.map(shift => ({
+            ...shift,
+            rides: shift.rides.filter(ride => {
+                const matchesSearch = !searchTerm || 
+                    ride.note.toLowerCase().includes(searchTerm) ||
+                    ride.totalAmount.toString().includes(searchTerm);
+                const matchesType = filterType === 'all' || ride.type === filterType;
+                return matchesSearch && matchesType;
+            })
+        })).filter(shift => shift.rides.length > 0);
+
+        if (filteredShifts.length === 0) {
             container.innerHTML = `
-                <div class="shift-section">
+                <div class="card">
                     <div class="empty-state">
                         <div class="empty-state-icon">🚕</div>
-                        <p>Keine Fahrten vorhanden.<br>Füge deine erste Fahrt hinzu!</p>
+                        <p>Keine Fahrten gefunden</p>
                     </div>
                 </div>
             `;
             return;
         }
 
-        let html = '';
-        shifts.forEach((shift, shiftIndex) => {
+        container.innerHTML = '';
+        filteredShifts.forEach((shift, shiftIndex) => {
             const total = shift.rides.reduce((sum, ride) => sum + ride.totalAmount, 0);
             const totalTips = shift.rides.reduce((sum, ride) => sum + (ride.tip || 0), 0);
-            
-            html += `
-                <div class="shift-section">
-                    <div class="shift-header">
-                        <div>
-                            <div class="shift-date">${formatDate(shift.date)}</div>
-                            <div class="shift-time">${shift.rides.length} Fahrt${shift.rides.length !== 1 ? 'en' : ''}</div>
+
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border);">
+                    <div>
+                        <div style="font-family: Orbitron; font-size: 1.2rem; font-weight: 900; color: var(--accent-yellow);">
+                            ${formatDate(shift.date)}
                         </div>
-                        <div class="shift-total">
-                            <div class="total-label">Gesamt${totalTips > 0 ? ' (inkl. Trinkgeld)' : ''}</div>
-                            <div class="total-amount">${total.toFixed(2)}€</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                            ${shift.rides.length} Fahrt${shift.rides.length !== 1 ? 'en' : ''}
                         </div>
                     </div>
-                    <div class="rides-list">
-            `;
-
-            shift.rides.forEach((ride, rideIndex) => {
-                html += `
-                    <div class="ride-item" data-type="${ride.type}" style="animation-delay: ${rideIndex * 0.05}s">
-                        <div class="ride-type-badge">${getTypeLabel(ride.type)}</div>
-                        <div class="ride-details">
-                            <span style="color: var(--text-secondary); font-size: 0.8rem;">${ride.time}</span>
-                            ${ride.note ? `<span class="ride-note">${ride.note}</span>` : ''}
-                            ${ride.tip > 0 ? `<span class="ride-tip">+${ride.tip.toFixed(2)}€ Tip</span>` : ''}
+                    <div style="text-align: right;">
+                        <div style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">
+                            Gesamt${totalTips > 0 ? ' (inkl. TG)' : ''}
                         </div>
-                        <div class="ride-amount">${ride.totalAmount.toFixed(2)}€</div>
-                        <button class="delete-btn" data-shift="${shiftIndex}" data-ride="${rideIndex}">×</button>
-                    </div>
-                `;
-            });
-
-            html += `
+                        <div style="font-family: Orbitron; font-size: 1.5rem; font-weight: 900; color: var(--accent-green);">
+                            ${total.toFixed(2)}${shift.rides[0].currency || settings.currency}
+                        </div>
                     </div>
                 </div>
+                <div class="rides-list" id="rides-${shiftIndex}"></div>
             `;
-        });
+            container.appendChild(card);
 
-        container.innerHTML = html;
-
-        // Add delete listeners
-        container.querySelectorAll('.delete-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const shiftIdx = parseInt(this.getAttribute('data-shift'));
-                const rideIdx = parseInt(this.getAttribute('data-ride'));
-                deleteRide(shiftIdx, rideIdx);
+            const ridesList = document.getElementById(`rides-${shiftIndex}`);
+            shift.rides.forEach((ride, rideIndex) => {
+                const rideItem = createRideElement(ride, shiftIndex, rideIndex);
+                ridesList.appendChild(rideItem);
             });
         });
     }
 
-    function formatDate(dateStr) {
-        const date = new Date(dateStr + 'T00:00:00');
-        const options = { weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' };
-        return date.toLocaleDateString('de-DE', options);
-    }
+    function createRideElement(ride, shiftIndex, rideIndex) {
+        const div = document.createElement('div');
+        div.className = 'ride-item';
+        div.setAttribute('data-type', ride.type);
+        div.style.animationDelay = (rideIndex * 0.05) + 's';
 
-    function getTypeLabel(type) {
-        const labels = {
-            card: '💳 Karte',
-            cash: '💵 Bar',
-            invoice: '🧾 Rechnung',
-            wheelchair: '♿ Rollstuhl'
-        };
-        return labels[type] || type;
+        div.innerHTML = `
+            <div class="ride-type-badge">${getTypeLabel(ride.type)}</div>
+            <div class="ride-details">
+                <div class="ride-time">${ride.time}</div>
+                ${ride.category ? `<span class="ride-category">${getCategoryLabel(ride.category)}</span>` : ''}
+                ${ride.note ? `<div class="ride-note">${ride.note}</div>` : ''}
+                ${ride.tip > 0 ? `<span class="ride-tip">+${ride.tip.toFixed(2)}${ride.currency || settings.currency} TIP</span>` : ''}
+            </div>
+            <div class="ride-amount">${ride.totalAmount.toFixed(2)}${ride.currency || settings.currency}</div>
+            <button class="edit-btn">✏️</button>
+            <button class="delete-btn">×</button>
+        `;
+
+        // Swipe to delete
+        let startX = 0;
+        let currentX = 0;
+
+        div.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        div.addEventListener('touchmove', (e) => {
+            currentX = e.touches[0].clientX;
+            const diffX = startX - currentX;
+            if (diffX > 0) {
+                div.style.transform = `translateX(-${diffX}px)`;
+            }
+        });
+
+        div.addEventListener('touchend', () => {
+            const diffX = startX - currentX;
+            if (diffX > 100) {
+                div.classList.add('swiped-left');
+                setTimeout(() => deleteRide(shiftIndex, rideIndex), 300);
+            } else {
+                div.style.transform = 'translateX(0)';
+            }
+        });
+
+        // Edit button
+        div.querySelector('.edit-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            openEditModal(shiftIndex, rideIndex);
+        });
+
+        // Delete button
+        div.querySelector('.delete-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            deleteRide(shiftIndex, rideIndex);
+        });
+
+        return div;
     }
 
     function deleteRide(shiftIndex, rideIndex) {
@@ -706,13 +1595,145 @@
                 shifts.splice(shiftIndex, 1);
             }
             saveData();
+            updateStats();
             renderShifts();
+            showNotification('Fahrt gelöscht! 🗑️');
         }
     }
 
-    // Export
-    document.getElementById('exportBtn').addEventListener('click', function() {
-        let report = '=== SCHICHT NACHWEIS ===\n\n';
+    // ==================== EDIT RIDE ====================
+    function openEditModal(shiftIndex, rideIndex) {
+        currentEditRide = { shiftIndex, rideIndex };
+        const ride = shifts[shiftIndex].rides[rideIndex];
+        const shift = shifts[shiftIndex];
+
+        document.getElementById('editDate').value = shift.date;
+        document.getElementById('editTime').value = ride.time;
+        document.getElementById('editAmount').value = ride.amount;
+        document.getElementById('editTip').value = ride.tip || 0;
+        document.getElementById('editNote').value = ride.note || '';
+
+        document.querySelectorAll('#editTypeSelector .type-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-type') === ride.type);
+        });
+
+        document.getElementById('editModal').classList.add('active');
+    }
+
+    function closeEditModal() {
+        document.getElementById('editModal').classList.remove('active');
+        currentEditRide = null;
+    }
+
+    function saveEdit() {
+        if (!currentEditRide) return;
+
+        const { shiftIndex, rideIndex } = currentEditRide;
+        const ride = shifts[shiftIndex].rides[rideIndex];
+
+        const newDate = document.getElementById('editDate').value;
+        const newTime = document.getElementById('editTime').value;
+        const newAmount = parseFloat(document.getElementById('editAmount').value);
+        const newTip = parseFloat(document.getElementById('editTip').value) || 0;
+        const newNote = document.getElementById('editNote').value.trim();
+        const newType = document.querySelector('#editTypeSelector .type-btn.active').getAttribute('data-type');
+
+        if (!newAmount || newAmount <= 0) {
+            alert('Bitte gültigen Betrag eingeben');
+            return;
+        }
+
+        // Remove from old shift
+        shifts[shiftIndex].rides.splice(rideIndex, 1);
+        if (shifts[shiftIndex].rides.length === 0 && shifts[shiftIndex].date !== newDate) {
+            shifts.splice(shiftIndex, 1);
+        }
+
+        // Add to new/same shift
+        let targetShift = shifts.find(s => s.date === newDate);
+        if (!targetShift) {
+            targetShift = { date: newDate, rides: [] };
+            shifts.push(targetShift);
+            shifts.sort((a, b) => new Date(b.date) - new Date(a.date));
+        }
+
+        targetShift.rides.push({
+            ...ride,
+            type: newType,
+            amount: newAmount,
+            tip: newTip,
+            totalAmount: newAmount + newTip,
+            note: newNote,
+            time: newTime,
+            timestamp: new Date(newDate + 'T' + newTime).toISOString()
+        });
+
+        targetShift.rides.sort((a, b) => a.time.localeCompare(b.time));
+
+        saveData();
+        updateStats();
+        renderShifts();
+        closeEditModal();
+        showNotification('Fahrt aktualisiert! ✅');
+    }
+
+    // ==================== VOICE INPUT ====================
+    function startVoiceInput() {
+        if (!('webkitSpeechRecognition' in window)) {
+            alert('Spracherkennung nicht verfügbar in diesem Browser!');
+            return;
+        }
+
+        const recognition = new webkitSpeechRecognition();
+        recognition.lang = 'de-DE';
+        recognition.continuous = false;
+
+        const voiceBtn = document.getElementById('voiceBtn');
+        voiceBtn.classList.add('listening');
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript.toLowerCase();
+            parseVoiceInput(transcript);
+            voiceBtn.classList.remove('listening');
+        };
+
+        recognition.onerror = () => {
+            voiceBtn.classList.remove('listening');
+            alert('Spracherkennung fehlgeschlagen!');
+        };
+
+        recognition.onend = () => {
+            voiceBtn.classList.remove('listening');
+        };
+
+        recognition.start();
+    }
+
+    function parseVoiceInput(transcript) {
+        // Extract amount
+        const amountMatch = transcript.match(/(\d+[,.]?\d*)/);
+        if (amountMatch) {
+            const amount = parseFloat(amountMatch[1].replace(',', '.'));
+            document.getElementById('amount').value = amount;
+        }
+
+        // Extract type
+        if (transcript.includes('karte') || transcript.includes('card')) {
+            document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector('.type-btn[data-type="card"]').classList.add('active');
+            selectedType = 'card';
+        } else if (transcript.includes('bar') || transcript.includes('cash')) {
+            document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector('.type-btn[data-type="cash"]').classList.add('active');
+            selectedType = 'cash';
+        }
+
+        showNotification('Spracheingabe erkannt! 🎤');
+    }
+
+    // ==================== EXPORT ====================
+    function exportTXT() {
+        let report = '=== TAXI COMMAND CENTER - SCHICHT NACHWEIS ===\n\n';
         
         shifts.forEach(shift => {
             const total = shift.rides.reduce((sum, ride) => sum + ride.totalAmount, 0);
@@ -721,79 +1742,188 @@
             
             report += `Datum: ${formatDate(shift.date)}\n`;
             report += `Fahrten: ${shift.rides.length}\n`;
-            report += `Gesamt: ${total.toFixed(2)}€`;
+            report += `Gesamt: ${total.toFixed(2)}${shift.rides[0].currency || settings.currency}`;
             if (totalTips > 0) {
-                report += ` (Fahrpreise: ${totalBase.toFixed(2)}€ + Trinkgeld: ${totalTips.toFixed(2)}€)`;
+                report += ` (Fahrpreise: ${totalBase.toFixed(2)} + Trinkgeld: ${totalTips.toFixed(2)})`;
             }
             report += '\n\n';
             
-            const byType = {
-                card: { label: 'Karte', total: 0, tips: 0, count: 0 },
-                cash: { label: 'Bar', total: 0, tips: 0, count: 0 },
-                invoice: { label: 'Rechnung', total: 0, tips: 0, count: 0 },
-                wheelchair: { label: 'Rollstuhl', total: 0, tips: 0, count: 0 }
-            };
-            
             shift.rides.forEach(ride => {
-                byType[ride.type].total += ride.totalAmount;
-                byType[ride.type].tips += (ride.tip || 0);
-                byType[ride.type].count++;
-                report += `  ${ride.time} | ${getTypeLabel(ride.type)}: ${ride.totalAmount.toFixed(2)}€`;
-                if (ride.tip > 0) report += ` (Fahrt: ${ride.amount.toFixed(2)}€ + Tip: ${ride.tip.toFixed(2)}€)`;
+                report += `  ${ride.time} | ${getTypeLabel(ride.type)}: ${ride.totalAmount.toFixed(2)}${ride.currency || settings.currency}`;
+                if (ride.category) report += ` [${getCategoryLabel(ride.category)}]`;
+                if (ride.tip > 0) report += ` (+ ${ride.tip.toFixed(2)} TIP)`;
                 if (ride.note) report += ` - ${ride.note}`;
                 report += '\n';
             });
             
-            report += '\nZusammenfassung:\n';
-            Object.values(byType).forEach(type => {
-                if (type.count > 0) {
-                    report += `  ${type.label}: ${type.count}x = ${type.total.toFixed(2)}€`;
-                    if (type.tips > 0) report += ` (davon ${type.tips.toFixed(2)}€ Trinkgeld)`;
-                    report += '\n';
-                }
-            });
-            
-            report += '\n' + '='.repeat(40) + '\n\n';
+            report += '\n' + '='.repeat(50) + '\n\n';
         });
         
         const grandTotal = shifts.reduce((sum, shift) => 
             sum + shift.rides.reduce((s, r) => s + r.totalAmount, 0), 0);
-        const grandTotalBase = shifts.reduce((sum, shift) => 
-            sum + shift.rides.reduce((s, r) => s + r.amount, 0), 0);
-        const grandTotalTips = shifts.reduce((sum, shift) => 
-            sum + shift.rides.reduce((s, r) => s + (r.tip || 0), 0), 0);
+        report += `GESAMTSUMME: ${grandTotal.toFixed(2)}${settings.currency}\n`;
         
-        report += `GESAMTSUMME: ${grandTotal.toFixed(2)}€\n`;
-        if (grandTotalTips > 0) {
-            report += `  Fahrpreise: ${grandTotalBase.toFixed(2)}€\n`;
-            report += `  Trinkgeld: ${grandTotalTips.toFixed(2)}€\n`;
-        }
+        downloadFile(report, `taxi-export-${Date.now()}.txt`, 'text/plain');
+        showNotification('TXT Export erfolgreich! 📊');
+    }
+
+    function exportCSV() {
+        let csv = 'Datum,Zeit,Typ,Kategorie,Betrag,Trinkgeld,Gesamt,Währung,Notiz\n';
         
-        const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
+        shifts.forEach(shift => {
+            shift.rides.forEach(ride => {
+                csv += `${shift.date},${ride.time},${ride.type},${ride.category || ''},`;
+                csv += `${ride.amount},${ride.tip || 0},${ride.totalAmount},${ride.currency || settings.currency},"${ride.note || ''}"\n`;
+            });
+        });
+        
+        downloadFile(csv, `taxi-export-${Date.now()}.csv`, 'text/csv');
+        showNotification('CSV Export erfolgreich! 📄');
+    }
+
+    function backupJSON() {
+        const backup = {
+            shifts: shifts,
+            settings: settings,
+            version: '2.0',
+            timestamp: new Date().toISOString()
+        };
+        
+        downloadFile(JSON.stringify(backup, null, 2), `taxi-backup-${Date.now()}.json`, 'application/json');
+        showNotification('Backup erstellt! 💾');
+    }
+
+    function restoreJSON(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const backup = JSON.parse(e.target.result);
+                if (backup.shifts && backup.settings) {
+                    if (confirm('Alle aktuellen Daten werden überschrieben! Fortfahren?')) {
+                        shifts = backup.shifts;
+                        settings = backup.settings;
+                        saveData();
+                        loadData();
+                        updateStats();
+                        renderShifts();
+                        showNotification('Backup wiederhergestellt! 📥');
+                    }
+                } else {
+                    alert('Ungültiges Backup-Format!');
+                }
+            } catch (e) {
+                alert('Fehler beim Lesen der Backup-Datei!');
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    function downloadFile(content, filename, type) {
+        const blob = new Blob([content], { type: type });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `schicht-nachweis-${new Date().toISOString().split('T')[0]}.txt`;
+        a.download = filename;
         a.click();
         URL.revokeObjectURL(url);
-    });
+    }
 
-    // Clear all
-    document.getElementById('clearBtn').addEventListener('click', function() {
-        if (confirm('Wirklich ALLE Fahrten löschen? Diese Aktion kann nicht rückgängig gemacht werden!')) {
-            shifts = [];
-            saveData();
-            renderShifts();
+    function clearAll() {
+        if (confirm('WARNUNG: Alle Daten werden gelöscht! Diese Aktion kann nicht rückgängig gemacht werden!')) {
+            if (confirm('Bist du WIRKLICH sicher?')) {
+                shifts = [];
+                settings.goal = 0;
+                settings.shiftStart = null;
+                settings.shiftEnd = null;
+                saveData();
+                updateStats();
+                renderShifts();
+                updateShiftStatus();
+                document.getElementById('goalAmount').value = '';
+                showNotification('Alle Daten gelöscht! 🗑️');
+            }
         }
-    });
+    }
 
-    // Initialize
-    const now = new Date();
-    document.getElementById('rideDate').value = now.toISOString().split('T')[0];
-    document.getElementById('rideTime').value = now.toTimeString().substring(0, 5);
-    
-    loadData();
-    }); // End DOMContentLoaded
+    // ==================== THEME ====================
+    function toggleTheme() {
+        const currentTheme = document.body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+    }
+
+    function setTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        document.getElementById('themeToggle').textContent = theme === 'dark' ? '🌙' : '☀️';
+        settings.theme = theme;
+        saveData();
+    }
+
+    // ==================== HELPERS ====================
+    function formatDate(dateStr) {
+        const date = new Date(dateStr + 'T00:00:00');
+        return date.toLocaleDateString('de-DE', { 
+            weekday: 'short', 
+            day: '2-digit', 
+            month: '2-digit', 
+            year: 'numeric' 
+        });
+    }
+
+    function getTypeLabel(type) {
+        const labels = {
+            card: '💳 KARTE',
+            cash: '💵 BAR',
+            invoice: '🧾 RECHNUNG',
+            wheelchair: '♿ ROLLSTUHL'
+        };
+        return labels[type] || type;
+    }
+
+    function getCategoryLabel(category) {
+        const labels = {
+            city: '🏙️ City',
+            airport: '✈️ Airport',
+            long: '🛣️ Long',
+            vip: '⭐ VIP'
+        };
+        return labels[category] || category;
+    }
+
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-cyan);
+            color: #000;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-family: Orbitron;
+            font-weight: 700;
+            font-size: 0.9rem;
+            z-index: 9999;
+            animation: slideDown 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 247, 255, 0.5);
+        `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.animation = 'fadeOut 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 2000);
+    }
+
+    // Add fadeOut animation
+    const style = document.createElement('style');
+    style.textContent = '@keyframes fadeOut { to { opacity: 0; transform: translateX(-50%) translateY(-20px); } }';
+    document.head.appendChild(style);
 </script>
 ```
 
