@@ -4,28 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>TaxiLog Pro</title>
+    <title>TaxiLog</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-user-select: none;
-            user-select: none;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-user-select: none; user-select: none; }
+        html, body { width: 100%; height: 100%; overflow-x: hidden; position: fixed; touch-action: pan-y; }
 
 ```
-    html, body {
-        width: 100%;
-        height: 100%;
-        overflow-x: hidden;
-        position: fixed;
-        touch-action: pan-y;
-    }
-
-    /* LIGHT THEME */
     body[data-theme="light"] {
-        --bg-main: #ffffff;
+        --bg-main: #FFD700;
         --bg-card: #ffffff;
         --bg-input: #ffffff;
         --text-primary: #000000;
@@ -35,12 +21,11 @@
         --accent-green: #00ff00;
         --accent-red: #ff0000;
     }
-
-    /* DARK THEME - ULTRA DARK */
+    
     body[data-theme="dark"] {
-        --bg-main: #0a0a0a;
-        --bg-card: #141414;
-        --bg-input: #1f1f1f;
+        --bg-main: #1a1a1a;
+        --bg-card: #2a2a2a;
+        --bg-input: #333333;
         --text-primary: #ffffff;
         --text-secondary: #cccccc;
         --border-main: #FFD700;
@@ -48,730 +33,111 @@
         --accent-green: #00ff00;
         --accent-red: #ff0000;
     }
-
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-        background: var(--bg-main);
-        color: var(--text-primary);
-        transition: all 0.3s;
-    }
-
-    .main-container {
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px 16px 100px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        height: 100vh;
-    }
-
-    .header {
-        background: var(--accent-yellow);
-        border: 5px solid var(--border-main);
-        border-radius: 12px;
-        padding: 24px;
-        margin-bottom: 24px;
-        text-align: center;
-        position: relative;
-    }
-
-    .header h1 {
-        font-size: 2rem;
-        font-weight: 800;
-        color: #000;
-        margin-bottom: 4px;
-        letter-spacing: -1px;
-    }
-
-    .header .subtitle {
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: #000;
-    }
-
-    .header .version {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 0.625rem;
-        font-weight: 700;
-        background: #000;
-        color: var(--accent-yellow);
-        padding: 4px 8px;
-        border-radius: 4px;
-    }
-
-    .theme-toggle-btn {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        width: 36px;
-        height: 36px;
-        background: #000;
-        color: var(--accent-yellow);
-        border: 3px solid #000;
-        border-radius: 6px;
-        font-size: 1rem;
-        cursor: pointer;
-    }
-
-    .tabs {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 20px;
-    }
-
-    .tab {
-        flex: 1;
-        padding: 14px 8px;
-        background: var(--bg-card);
-        border: 4px solid var(--border-main);
-        border-radius: 8px;
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.2s;
-        color: var(--text-primary);
-    }
-
-    .tab.active {
-        background: var(--accent-yellow);
-        color: #000;
-    }
-
-    .card {
-        background: var(--bg-card);
-        border: 5px solid var(--border-main);
-        border-radius: 12px;
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-
-    .card-title {
-        font-size: 1.125rem;
-        font-weight: 800;
-        margin-bottom: 16px;
-        color: var(--text-primary);
-    }
-
-    .input-group {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 12px;
-    }
-
-    input, select {
-        flex: 1;
-        padding: 12px;
-        background: var(--bg-input);
-        border: 3px solid var(--border-main);
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 500;
-        color: var(--text-primary);
-    }
-
-    input::placeholder {
-        color: var(--text-secondary);
-    }
-
-    input:focus, select:focus {
-        outline: none;
-        border-color: var(--accent-yellow);
-    }
-
-    .btn {
-        padding: 14px 20px;
-        border: 3px solid var(--border-main);
-        border-radius: 8px;
-        font-size: 0.9375rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.2s;
-    }
-
-    .btn-yellow {
-        background: var(--accent-yellow);
-        color: #000;
-        border-color: var(--border-main);
-    }
-
-    .btn-outline {
-        background: var(--bg-card);
-        color: var(--text-primary);
-        border-color: var(--border-main);
-    }
-
-    .btn-outline:hover {
-        background: var(--accent-yellow);
-        color: #000;
-    }
-
-    .btn-green {
-        background: var(--accent-green);
-        color: #000;
-        border-color: var(--border-main);
-    }
-
-    .btn-blue {
-        background: #00ccff;
-        color: #000;
-        border-color: var(--border-main);
-    }
-
-    .btn-red {
-        background: var(--accent-red);
-        color: #fff;
-        border-color: var(--border-main);
-    }
-
-    .btn-full {
-        width: 100%;
-    }
-
-    .location-buttons {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin-bottom: 16px;
-    }
-
-    .location-btn {
-        padding: 20px;
-        background: var(--bg-card);
-        border: 4px solid var(--border-main);
-        border-radius: 8px;
-        font-size: 0.875rem;
-        font-weight: 700;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.2s;
-        color: var(--text-primary);
-    }
-
-    .location-btn.active {
-        background: var(--accent-green);
-        color: #000;
-    }
-
-    .location-btn.disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-
-    .location-info {
-        background: var(--bg-input);
-        border: 3px solid var(--border-main);
-        border-radius: 8px;
-        padding: 12px;
-        margin-bottom: 12px;
-        font-size: 0.875rem;
-        color: var(--text-secondary);
-        min-height: 60px;
-    }
-
-    .location-label {
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 4px;
-    }
-
-    .ride-form {
-        display: none;
-        animation: slideDown 0.3s ease;
-    }
-
-    .ride-form.active {
-        display: block;
-    }
-
-    @keyframes slideDown {
-        from { opacity: 0; transform: translateY(-20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    .type-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin-bottom: 16px;
-    }
-
-    .type-btn {
-        padding: 16px;
-        background: var(--bg-card);
-        border: 4px solid var(--border-main);
-        border-radius: 8px;
-        font-size: 0.875rem;
-        font-weight: 700;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.2s;
-        color: var(--text-primary);
-    }
-
-    .type-btn.active {
-        background: var(--accent-yellow);
-        color: #000;
-    }
-
-    .category-pills {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-bottom: 16px;
-    }
-
-    .category-pill {
-        padding: 8px 16px;
-        background: var(--bg-card);
-        border: 3px solid var(--border-main);
-        border-radius: 20px;
-        font-size: 0.8125rem;
-        font-weight: 600;
-        cursor: pointer;
-        color: var(--text-primary);
-    }
-
-    .category-pill.active {
-        background: var(--accent-yellow);
-        color: #000;
-    }
-
-    .distance-input-group {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        margin-bottom: 12px;
-    }
-
-    .distance-input-group label {
-        font-weight: 700;
-        min-width: 80px;
-    }
-
-    .tax-badge {
-        padding: 6px 12px;
-        background: var(--accent-yellow);
-        color: #000;
-        border-radius: 6px;
-        font-size: 0.75rem;
-        font-weight: 700;
-        white-space: nowrap;
-    }
-
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        margin-bottom: 20px;
-    }
-
-    .stat-card {
-        background: var(--bg-card);
-        border: 4px solid var(--border-main);
-        border-radius: 12px;
-        padding: 20px;
-        text-align: center;
-    }
-
-    .stat-label {
-        font-size: 0.75rem;
-        font-weight: 700;
-        margin-bottom: 8px;
-        color: var(--text-secondary);
-    }
-
-    .stat-value {
-        font-size: 1.75rem;
-        font-weight: 800;
-        color: var(--accent-yellow);
-    }
-
-    .stat-subtext {
-        font-size: 0.625rem;
-        margin-top: 4px;
-        color: var(--text-secondary);
-    }
-
-    .tax-info {
-        background: var(--bg-card);
-        border: 3px solid var(--border-main);
-        border-radius: 8px;
-        padding: 16px;
-        margin-top: 12px;
-    }
-
-    .tax-row {
-        display: flex;
-        justify-content: space-between;
-        padding: 8px 0;
-        border-bottom: 2px solid var(--border-main);
-        font-size: 0.875rem;
-    }
-
-    .tax-row:last-child {
-        border-bottom: none;
-        font-weight: 700;
-        font-size: 1rem;
-    }
-
-    .chart-container {
-        height: 180px;
-        padding: 16px;
-        background: var(--bg-card);
-        border: 3px solid var(--border-main);
-        border-radius: 8px;
-    }
-
-    .chart-bars {
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        height: 100%;
-        gap: 8px;
-    }
-
-    .chart-bar-wrapper {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 100%;
-    }
-
-    .chart-bar {
-        width: 100%;
-        background: var(--accent-yellow);
-        border: 3px solid var(--border-main);
-        border-radius: 4px 4px 0 0;
-    }
-
-    .chart-label {
-        font-size: 0.75rem;
-        font-weight: 600;
-        margin-top: 8px;
-        color: var(--text-secondary);
-    }
-
-    .progress-bar {
-        height: 12px;
-        background: var(--bg-input);
-        border: 3px solid var(--border-main);
-        border-radius: 6px;
-        overflow: hidden;
-        margin: 16px 0;
-    }
-
-    .progress-fill {
-        height: 100%;
-        background: var(--accent-yellow);
-    }
-
-    .progress-text {
-        font-size: 0.875rem;
-        font-weight: 600;
-        text-align: center;
-        color: var(--text-primary);
-    }
-
-    .rides-list {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .ride-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 16px;
-        background: var(--bg-card);
-        border: 4px solid var(--border-main);
-        border-radius: 8px;
-    }
-
-    .ride-badge {
-        padding: 6px 10px;
-        border: 2px solid var(--border-main);
-        border-radius: 6px;
-        font-size: 0.75rem;
-        font-weight: 700;
-        color: var(--text-primary);
-    }
-
-    .ride-info {
-        flex: 1;
-    }
-
-    .ride-time {
-        font-size: 0.875rem;
-        font-weight: 600;
-        margin-bottom: 4px;
-        color: var(--text-primary);
-    }
-
-    .ride-note {
-        font-size: 0.875rem;
-        color: var(--text-secondary);
-    }
-
-    .ride-location {
-        font-size: 0.75rem;
-        color: var(--text-secondary);
-        margin-top: 2px;
-    }
-
-    .ride-meta {
-        display: flex;
-        gap: 8px;
-        margin-top: 4px;
-        flex-wrap: wrap;
-    }
-
-    .ride-category {
-        padding: 2px 8px;
-        background: var(--accent-yellow);
-        color: #000;
-        border-radius: 4px;
-        font-size: 0.75rem;
-        font-weight: 600;
-    }
-
-    .ride-tip {
-        padding: 2px 8px;
-        background: var(--accent-green);
-        color: #000;
-        border-radius: 4px;
-        font-size: 0.75rem;
-        font-weight: 600;
-    }
-
-    .ride-tax {
-        padding: 2px 8px;
-        background: #00ccff;
-        color: #000;
-        border-radius: 4px;
-        font-size: 0.75rem;
-        font-weight: 600;
-    }
-
-    .ride-amount {
-        font-size: 1.25rem;
-        font-weight: 800;
-        margin-left: auto;
-        color: var(--text-primary);
-    }
-
-    .ride-actions {
-        display: flex;
-        gap: 6px;
-    }
-
-    .ride-action-btn {
-        width: 36px;
-        height: 36px;
-        background: var(--bg-card);
-        border: 2px solid var(--border-main);
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 1rem;
-        color: var(--text-primary);
-    }
-
-    .shift-header {
-        display: flex;
-        justify-content: space-between;
-        padding-bottom: 16px;
-        margin-bottom: 16px;
-        border-bottom: 3px solid var(--border-main);
-    }
-
-    .shift-date {
-        font-size: 1.125rem;
-        font-weight: 700;
-        color: var(--text-primary);
-    }
-
-    .shift-count {
-        font-size: 0.875rem;
-        color: var(--text-secondary);
-    }
-
-    .shift-total-value {
-        font-size: 1.5rem;
-        font-weight: 800;
-        color: var(--accent-yellow);
-    }
-
-    .breakdown-item {
-        display: flex;
-        justify-content: space-between;
-        padding: 16px;
-        background: var(--bg-card);
-        border: 4px solid var(--border-main);
-        border-radius: 8px;
-        margin-bottom: 10px;
-    }
-
-    .breakdown-label {
-        font-weight: 600;
-        color: var(--text-primary);
-    }
-
-    .breakdown-value {
-        font-weight: 700;
-        font-size: 1.125rem;
-        color: var(--text-primary);
-    }
-
-    .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.9);
-        z-index: 1000;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-    }
-
-    .modal.active {
-        display: flex;
-    }
-
-    .modal-content {
-        background: var(--bg-card);
-        border: 5px solid var(--border-main);
-        border-radius: 12px;
-        padding: 24px;
-        max-width: 500px;
-        width: 100%;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    .modal-header {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        padding-bottom: 16px;
-        border-bottom: 3px solid var(--border-main);
-    }
-
-    .modal-title {
-        font-size: 1.25rem;
-        font-weight: 800;
-        color: var(--text-primary);
-    }
-
-    .modal-close {
-        width: 36px;
-        height: 36px;
-        background: var(--bg-card);
-        border: 2px solid var(--border-main);
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 1.5rem;
-        color: var(--text-primary);
-    }
-
-    .bottom-nav {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: var(--accent-yellow);
-        border-top: 5px solid var(--border-main);
-        display: flex;
-        padding: 12px;
-        gap: 8px;
-        z-index: 100;
-    }
-
-    .nav-btn {
-        flex: 1;
-        padding: 12px;
-        background: var(--bg-card);
-        border: 3px solid var(--border-main);
-        border-radius: 8px;
-        font-size: 1.25rem;
-        cursor: pointer;
-    }
-
-    .nav-btn.active {
-        background: #000;
-        color: var(--accent-yellow);
-    }
-
-    .empty-state {
-        text-align: center;
-        padding: 60px 20px;
-        color: var(--text-secondary);
-    }
-
-    .empty-icon {
-        font-size: 4rem;
-        margin-bottom: 16px;
-    }
-
-    .notification {
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--accent-yellow);
-        border: 4px solid #000;
-        border-radius: 8px;
-        padding: 16px 24px;
-        font-weight: 700;
-        color: #000;
-        z-index: 2000;
-    }
-
-    .tab-content {
-        display: none;
-    }
-
-    .tab-content.active {
-        display: block;
-    }
-
-    .voice-btn {
-        position: fixed;
-        bottom: 90px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-        background: var(--accent-yellow);
-        border: 4px solid var(--border-main);
-        border-radius: 50%;
-        font-size: 1.5rem;
-        cursor: pointer;
-        z-index: 99;
-    }
-
-    .info-row {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px 0;
-        border-bottom: 2px solid var(--border-main);
-    }
-
-    .info-row:last-child {
-        border-bottom: none;
-    }
-
-    @media (max-width: 600px) {
-        .stats-grid {
-            grid-template-columns: 1fr;
-        }
-    }
+    
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); transition: all 0.3s; }
+    .main-container { width: 100%; max-width: 600px; margin: 0 auto; padding: 20px 16px 100px; overflow-y: auto; overflow-x: hidden; height: 100vh; }
+    .header { background: var(--accent-yellow); border: 5px solid var(--border-main); border-radius: 12px; padding: 20px; margin-bottom: 12px; text-align: center; position: relative; }
+    .header h1 { font-size: 2.5rem; font-weight: 800; color: #000; letter-spacing: -1px; }
+    .header .subtitle { font-size: 0.875rem; font-weight: 600; color: #000; }
+    .header .version { position: absolute; top: 10px; right: 10px; font-size: 0.625rem; font-weight: 700; background: #000; color: var(--accent-yellow); padding: 4px 8px; border-radius: 4px; }
+    .theme-toggle-btn { position: absolute; top: 10px; left: 10px; width: 36px; height: 36px; background: #000; color: var(--accent-yellow); border: 3px solid #000; border-radius: 6px; font-size: 1rem; cursor: pointer; }
+    
+    .drive-control { background: var(--bg-card); border: 5px solid var(--border-main); border-radius: 12px; padding: 12px; margin-bottom: 16px; }
+    .drive-buttons { display: flex; gap: 10px; }
+    .drive-btn { flex: 1; padding: 14px; border: 4px solid var(--border-main); border-radius: 8px; font-size: 0.875rem; font-weight: 700; cursor: pointer; transition: all 0.2s; text-transform: uppercase; }
+    .drive-btn.drive { background: var(--accent-green); color: #000; }
+    .drive-btn.pause { background: var(--accent-red); color: #fff; }
+    .drive-btn.disabled { opacity: 0.5; cursor: not-allowed; }
+    .drive-status { font-size: 0.75rem; font-weight: 600; text-align: center; margin-top: 8px; color: var(--text-primary); }
+    
+    .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+    .tab { flex: 1; padding: 14px 8px; background: var(--bg-card); border: 4px solid var(--border-main); border-radius: 8px; font-size: 0.75rem; font-weight: 700; text-align: center; cursor: pointer; transition: all 0.2s; color: var(--text-primary); }
+    .tab.active { background: var(--accent-yellow); color: #000; }
+    .card { background: var(--bg-card); border: 5px solid var(--border-main); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    .card-title { font-size: 1.125rem; font-weight: 800; margin-bottom: 16px; color: var(--text-primary); }
+    .input-group { display: flex; gap: 8px; margin-bottom: 12px; }
+    input, select { flex: 1; padding: 12px; background: var(--bg-input); border: 3px solid var(--border-main); border-radius: 8px; font-size: 1rem; font-weight: 500; color: var(--text-primary); }
+    input::placeholder { color: var(--text-secondary); }
+    input:focus, select:focus { outline: none; border-color: var(--accent-yellow); }
+    .btn { padding: 14px 20px; border: 3px solid var(--border-main); border-radius: 8px; font-size: 0.9375rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .btn-yellow { background: var(--accent-yellow); color: #000; border-color: var(--border-main); }
+    .btn-outline { background: var(--bg-card); color: var(--text-primary); border-color: var(--border-main); }
+    .btn-outline:hover { background: var(--accent-yellow); color: #000; }
+    .btn-red { background: var(--accent-red); color: #fff; border-color: var(--border-main); }
+    .btn-full { width: 100%; }
+    .location-buttons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+    .location-btn { padding: 18px; background: var(--bg-card); border: 4px solid var(--border-main); border-radius: 8px; font-size: 0.875rem; font-weight: 700; text-align: center; cursor: pointer; transition: all 0.2s; color: var(--text-primary); }
+    .location-btn.active { background: var(--accent-green); color: #000; }
+    .location-btn.disabled { opacity: 0.5; cursor: not-allowed; }
+    .location-info { background: var(--bg-input); border: 3px solid var(--border-main); border-radius: 8px; padding: 12px; margin-bottom: 12px; font-size: 0.875rem; color: var(--text-secondary); min-height: 60px; }
+    .location-label { font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .ride-form { display: none; animation: slideDown 0.3s ease; }
+    .ride-form.active { display: block; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    .type-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+    .type-btn { padding: 16px; background: var(--bg-card); border: 4px solid var(--border-main); border-radius: 8px; font-size: 0.875rem; font-weight: 700; text-align: center; cursor: pointer; transition: all 0.2s; color: var(--text-primary); }
+    .type-btn.active { background: var(--accent-yellow); color: #000; }
+    .category-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .category-pill { padding: 8px 16px; background: var(--bg-card); border: 3px solid var(--border-main); border-radius: 20px; font-size: 0.8125rem; font-weight: 600; cursor: pointer; color: var(--text-primary); }
+    .category-pill.active { background: var(--accent-yellow); color: #000; }
+    .distance-input-group { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+    .distance-input-group label { font-weight: 700; min-width: 80px; }
+    .tax-badge { padding: 6px 12px; background: var(--accent-yellow); color: #000; border-radius: 6px; font-size: 0.75rem; font-weight: 700; white-space: nowrap; }
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+    .stat-card { background: var(--bg-card); border: 4px solid var(--border-main); border-radius: 12px; padding: 20px; text-align: center; }
+    .stat-label { font-size: 0.75rem; font-weight: 700; margin-bottom: 8px; color: var(--text-secondary); }
+    .stat-value { font-size: 1.75rem; font-weight: 800; color: var(--accent-yellow); }
+    .stat-subtext { font-size: 0.625rem; margin-top: 4px; color: var(--text-secondary); }
+    .tax-info { background: var(--bg-card); border: 3px solid var(--border-main); border-radius: 8px; padding: 16px; margin-top: 12px; }
+    .tax-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 2px solid var(--border-main); font-size: 0.875rem; }
+    .tax-row:last-child { border-bottom: none; font-weight: 700; font-size: 1rem; }
+    .chart-container { height: 180px; padding: 16px; background: var(--bg-card); border: 3px solid var(--border-main); border-radius: 8px; }
+    .chart-bars { display: flex; align-items: flex-end; justify-content: space-between; height: 100%; gap: 8px; }
+    .chart-bar-wrapper { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; }
+    .chart-bar { width: 100%; background: var(--accent-yellow); border: 3px solid var(--border-main); border-radius: 4px 4px 0 0; }
+    .chart-label { font-size: 0.75rem; font-weight: 600; margin-top: 8px; color: var(--text-secondary); }
+    .progress-bar { height: 12px; background: var(--bg-input); border: 3px solid var(--border-main); border-radius: 6px; overflow: hidden; margin: 16px 0; }
+    .progress-fill { height: 100%; background: var(--accent-yellow); }
+    .progress-text { font-size: 0.875rem; font-weight: 600; text-align: center; color: var(--text-primary); }
+    .rides-list { display: flex; flex-direction: column; gap: 12px; }
+    .ride-item { display: flex; align-items: center; gap: 12px; padding: 16px; background: var(--bg-card); border: 4px solid var(--border-main); border-radius: 8px; }
+    .ride-badge { padding: 6px 10px; border: 2px solid var(--border-main); border-radius: 6px; font-size: 0.75rem; font-weight: 700; color: var(--text-primary); }
+    .ride-info { flex: 1; }
+    .ride-time { font-size: 0.875rem; font-weight: 600; margin-bottom: 4px; color: var(--text-primary); }
+    .ride-note { font-size: 0.875rem; color: var(--text-secondary); }
+    .ride-location { font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px; }
+    .ride-meta { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
+    .ride-category { padding: 2px 8px; background: var(--accent-yellow); color: #000; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+    .ride-tip { padding: 2px 8px; background: var(--accent-green); color: #000; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+    .ride-tax { padding: 2px 8px; background: #00ccff; color: #000; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+    .ride-amount { font-size: 1.25rem; font-weight: 800; margin-left: auto; color: var(--text-primary); }
+    .ride-actions { display: flex; gap: 6px; }
+    .ride-action-btn { width: 36px; height: 36px; background: var(--bg-card); border: 2px solid var(--border-main); border-radius: 6px; cursor: pointer; font-size: 1rem; color: var(--text-primary); }
+    .shift-header { display: flex; justify-content: space-between; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 3px solid var(--border-main); }
+    .shift-date { font-size: 1.125rem; font-weight: 700; color: var(--text-primary); }
+    .shift-count { font-size: 0.875rem; color: var(--text-secondary); }
+    .shift-total-value { font-size: 1.5rem; font-weight: 800; color: var(--accent-yellow); }
+    .breakdown-item { display: flex; justify-content: space-between; padding: 16px; background: var(--bg-card); border: 4px solid var(--border-main); border-radius: 8px; margin-bottom: 10px; }
+    .breakdown-label { font-weight: 600; color: var(--text-primary); }
+    .breakdown-value { font-weight: 700; font-size: 1.125rem; color: var(--text-primary); }
+    .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.9); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+    .modal.active { display: flex; }
+    .modal-content { background: var(--bg-card); border: 5px solid var(--border-main); border-radius: 12px; padding: 24px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; }
+    .modal-header { display: flex; justify-content: space-between; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 3px solid var(--border-main); }
+    .modal-title { font-size: 1.25rem; font-weight: 800; color: var(--text-primary); }
+    .modal-close { width: 36px; height: 36px; background: var(--bg-card); border: 2px solid var(--border-main); border-radius: 6px; cursor: pointer; font-size: 1.5rem; color: var(--text-primary); }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--accent-yellow); border-top: 5px solid var(--border-main); display: flex; padding: 12px; gap: 8px; z-index: 100; }
+    .nav-btn { flex: 1; padding: 12px; background: var(--bg-card); border: 3px solid var(--border-main); border-radius: 8px; font-size: 1.25rem; cursor: pointer; }
+    .nav-btn.active { background: #000; color: var(--accent-yellow); }
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--text-secondary); }
+    .empty-icon { font-size: 4rem; margin-bottom: 16px; }
+    .notification { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--accent-yellow); border: 4px solid #000; border-radius: 8px; padding: 16px 24px; font-weight: 700; color: #000; z-index: 2000; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .voice-btn { position: fixed; bottom: 90px; right: 20px; width: 60px; height: 60px; background: var(--accent-yellow); border: 4px solid var(--border-main); border-radius: 50%; font-size: 1.5rem; cursor: pointer; z-index: 99; }
+    .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 2px solid var(--border-main); }
+    .info-row:last-child { border-bottom: none; }
+    @media (max-width: 600px) { .stats-grid { grid-template-columns: 1fr; } }
 </style>
 ```
 
@@ -781,11 +147,19 @@
         <div class="header">
             <button class="theme-toggle-btn" id="themeToggle">🌓</button>
             <div class="version">v1.0</div>
-            <h1>TaxiLog Pro</h1>
+            <h1>TaxiLog</h1>
             <p class="subtitle">Professional Edition</p>
         </div>
 
 ```
+    <div class="drive-control">
+        <div class="drive-buttons">
+            <button class="drive-btn drive" id="driveBtn">🚗 DRIVE</button>
+            <button class="drive-btn pause disabled" id="pauseBtn">⏸ PAUSE</button>
+        </div>
+        <div class="drive-status" id="driveStatus"></div>
+    </div>
+
     <div class="tabs">
         <button class="tab active" data-tab="add">Add</button>
         <button class="tab" data-tab="stats">Stats</button>
@@ -796,7 +170,7 @@
 
     <div class="tab-content active" data-content="add">
         <div class="card">
-            <h3 class="card-title">📍 Start New Ride</h3>
+            <h3 class="card-title">📍 New Ride</h3>
             
             <div class="location-buttons">
                 <button class="location-btn" id="arrivedBtn">📍 ARRIVED</button>
@@ -805,12 +179,12 @@
 
             <div class="location-info">
                 <div class="location-label">Start:</div>
-                <div id="startLocation">Tap ARRIVED to begin</div>
+                <div id="startLocation">Tap ARRIVED</div>
             </div>
 
             <div class="location-info">
                 <div class="location-label">End:</div>
-                <div id="endLocation">Tap FINISH after arrival</div>
+                <div id="endLocation">Tap FINISH</div>
             </div>
 
             <div class="ride-form" id="rideForm">
@@ -836,7 +210,7 @@
                 </div>
 
                 <div class="input-group">
-                    <input type="number" step="0.01" id="tip" placeholder="Tip (optional)">
+                    <input type="number" step="0.01" id="tip" placeholder="Tip">
                 </div>
 
                 <div class="type-grid">
@@ -849,7 +223,7 @@
                 <div class="category-pills">
                     <button class="category-pill" data-category="city">City</button>
                     <button class="category-pill" data-category="airport">Airport</button>
-                    <button class="category-pill" data-category="long">Long Distance</button>
+                    <button class="category-pill" data-category="long">Long</button>
                     <button class="category-pill" data-category="vip">VIP</button>
                     <button class="category-pill" data-category="disabled">Disabled Kids</button>
                 </div>
@@ -860,15 +234,6 @@
 
                 <button class="btn btn-yellow btn-full" id="addBtn">ADD RIDE</button>
             </div>
-        </div>
-
-        <div class="card">
-            <h3 class="card-title">⏱️ Shift Management</h3>
-            <div class="input-group">
-                <button class="btn btn-outline" id="shiftStartBtn">START SHIFT</button>
-                <button class="btn btn-outline" id="shiftEndBtn">END SHIFT</button>
-            </div>
-            <div id="shiftStatus" style="text-align: center; margin-top: 12px; font-weight: 600;"></div>
         </div>
     </div>
 
@@ -901,34 +266,33 @@
         </div>
 
         <div class="card">
-            <h3 class="card-title">💰 Tax Overview (Smart)</h3>
-            <p style="margin-bottom: 12px; font-size: 0.875rem; color: var(--text-secondary);">7% tax under 50km, 19% over 50km</p>
+            <h3 class="card-title">💰 Tax (7% / 19%)</h3>
             <div class="tax-info">
                 <div class="tax-row">
-                    <span>Gross Income (Month)</span>
+                    <span>Gross (Month)</span>
                     <span id="taxGross">0€</span>
                 </div>
                 <div class="tax-row">
-                    <span>Tax Amount</span>
+                    <span>Tax</span>
                     <span id="taxAmount">0€</span>
                 </div>
                 <div class="tax-row">
-                    <span>Net Income</span>
+                    <span>Net</span>
                     <span id="taxNet">0€</span>
                 </div>
             </div>
         </div>
 
         <div class="card">
-            <h3 class="card-title">🎯 Daily Goal</h3>
+            <h3 class="card-title">🎯 Goal</h3>
             <div class="input-group">
-                <input type="number" id="goalAmount" placeholder="Set daily goal">
+                <input type="number" id="goalAmount" placeholder="Daily goal">
                 <button class="btn btn-yellow" id="setGoalBtn">SET</button>
             </div>
             <div class="progress-bar">
                 <div class="progress-fill" id="goalProgress" style="width: 0%"></div>
             </div>
-            <div class="progress-text" id="goalText">No goal set</div>
+            <div class="progress-text" id="goalText">No goal</div>
         </div>
 
         <div class="card">
@@ -939,7 +303,7 @@
         </div>
 
         <div class="card">
-            <h3 class="card-title">💳 Breakdown by Type</h3>
+            <h3 class="card-title">💳 Breakdown</h3>
             <div id="breakdown"></div>
         </div>
     </div>
@@ -950,7 +314,7 @@
             <div class="input-group">
                 <input type="text" id="searchInput" placeholder="Search...">
                 <select id="filterType">
-                    <option value="all">All Types</option>
+                    <option value="all">All</option>
                     <option value="card">Card</option>
                     <option value="cash">Cash</option>
                     <option value="invoice">Invoice</option>
@@ -964,34 +328,33 @@
 
     <div class="tab-content" data-content="reports">
         <div class="card">
-            <h3 class="card-title">📋 Reports (Schichtnachweis)</h3>
-            <p style="margin-bottom: 16px; color: var(--text-secondary); font-size: 0.875rem;">Professional documentation</p>
+            <h3 class="card-title">📋 Reports</h3>
             
             <div class="input-group">
                 <input type="date" id="reportStartDate">
                 <input type="date" id="reportEndDate">
             </div>
             
-            <button class="btn btn-yellow btn-full" id="generateReportBtn" style="margin-bottom: 10px;">GENERATE REPORT</button>
+            <button class="btn btn-yellow btn-full" id="generateReportBtn" style="margin-bottom: 10px;">REPORT</button>
             <button class="btn btn-outline btn-full" id="generateTaxReportBtn">TAX REPORT</button>
         </div>
 
         <div class="card">
-            <h3 class="card-title">ℹ️ Report Info</h3>
+            <h3 class="card-title">ℹ️ Info</h3>
             <div class="info-row">
-                <span>Total Shifts</span>
+                <span>Shifts</span>
                 <span id="reportShifts">0</span>
             </div>
             <div class="info-row">
-                <span>Total Hours</span>
+                <span>Hours</span>
                 <span id="reportHours">0h</span>
             </div>
             <div class="info-row">
-                <span>Total Income</span>
+                <span>Income</span>
                 <span id="reportIncome">0€</span>
             </div>
             <div class="info-row">
-                <span>Tax Liability</span>
+                <span>Tax</span>
                 <span id="reportTax">0€</span>
             </div>
         </div>
@@ -1013,37 +376,32 @@
 
             <div style="padding: 12px; background: var(--bg-input); border: 3px solid var(--border-main); border-radius: 8px;">
                 <p style="font-size: 0.875rem; color: var(--text-secondary);">
-                    <strong>Tax System:</strong><br>
-                    Under 50km: 7% tax<br>
-                    Over 50km: 19% tax<br>
-                    Calculated automatically
+                    <strong>Tax:</strong> Under 50km: 7% | Over 50km: 19%
                 </p>
             </div>
         </div>
 
         <div class="card">
-            <h3 class="card-title">📤 Export Data</h3>
-            <button class="btn btn-outline btn-full" id="exportBtn" style="margin-bottom: 10px;">EXPORT TXT</button>
-            <button class="btn btn-outline btn-full" id="exportCSVBtn" style="margin-bottom: 10px;">EXPORT CSV</button>
-            <button class="btn btn-outline btn-full" id="exportExcelBtn" style="margin-bottom: 10px;">EXPORT EXCEL</button>
-            <button class="btn btn-outline btn-full" id="backupBtn" style="margin-bottom: 10px;">BACKUP JSON</button>
-            <button class="btn btn-outline btn-full" id="restoreBtn">RESTORE JSON</button>
+            <h3 class="card-title">📤 Export</h3>
+            <button class="btn btn-outline btn-full" id="exportBtn" style="margin-bottom: 10px;">TXT</button>
+            <button class="btn btn-outline btn-full" id="exportCSVBtn" style="margin-bottom: 10px;">CSV</button>
+            <button class="btn btn-outline btn-full" id="exportExcelBtn" style="margin-bottom: 10px;">EXCEL</button>
+            <button class="btn btn-outline btn-full" id="backupBtn" style="margin-bottom: 10px;">BACKUP</button>
+            <button class="btn btn-outline btn-full" id="restoreBtn">RESTORE</button>
             <input type="file" id="restoreFile" accept=".json" style="display: none;">
         </div>
 
         <div class="card">
-            <h3 class="card-title">⚠️ Danger Zone</h3>
-            <button class="btn btn-red btn-full" id="clearBtn">CLEAR ALL DATA</button>
+            <h3 class="card-title">⚠️ Danger</h3>
+            <button class="btn btn-red btn-full" id="clearBtn">CLEAR ALL</button>
         </div>
 
         <div class="card">
-            <h3 class="card-title">ℹ️ App Info</h3>
+            <h3 class="card-title">ℹ️ Info</h3>
             <p style="line-height: 1.8; color: var(--text-primary);">
-                <strong>App:</strong> TaxiLog Pro<br>
-                <strong>Version:</strong> 1.0 Production<br>
-                <strong>Total Rides:</strong> <span id="infoTotalRides">0</span><br>
-                <strong>Storage:</strong> LocalStorage<br>
-                <strong>Features:</strong> GPS, Smart Tax, Reports
+                <strong>App:</strong> TaxiLog<br>
+                <strong>Version:</strong> 1.0<br>
+                <strong>Rides:</strong> <span id="infoTotalRides">0</span>
             </p>
         </div>
     </div>
@@ -1062,7 +420,7 @@
 <div class="modal" id="editModal">
     <div class="modal-content">
         <div class="modal-header">
-            <div class="modal-title">Edit Ride</div>
+            <div class="modal-title">Edit</div>
             <button class="modal-close" id="closeEditModal">×</button>
         </div>
         
@@ -1077,7 +435,7 @@
         </div>
 
         <div class="input-group">
-            <input type="number" step="0.1" id="editDistance" placeholder="Distance (km)">
+            <input type="number" step="0.1" id="editDistance" placeholder="km">
         </div>
 
         <div class="input-group">
@@ -1098,7 +456,7 @@
 <script>
 ```
 
-const S=‘taxilog_pro’;const SS=‘taxilog_pro_s’;let shifts=[];let settings={currency:‘€’,goal:0,shiftStart:null,shiftEnd:null,theme:‘light’};let selectedType=‘card’;let selectedCategory=null;let currentEditRide=null;let startLoc=null;let endLoc=null;let rideInProgress=false;document.addEventListener(‘DOMContentLoaded’,()=>{loadData();initEvents();updateStats();renderShifts();updateShiftStatus();updateReportInfo()});function loadData(){try{const d=localStorage.getItem(S);if(d)shifts=JSON.parse(d);const s=localStorage.getItem(SS);if(s){settings={…settings,…JSON.parse(s)};document.getElementById(‘currency’).value=settings.currency;document.getElementById(‘settingsCurrency’).value=settings.currency;if(settings.goal>0)document.getElementById(‘goalAmount’).value=settings.goal;document.body.setAttribute(‘data-theme’,settings.theme)}}catch(e){console.error(e)}}function saveData(){try{localStorage.setItem(S,JSON.stringify(shifts));localStorage.setItem(SS,JSON.stringify(settings))}catch(e){notify(‘Save failed’)}}function initEvents(){document.querySelectorAll(’.tab,.nav-btn’).forEach(b=>b.addEventListener(‘click’,function(){switchTab(this.getAttribute(‘data-tab’))}));document.querySelectorAll(’.type-btn’).forEach(b=>b.addEventListener(‘click’,function(){const p=this.parentElement;p.querySelectorAll(’.type-btn’).forEach(x=>x.classList.remove(‘active’));this.classList.add(‘active’);selectedType=this.getAttribute(‘data-type’)}));document.querySelectorAll(’.category-pill’).forEach(b=>b.addEventListener(‘click’,function(){if(this.classList.contains(‘active’)){this.classList.remove(‘active’);selectedCategory=null}else{document.querySelectorAll(’.category-pill’).forEach(x=>x.classList.remove(‘active’));this.classList.add(‘active’);selectedCategory=this.getAttribute(‘data-category’)}}));document.getElementById(‘distance’).addEventListener(‘input’,updateTaxBadge);document.getElementById(‘arrivedBtn’).addEventListener(‘click’,captureStart);document.getElementById(‘finishBtn’).addEventListener(‘click’,captureEnd);document.getElementById(‘themeToggle’).addEventListener(‘click’,toggleTheme);document.getElementById(‘addBtn’).addEventListener(‘click’,addRide);document.getElementById(‘shiftStartBtn’).addEventListener(‘click’,startShift);document.getElementById(‘shiftEndBtn’).addEventListener(‘click’,endShift);document.getElementById(‘currency’).addEventListener(‘change’,function(){settings.currency=this.value;saveData();updateStats();renderShifts()});document.getElementById(‘settingsCurrency’).addEventListener(‘change’,function(){settings.currency=this.value;document.getElementById(‘currency’).value=this.value;saveData();updateStats();renderShifts()});document.getElementById(‘setGoalBtn’).addEventListener(‘click’,setGoal);document.getElementById(‘searchInput’).addEventListener(‘input’,renderShifts);document.getElementById(‘filterType’).addEventListener(‘change’,renderShifts);document.getElementById(‘exportBtn’).addEventListener(‘click’,exportTXT);document.getElementById(‘exportCSVBtn’).addEventListener(‘click’,exportCSV);document.getElementById(‘exportExcelBtn’).addEventListener(‘click’,exportExcel);document.getElementById(‘backupBtn’).addEventListener(‘click’,backupJSON);document.getElementById(‘restoreBtn’).addEventListener(‘click’,()=>document.getElementById(‘restoreFile’).click());document.getElementById(‘restoreFile’).addEventListener(‘change’,restoreJSON);document.getElementById(‘clearBtn’).addEventListener(‘click’,clearAll);document.getElementById(‘closeEditModal’).addEventListener(‘click’,closeEditModal);document.getElementById(‘saveEditBtn’).addEventListener(‘click’,saveEdit);document.getElementById(‘voiceBtn’).addEventListener(‘click’,startVoice);document.getElementById(‘generateReportBtn’).addEventListener(‘click’,generateReport);document.getElementById(‘generateTaxReportBtn’).addEventListener(‘click’,generateTaxReport);document.querySelectorAll(’#editTypeGrid .type-btn’).forEach(b=>b.addEventListener(‘click’,function(){document.querySelectorAll(’#editTypeGrid .type-btn’).forEach(x=>x.classList.remove(‘active’));this.classList.add(‘active’)}))}function updateTaxBadge(){const dist=parseFloat(document.getElementById(‘distance’).value)||0;const badge=document.getElementById(‘taxBadge’);if(dist>50){badge.textContent=‘19% Tax’;badge.style.background=’#ff6b6b’}else{badge.textContent=‘7% Tax’;badge.style.background=‘var(–accent-yellow)’}}async function captureStart(){if(rideInProgress){notify(‘Finish current ride first’);return}if(!navigator.geolocation){notify(‘GPS not available’);return}rideInProgress=true;document.getElementById(‘arrivedBtn’).classList.add(‘active’);document.getElementById(‘finishBtn’).classList.remove(‘disabled’);notify(‘Capturing start…’);navigator.geolocation.getCurrentPosition(async(pos)=>{startLoc={lat:pos.coords.latitude,lng:pos.coords.longitude,timestamp:new Date().toISOString()};const addr=await getAddress(startLoc.lat,startLoc.lng);document.getElementById(‘startLocation’).textContent=addr;notify(‘Start captured’)},()=>{document.getElementById(‘arrivedBtn’).classList.remove(‘active’);document.getElementById(‘finishBtn’).classList.add(‘disabled’);rideInProgress=false;notify(‘GPS failed’)})}async function captureEnd(){if(!rideInProgress||!startLoc){notify(‘Tap ARRIVED first’);return}document.getElementById(‘finishBtn’).classList.add(‘active’);notify(‘Capturing end…’);navigator.geolocation.getCurrentPosition(async(pos)=>{endLoc={lat:pos.coords.latitude,lng:pos.coords.longitude,timestamp:new Date().toISOString()};const addr=await getAddress(endLoc.lat,endLoc.lng);document.getElementById(‘endLocation’).textContent=addr;const dist=calculateDistance(startLoc.lat,startLoc.lng,endLoc.lat,endLoc.lng);document.getElementById(‘distance’).value=dist.toFixed(1);updateTaxBadge();const now=new Date();document.getElementById(‘rideDate’).value=now.toISOString().split(‘T’)[0];document.getElementById(‘rideTime’).value=now.toTimeString().substring(0,5);document.getElementById(‘rideForm’).classList.add(‘active’);notify(‘End captured - Fill details’)},()=>{document.getElementById(‘finishBtn’).classList.remove(‘active’);notify(‘GPS failed’)})}async function getAddress(lat,lng){try{const res=await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);const data=await res.json();return data.display_name.split(’,’).slice(0,3).join(’,’)}catch(e){return `${lat.toFixed(4)}, ${lng.toFixed(4)}`}}function calculateDistance(lat1,lng1,lat2,lng2){const R=6371;const dLat=(lat2-lat1)*Math.PI/180;const dLng=(lng2-lng1)*Math.PI/180;const a=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)*Math.sin(dLng/2);const c=2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));return R*c}function toggleTheme(){settings.theme=settings.theme===‘light’?‘dark’:‘light’;document.body.setAttribute(‘data-theme’,settings.theme);saveData()}function switchTab(tab){document.querySelectorAll(’.tab,.nav-btn’).forEach(b=>b.classList.toggle(‘active’,b.getAttribute(‘data-tab’)===tab));document.querySelectorAll(’.tab-content’).forEach(c=>c.classList.toggle(‘active’,c.getAttribute(‘data-content’)===tab));if(tab===‘stats’)updateStats();if(tab===‘history’)renderShifts();if(tab===‘reports’)updateReportInfo()}function addRide(){const amt=parseFloat(document.getElementById(‘amount’).value);const tip=parseFloat(document.getElementById(‘tip’).value)||0;const dist=parseFloat(document.getElementById(‘distance’).value)||0;const note=document.getElementById(‘note’).value.trim();const date=document.getElementById(‘rideDate’).value;const time=document.getElementById(‘rideTime’).value;const curr=document.getElementById(‘currency’).value;if(!amt||amt<=0){notify(‘Enter amount’);return}if(!date||!time){notify(‘Select date/time’);return}const taxRate=dist>50?0.19:0.07;const taxAmt=amt*taxRate;let shift=shifts.find(s=>s.date===date);if(!shift){shift={date:date,rides:[]};shifts.push(shift);shifts.sort((a,b)=>new Date(b.date)-new Date(a.date))}shift.rides.push({id:Date.now(),type:selectedType,amount:amt,tip:tip,distance:dist,taxRate:taxRate*100,taxAmount:taxAmt,totalAmount:amt+tip,currency:curr,category:selectedCategory,note:note,time:time,startLocation:startLoc?document.getElementById(‘startLocation’).textContent:null,endLocation:endLoc?document.getElementById(‘endLocation’).textContent:null,timestamp:new Date(date+‘T’+time).toISOString()});shift.rides.sort((a,b)=>a.time.localeCompare(b.time));saveData();updateStats();renderShifts();updateReportInfo();document.getElementById(‘amount’).value=’’;document.getElementById(‘tip’).value=’’;document.getElementById(‘distance’).value=’’;document.getElementById(‘note’).value=’’;document.getElementById(‘startLocation’).textContent=‘Tap ARRIVED to begin’;document.getElementById(‘endLocation’).textContent=‘Tap FINISH after arrival’;document.getElementById(‘arrivedBtn’).classList.remove(‘active’);document.getElementById(‘finishBtn’).classList.remove(‘active’);document.getElementById(‘finishBtn’).classList.add(‘disabled’);document.getElementById(‘rideForm’).classList.remove(‘active’);document.querySelectorAll(’.category-pill’).forEach(b=>b.classList.remove(‘active’));selectedCategory=null;startLoc=null;endLoc=null;rideInProgress=false;updateTaxBadge();notify(‘Ride added’)}function startShift(){settings.shiftStart=new Date().toISOString();settings.shiftEnd=null;saveData();updateShiftStatus();notify(‘Shift started’)}function endShift(){if(!settings.shiftStart){notify(‘No shift’);return}settings.shiftEnd=new Date().toISOString();saveData();updateShiftStatus();notify(‘Shift ended’)}function updateShiftStatus(){const st=document.getElementById(‘shiftStatus’);if(!settings.shiftStart){st.textContent=‘No active shift’;return}if(settings.shiftEnd){const dur=Math.round((new Date(settings.shiftEnd)-new Date(settings.shiftStart))/60000);st.textContent=`Last shift: ${dur}min`}else{const dur=Math.round((new Date()-new Date(settings.shiftStart))/60000);st.textContent=`Active: ${dur}min`;setTimeout(updateShiftStatus,60000)}}function updateStats(){const today=new Date().toISOString().split(‘T’)[0];const weekAgo=new Date(Date.now()-7*86400000).toISOString().split(‘T’)[0];const monthStart=new Date(new Date().getFullYear(),new Date().getMonth(),1).toISOString().split(‘T’)[0];let todayT=0,weekT=0,monthT=0,allT=0,todayR=0,weekR=0,monthR=0,allR=0,monthTax=0;shifts.forEach(shift=>{const shiftT=shift.rides.reduce((s,r)=>s+r.totalAmount,0);const shiftR=shift.rides.length;if(shift.date===today){todayT+=shiftT;todayR+=shiftR}if(shift.date>=weekAgo){weekT+=shiftT;weekR+=shiftR}if(shift.date>=monthStart){monthT+=shiftT;monthR+=shiftR;monthTax+=shift.rides.reduce((s,r)=>s+(r.taxAmount||0),0)}allT+=shiftT;allR+=shiftR});document.getElementById(‘statToday’).textContent=todayT.toFixed(2)+settings.currency;document.getElementById(‘statWeek’).textContent=weekT.toFixed(2)+settings.currency;document.getElementById(‘statMonth’).textContent=monthT.toFixed(2)+settings.currency;document.getElementById(‘statTotal’).textContent=allT.toFixed(2)+settings.currency;document.getElementById(‘todayRides’).textContent=todayR+’ rides’;document.getElementById(‘weekRides’).textContent=weekR+’ rides’;document.getElementById(‘monthRides’).textContent=monthR+’ rides’;document.getElementById(‘totalRides’).textContent=allR+’ rides’;document.getElementById(‘infoTotalRides’).textContent=allR;const taxG=monthT;const taxN=taxG-monthTax;document.getElementById(‘taxGross’).textContent=taxG.toFixed(2)+settings.currency;document.getElementById(‘taxAmount’).textContent=monthTax.toFixed(2)+settings.currency;document.getElementById(‘taxNet’).textContent=taxN.toFixed(2)+settings.currency;if(settings.goal>0){const prog=Math.min((todayT/settings.goal)*100,100);document.getElementById(‘goalProgress’).style.width=prog+’%’;document.getElementById(‘goalText’).textContent=`${todayT.toFixed(2)}${settings.currency}/${settings.goal}${settings.currency} (${Math.round(prog)}%)`}updateChart();updateBreakdown()}function setGoal(){const g=parseFloat(document.getElementById(‘goalAmount’).value);if(g>0){settings.goal=g;saveData();updateStats();notify(‘Goal set’)}}function updateChart(){const bars=document.getElementById(‘chartBars’);bars.innerHTML=’’;const days=[];for(let i=6;i>=0;i–){const d=new Date(Date.now()-i*86400000);const ds=d.toISOString().split(‘T’)[0];const sh=shifts.find(s=>s.date===ds);const t=sh?sh.rides.reduce((s,r)=>s+r.totalAmount,0):0;days.push({date:ds,total:t})}const max=Math.max(…days.map(d=>d.total),1);days.forEach(day=>{const w=document.createElement(‘div’);w.className=‘chart-bar-wrapper’;const b=document.createElement(‘div’);b.className=‘chart-bar’;b.style.height=(day.total/max)*100+’%’;b.title=`${day.total.toFixed(2)}${settings.currency}`;const l=document.createElement(‘div’);l.className=‘chart-label’;l.textContent=new Date(day.date).toLocaleDateString(‘de-DE’,{weekday:‘short’});w.appendChild(b);w.appendChild(l);bars.appendChild(w)})}function updateBreakdown(){const br=document.getElementById(‘breakdown’);const types={card:{label:‘💳 Card’,total:0,count:0},cash:{label:‘💵 Cash’,total:0,count:0},invoice:{label:‘🧾 Invoice’,total:0,count:0},wheelchair:{label:‘♿ Wheelchair’,total:0,count:0}};shifts.forEach(shift=>shift.rides.forEach(r=>{types[r.type].total+=r.totalAmount;types[r.type].count++}));br.innerHTML=’’;Object.entries(types).forEach(([t,d])=>{if(d.count>0){const i=document.createElement(‘div’);i.className=‘breakdown-item’;i.innerHTML=`<div class="breakdown-label">${d.label} (${d.count}×)</div><div class="breakdown-value">${d.total.toFixed(2)}${settings.currency}</div>`;br.appendChild(i)}})}function renderShifts(){const cont=document.getElementById(‘shiftsContainer’);const search=document.getElementById(‘searchInput’).value.toLowerCase();const filter=document.getElementById(‘filterType’).value;let filtered=shifts.map(s=>({…s,rides:s.rides.filter(r=>{const ms=!search||r.note.toLowerCase().includes(search)||r.totalAmount.toString().includes(search)||(r.startLocation&&r.startLocation.toLowerCase().includes(search))||(r.endLocation&&r.endLocation.toLowerCase().includes(search));const mt=filter===‘all’||r.type===filter;return ms&&mt})})).filter(s=>s.rides.length>0);if(filtered.length===0){cont.innerHTML=’<div class="card"><div class="empty-state"><div class="empty-icon">📋</div><div>No rides</div></div></div>’;return}cont.innerHTML=’’;filtered.forEach((shift,si)=>{const total=shift.rides.reduce((s,r)=>s+r.totalAmount,0);const card=document.createElement(‘div’);card.className=‘card’;card.innerHTML=`<div class="shift-header"><div><div class="shift-date">${formatDate(shift.date)}</div><div class="shift-count">${shift.rides.length} rides</div></div><div style="text-align:right"><div style="font-size:0.75rem;font-weight:600;">TOTAL</div><div class="shift-total-value">${total.toFixed(2)}${shift.rides[0].currency||settings.currency}</div></div></div><div class="rides-list" id="rides-${si}"></div>`;cont.appendChild(card);const list=document.getElementById(`rides-${si}`);shift.rides.forEach((r,ri)=>list.appendChild(createRideElem(r,si,ri)))})}function createRideElem(r,si,ri){const d=document.createElement(‘div’);d.className=‘ride-item’;d.innerHTML=`<div class="ride-badge">${getBadge(r.type)}</div><div class="ride-info"><div class="ride-time">${r.time}</div>${r.note?`<div class="ride-note">${r.note}</div>`:''}${r.startLocation||r.endLocation?`<div class="ride-location">📍 ${r.startLocation||’’} → ${r.endLocation||’’}</div>`:''}${r.category||r.tip>0||r.distance?`<div class="ride-meta">${r.category?`<span class="ride-category">${r.category}</span>`:’’}${r.tip>0?`<span class="ride-tip">+${r.tip.toFixed(2)}</span>`:’’}${r.distance?`<span class="ride-tax">${r.distance.toFixed(1)}km • ${r.taxRate}%</span>`:’’}</div>`:''}</div><div class="ride-amount">${r.totalAmount.toFixed(2)}${r.currency||settings.currency}</div><div class="ride-actions"><button class="ride-action-btn edit">✏️</button><button class="ride-action-btn delete">×</button></div>`;d.querySelector(’.edit’).addEventListener(‘click’,()=>openEdit(si,ri));d.querySelector(’.delete’).addEventListener(‘click’,()=>deleteRide(si,ri));return d}function deleteRide(si,ri){if(confirm(‘Delete?’)){shifts[si].rides.splice(ri,1);if(shifts[si].rides.length===0)shifts.splice(si,1);saveData();updateStats();renderShifts();updateReportInfo();notify(‘Deleted’)}}function openEdit(si,ri){currentEditRide={si,ri};const r=shifts[si].rides[ri];const s=shifts[si];document.getElementById(‘editDate’).value=s.date;document.getElementById(‘editTime’).value=r.time;document.getElementById(‘editAmount’).value=r.amount;document.getElementById(‘editTip’).value=r.tip||0;document.getElementById(‘editDistance’).value=r.distance||0;document.getElementById(‘editNote’).value=r.note||’’;document.querySelectorAll(’#editTypeGrid .type-btn’).forEach(b=>b.classList.toggle(‘active’,b.getAttribute(‘data-type’)===r.type));document.getElementById(‘editModal’).classList.add(‘active’)}function closeEditModal(){document.getElementById(‘editModal’).classList.remove(‘active’);currentEditRide=null}function saveEdit(){if(!currentEditRide)return;const{si,ri}=currentEditRide;const r=shifts[si].rides[ri];const newD=document.getElementById(‘editDate’).value;const newT=document.getElementById(‘editTime’).value;const newA=parseFloat(document.getElementById(‘editAmount’).value);const newTip=parseFloat(document.getElementById(‘editTip’).value)||0;const newDist=parseFloat(document.getElementById(‘editDistance’).value)||0;const newN=document.getElementById(‘editNote’).value.trim();const newType=document.querySelector(’#editTypeGrid .type-btn.active’).getAttribute(‘data-type’);if(!newA||newA<=0){notify(‘Invalid’);return}const taxRate=newDist>50?0.19:0.07;const taxAmt=newA*taxRate;shifts[si].rides.splice(ri,1);if(shifts[si].rides.length===0&&shifts[si].date!==newD)shifts.splice(si,1);let ts=shifts.find(s=>s.date===newD);if(!ts){ts={date:newD,rides:[]};shifts.push(ts);shifts.sort((a,b)=>new Date(b.date)-new Date(a.date))}ts.rides.push({…r,type:newType,amount:newA,tip:newTip,distance:newDist,taxRate:taxRate*100,taxAmount:taxAmt,totalAmount:newA+newTip,note:newN,time:newT,timestamp:new Date(newD+‘T’+newT).toISOString()});ts.rides.sort((a,b)=>a.time.localeCompare(b.time));saveData();updateStats();renderShifts();updateReportInfo();closeEditModal();notify(‘Updated’)}function startVoice(){if(!(‘webkitSpeechRecognition’in window)){notify(‘Voice N/A’);return}const rec=new webkitSpeechRecognition();rec.lang=‘de-DE’;const btn=document.getElementById(‘voiceBtn’);btn.style.background=’#00ff00’;rec.onresult=(e)=>{const txt=e.results[0][0].transcript.toLowerCase();const m=txt.match(/(\d+[,.]?\d*)/);if(m)document.getElementById(‘amount’).value=parseFloat(m[1].replace(’,’,’.’));btn.style.background=‘var(–accent-yellow)’;notify(‘Voice OK’)};rec.onerror=()=>{btn.style.background=‘var(–accent-yellow)’;notify(‘Voice failed’)};rec.onend=()=>{btn.style.background=‘var(–accent-yellow)’};rec.start()}function updateReportInfo(){const total=shifts.length;let hours=0;if(settings.shiftStart&&settings.shiftEnd){hours=Math.round((new Date(settings.shiftEnd)-new Date(settings.shiftStart))/3600000)}const income=shifts.reduce((s,sh)=>s+sh.rides.reduce((s,r)=>s+r.totalAmount,0),0);const tax=shifts.reduce((s,sh)=>s+sh.rides.reduce((s,r)=>s+(r.taxAmount||0),0),0);document.getElementById(‘reportShifts’).textContent=total;document.getElementById(‘reportHours’).textContent=hours+‘h’;document.getElementById(‘reportIncome’).textContent=income.toFixed(2)+settings.currency;document.getElementById(‘reportTax’).textContent=tax.toFixed(2)+settings.currency}function generateReport(){const start=document.getElementById(‘reportStartDate’).value;const end=document.getElementById(‘reportEndDate’).value;if(!start||!end){notify(‘Select dates’);return}let report=’=== TaxiLog Pro - SCHICHTNACHWEIS ===\n\n’;report+=`Period: ${formatDate(start)} - ${formatDate(end)}\n\n`;const filtered=shifts.filter(s=>s.date>=start&&s.date<=end);filtered.forEach(s=>{const total=s.rides.reduce((sum,r)=>sum+r.totalAmount,0);const totalTax=s.rides.reduce((sum,r)=>sum+(r.taxAmount||0),0);report+=`Date: ${formatDate(s.date)}\nRides: ${s.rides.length}\nGross: ${total.toFixed(2)}${s.rides[0]?.currency||settings.currency}\nTax: ${totalTax.toFixed(2)}${s.rides[0]?.currency||settings.currency}\n\n`;s.rides.forEach(r=>{report+=`  ${r.time} | ${getBadge(r.type)}: ${r.totalAmount.toFixed(2)}${r.currency||settings.currency}`;if(r.distance)report+=` | ${r.distance}km (${r.taxRate}% tax)`;if(r.category)report+=` [${r.category}]`;if(r.startLocation)report+=`\n    Start: ${r.startLocation}`;if(r.endLocation)report+=`\n    End: ${r.endLocation}`;if(r.note)report+=` - ${r.note}`;report+=’\n’});report+=’\n’});const grandT=filtered.reduce((s,sh)=>s+sh.rides.reduce((s,r)=>s+r.totalAmount,0),0);const grandTax=filtered.reduce((s,sh)=>s+sh.rides.reduce((s,r)=>s+(r.taxAmount||0),0),0);report+=`TOTAL GROSS: ${grandT.toFixed(2)}${settings.currency}\n`;report+=`TOTAL TAX: ${grandTax.toFixed(2)}${settings.currency}\n`;report+=`TOTAL NET: ${(grandT-grandTax).toFixed(2)}${settings.currency}\n`;downloadFile(report,`taxilog-report-${Date.now()}.txt`,‘text/plain’);notify(‘Report generated’)}function generateTaxReport(){let report=’=== TaxiLog Pro - TAX REPORT ===\n\n’;const monthStart=new Date(new Date().getFullYear(),new Date().getMonth(),1).toISOString().split(‘T’)[0];const monthRides=shifts.filter(s=>s.date>=monthStart);const gross=monthRides.reduce((s,sh)=>s+sh.rides.reduce((s,r)=>s+r.totalAmount,0),0);const tax=monthRides.reduce((s,sh)=>s+sh.rides.reduce((s,r)=>s+(r.taxAmount||0),0),0);const net=gross-tax;report+=`Month: ${new Date().toLocaleDateString('de-DE',{month:'long',year:'numeric'})}\n\n`;report+=`Gross Income: ${gross.toFixed(2)}${settings.currency}\n`;report+=`Tax Amount: ${tax.toFixed(2)}${settings.currency}\n`;report+=`Net Income: ${net.toFixed(2)}${settings.currency}\n\n`;report+=’=== TAX BREAKDOWN ===\n\n’;let tax7=0,tax19=0;monthRides.forEach(s=>s.rides.forEach(r=>{if(r.taxRate===7)tax7+=r.taxAmount||0;else if(r.taxRate===19)tax19+=r.taxAmount||0}));report+=`7% Tax (under 50km): ${tax7.toFixed(2)}${settings.currency}\n`;report+=`19% Tax (over 50km): ${tax19.toFixed(2)}${settings.currency}\n\n`;report+=’=== DAILY BREAKDOWN ===\n\n’;monthRides.forEach(s=>{const total=s.rides.reduce((sum,r)=>sum+r.totalAmount,0);const sTax=s.rides.reduce((sum,r)=>sum+(r.taxAmount||0),0);report+=`${formatDate(s.date)}: ${total.toFixed(2)}${s.rides[0]?.currency||settings.currency} (Tax: ${sTax.toFixed(2)})\n`});downloadFile(report,`taxilog-tax-${Date.now()}.txt`,‘text/plain’);notify(‘Tax report’)}function exportTXT(){let txt=’=== TaxiLog Pro EXPORT ===\n\n’;shifts.forEach(s=>{const total=s.rides.reduce((sum,r)=>sum+r.totalAmount,0);txt+=`Date: ${formatDate(s.date)}\nRides: ${s.rides.length}\nTotal: ${total.toFixed(2)}${s.rides[0]?.currency||settings.currency}\n\n`;s.rides.forEach(r=>{txt+=`${r.time} | ${getBadge(r.type)}: ${r.totalAmount.toFixed(2)}${r.currency||settings.currency}`;if(r.distance)txt+=` | ${r.distance}km (${r.taxRate}%)`;if(r.category)txt+=` [${r.category}]`;if(r.tip>0)txt+=` (+${r.tip.toFixed(2)})`;if(r.startLocation)txt+=`\n  Start: ${r.startLocation}`;if(r.endLocation)txt+=`\n  End: ${r.endLocation}`;if(r.note)txt+=` - ${r.note}`;txt+=’\n’});txt+=’\n’+(’=’).repeat(40)+’\n\n’});const total=shifts.reduce((s,sh)=>s+sh.rides.reduce((s,r)=>s+r.totalAmount,0),0);txt+=`TOTAL: ${total.toFixed(2)}${settings.currency}\n`;downloadFile(txt,`taxilog-export-${Date.now()}.txt`,‘text/plain’);notify(‘TXT exported’)}function exportCSV(){let csv=‘Date,Time,Type,Category,Amount,Tip,Distance,Tax Rate,Tax Amount,Total,Currency,Start,End,Note\n’;shifts.forEach(s=>s.rides.forEach(r=>{csv+=`${s.date},${r.time},${r.type},${r.category||''},${r.amount},${r.tip||0},${r.distance||0},${r.taxRate||0},${r.taxAmount||0},${r.totalAmount},${r.currency||settings.currency},"${r.startLocation||''}","${r.endLocation||''}","${r.note||''}"\n`}));downloadFile(csv,`taxilog-export-${Date.now()}.csv`,‘text/csv’);notify(‘CSV exported’)}function exportExcel(){let data=‘Date\tTime\tType\tCategory\tAmount\tTip\tDistance\tTax Rate\tTax Amount\tTotal\tCurrency\tStart\tEnd\tNote\n’;shifts.forEach(s=>s.rides.forEach(r=>{data+=`${s.date}\t${r.time}\t${r.type}\t${r.category||''}\t${r.amount}\t${r.tip||0}\t${r.distance||0}\t${r.taxRate||0}\t${r.taxAmount||0}\t${r.totalAmount}\t${r.currency||settings.currency}\t${r.startLocation||''}\t${r.endLocation||''}\t${r.note||''}\n`}));downloadFile(data,`taxilog-export-${Date.now()}.xls`,‘application/vnd.ms-excel’);notify(‘Excel exported’)}function backupJSON(){const backup={shifts:shifts,settings:settings,version:‘TaxiLog-1.0’,timestamp:new Date().toISOString()};downloadFile(JSON.stringify(backup,null,2),`taxilog-backup-${Date.now()}.json`,‘application/json’);notify(‘Backup created’)}function restoreJSON(e){const f=e.target.files[0];if(!f)return;const reader=new FileReader();reader.onload=(ev)=>{try{const backup=JSON.parse(ev.target.result);if(backup.shifts&&backup.settings){if(confirm(‘Restore? All data replaced.’)){shifts=backup.shifts;settings=backup.settings;saveData();loadData();updateStats();renderShifts();updateReportInfo();notify(‘Restored’)}}else{notify(‘Invalid backup’)}}catch(err){notify(‘Restore failed’)}};reader.readAsText(f)}function downloadFile(content,filename,type){const blob=new Blob([content],{type:type});const url=URL.createObjectURL(blob);const a=document.createElement(‘a’);a.href=url;a.download=filename;a.click();URL.revokeObjectURL(url)}function clearAll(){if(confirm(‘DELETE ALL?’)){if(confirm(‘SURE?’)){shifts=[];settings.goal=0;settings.shiftStart=null;settings.shiftEnd=null;saveData();updateStats();renderShifts();updateShiftStatus();updateReportInfo();document.getElementById(‘goalAmount’).value=’’;notify(‘Cleared’)}}}function formatDate(d){const date=new Date(d+‘T00:00:00’);return date.toLocaleDateString(‘de-DE’,{weekday:‘short’,day:‘2-digit’,month:‘2-digit’,year:‘numeric’})}function getBadge(t){const b={card:‘💳’,cash:‘💵’,invoice:‘🧾’,wheelchair:‘♿’};return b[t]||t}function notify(msg){const n=document.createElement(‘div’);n.className=‘notification’;n.textContent=msg;document.body.appendChild(n);setTimeout(()=>n.remove(),2000)}
+const S=‘taxilog’;const SS=‘taxilog_s’;let shifts=[];let settings={currency:‘€’,goal:0,shiftStart:null,shiftEnd:null,theme:‘light’};let selectedType=‘card’;let selectedCategory=null;let currentEditRide=null;let startLoc=null;let endLoc=null;let rideInProgress=false;let isDriving=false;document.addEventListener(‘DOMContentLoaded’,()=>{loadData();initEvents();updateStats();renderShifts();updateReportInfo();updateDriveUI()});function loadData(){try{const d=localStorage.getItem(S);if(d)shifts=JSON.parse(d);const s=localStorage.getItem(SS);if(s){settings={…settings,…JSON.parse(s)};document.getElementById(‘currency’).value=settings.currency;document.getElementById(‘settingsCurrency’).value=settings.currency;if(settings.goal>0)document.getElementById(‘goalAmount’).value=settings.goal;document.body.setAttribute(‘data-theme’,settings.theme);if(settings.shiftStart&&!settings.shiftEnd)isDriving=true}}catch(e){console.error(e)}}function saveData(){try{localStorage.setItem(S,JSON.stringify(shifts));localStorage.setItem(SS,JSON.stringify(settings))}catch(e){notify(‘Save failed’)}}function initEvents(){document.querySelectorAll(’.tab,.nav-btn’).forEach(b=>b.addEventListener(‘click’,function(){switchTab(this.getAttribute(‘data-tab’))}));document.querySelectorAll(’.type-btn’).forEach(b=>b.addEventListener(‘click’,function(){const p=this.parentElement;p.querySelectorAll(’.type-btn’).forEach(x=>x.classList.remove(‘active’));this.classList.add(‘active’);selectedType=this.getAttribute(‘data-type’)}));document.querySelectorAll(’.category-pill’).forEach(b=>b.addEventListener(‘click’,function(){if(this.classList.contains(‘active’)){this.classList.remove(‘active’);selectedCategory=null}else{document.querySelectorAll(’.category-pill’).forEach(x=>x.classList.remove(‘active’));this.classList.add(‘active’);selectedCategory=this.getAttribute(‘data-category’)}}));document.getElementById(‘distance’).addEventListener(‘input’,updateTaxBadge);document.getElementById(‘arrivedBtn’).addEventListener(‘click’,captureStart);document.getElementById(‘finishBtn’).addEventListener(‘click’,captureEnd);document.getElementById(‘driveBtn’).addEventListener(‘click’,startDrive);document.getElementById(‘pauseBtn’).addEventListener(‘click’,pauseDrive);document.getElementById(‘themeToggle’).addEventListener(‘click’,toggleTheme);document.getElementById(‘addBtn’).addEventListener(‘click’,addRide);document.getElementById(‘currency’).addEventListener(‘change’,function(){settings.currency=this.value;saveData();updateStats();renderShifts()});document.getElementById(‘settingsCurrency’).addEventListener(‘change’,function(){settings.currency=this.value;document.getElementById(‘currency’).value=this.value;saveData();updateStats();renderShifts()});document.getElementById(‘setGoalBtn’).addEventListener(‘click’,setGoal);document.getElementById(‘searchInput’).addEventListener(‘input’,renderShifts);document.getElementById(‘filterType’).addEventListener(‘change’,renderShifts);document.getElementById(‘exportBtn’).addEventListener(‘click’,exportTXT);document.getElementById(‘exportCSVBtn’).addEventListener(‘click’,exportCSV);document.getElementById(‘exportExcelBtn’).addEventListener(‘click’,exportExcel);document.getElementById(‘backupBtn’).addEventListener(‘click’,backupJSON);document.getElementById(‘restoreBtn’).addEventListener(‘click’,()=>document.getElementById(‘restoreFile’).click());document.getElementById(‘restoreFile’).addEventListener(‘change’,restoreJSON);document.getElementById(‘clearBtn’).addEventListener(‘click’,clearAll);document.getElementById(‘closeEditModal’).addEventListener(‘click’,closeEditModal);document.getElementById(‘saveEditBtn’).addEventListener(‘click’,saveEdit);document.getElementById(‘voiceBtn’).addEventListener(‘click’,startVoice);document.getElementById(‘generateReportBtn’).addEventListener(‘click’,generateReport);document.getElementById(‘generateTaxReportBtn’).addEventListener(‘click’,generateTaxReport);document.querySelectorAll(’#editTypeGrid .type-btn’).forEach(b=>b.addEventListener(‘click’,function(){document.querySelectorAll(’#editTypeGrid .type-btn’).forEach(x=>x.classList.remove(‘active’));this.classList.add(‘active’)}))}function startDrive(){settings.shiftStart=new Date().toISOString();settings.shiftEnd=null;isDriving=true;saveData();updateDriveUI();notify(‘Drive started’)}function pauseDrive(){if(!isDriving){notify(‘Not driving’);return}settings.shiftEnd=new Date().toISOString();isDriving=false;saveData();updateDriveUI();notify(‘Drive paused’)}function updateDriveUI(){const driveBtn=document.getElementById(‘driveBtn’);const pauseBtn=document.getElementById(‘pauseBtn’);const status=document.getElementById(‘driveStatus’);if(isDriving){driveBtn.classList.add(‘disabled’);pauseBtn.classList.remove(‘disabled’);const dur=Math.round((new Date()-new Date(settings.shiftStart))/60000);status.textContent=`Active: ${dur}min`;setTimeout(updateDriveUI,60000)}else{driveBtn.classList.remove(‘disabled’);pauseBtn.classList.add(‘disabled’);if(settings.shiftStart&&settings.shiftEnd){const dur=Math.round((new Date(settings.shiftEnd)-new Date(settings.shiftStart))/60000);status.textContent=`Last: ${dur}min`}else{status.textContent=’’}}}function updateTaxBadge(){const dist=parseFloat(document.getElementById(‘distance’).value)||0;const badge=document.getElementById(‘taxBadge’);if(dist>50){badge.textContent=‘19% Tax’;badge.style.background=’#ff6b6b’}else{badge.textContent=‘7% Tax’;badge.style.background=‘var(–accent-yellow)’}}function captureStart(){if(rideInProgress){notify(‘Finish current’);return}if(!navigator.geolocation){notify(‘GPS unavailable’);return}rideInProgress=true;document.getElementById(‘arrivedBtn’).classList.add(‘active’);document.getElementById(‘finishBtn’).classList.remove(‘disabled’);notify(‘Getting location…’);navigator.geolocation.getCurrentPosition(async(pos)=>{startLoc={lat:pos.coords.latitude,lng:pos.coords.longitude};const addr=await getAddress(startLoc.lat,startLoc.lng);document.getElementById(‘startLocation’).textContent=addr;notify(‘Start captured’)},()=>{document.getElementById(‘arrivedBtn’).classList.remove(‘active’);document.getElementById(‘finishBtn’).classList.add(‘disabled’);rideInProgress=false;notify(‘GPS failed’)},{timeout:15000,maximumAge:0,enableHighAccuracy:true})}function captureEnd(){if(!rideInProgress||!startLoc){notify(‘Tap ARRIVED first’);return}document.getElementById(‘finishBtn’).classList.add(‘active’);notify(‘Getting location…’);navigator.geolocation.getCurrentPosition(async(pos)=>{endLoc={lat:pos.coords.latitude,lng:pos.coords.longitude};const addr=await getAddress(endLoc.lat,endLoc.lng);document.getElementById(‘endLocation’).textContent=addr;const dist=calculateDistance(startLoc.lat,startLoc.lng,endLoc.lat,endLoc.lng);document.getElementById(‘distance’).value=dist.toFixed(1);updateTaxBadge();const now=new Date();document.getElementById(‘rideDate’).value=now.toISOString().split(‘T’)[0];document.getElementById(‘rideTime’).value=now.toTimeString().substring(0,5);document.getElementById(‘rideForm’).classList.add(‘active’);notify(‘Fill details’)},()=>{document.getElementById(‘finishBtn’).classList.remove(‘active’);notify(‘GPS failed’)},{timeout:15000,maximumAge:0,enableHighAccuracy:true})}async function getAddress(lat,lng){try{const res=await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);const data=await res.json();return data.display_name.split(’,’).slice(0,2).join(’,’)}catch(e){return `${lat.toFixed(4)}, ${lng.toFixed(4)}`}}function calculateDistance(lat1,lng1,lat2,lng2){const R=6371;const dLat=(lat2-lat1)*Math.PI/180;const dLng=(lng2-lng1)*Math.PI/180;const a=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)*Math.sin(dLng/2);const c=2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));return R*c}function toggleTheme(){settings.theme=settings.theme===‘light’?‘dark’:‘light’;document.body.setAttribute(‘data-theme’,settings.theme);saveData()}function switchTab(tab){document.querySelectorAll(’.tab,.nav-btn’).forEach(b=>b.classList.toggle(‘active’,b.getAttribute(‘data-tab’)===tab));document.querySelectorAll(’.tab-content’).forEach(c=>c.classList.toggle(‘active’,c.getAttribute(‘data-content’)===tab));if(tab===‘stats’)updateStats();if(tab===‘history’)renderShifts();if(tab===‘reports’)updateReportInfo()}function addRide(){const amt=parseFloat(document.getElementById(‘amount’).value);const tip=parseFloat(document.getElementById(‘tip’).value)||0;const dist=parseFloat(document.getElementById(‘distance’).value)||0;const note=document.getElementById(‘note’).value.trim();const date=document.getElementById(‘rideDate’).value;const time=document.getElementById(‘rideTime’).value;const curr=document.getElementById(‘currency’).value;if(!amt||amt<=0){notify(‘Enter amount’);return}if(!date||!time){notify(‘Select date/time’);return}const taxRate=dist>50?0.19:0.07;const taxAmt=amt*taxRate;let shift=shifts.find(s=>s.date===date);if(!shift){shift={date:date,rides:[]};shifts.push(shift);shifts.sort((a,b)=>new Date(b.date)-new Date(a.date))}shift.rides.push({id:Date.now(),type:selectedType,amount:amt,tip:tip,distance:dist,taxRate:taxRate*100,taxAmount:taxAmt,totalAmount:amt+tip,currency:curr,category:selectedCategory,note:note,time:time,startLocation:startLoc?document.getElementById(‘startLocation’).textContent:null,endLocation:endLoc?document.getElementById(‘endLocation’).textContent:null,timestamp:new Date(date+‘T’+time).toISOString()});shift.rides.sort((a,b)=>a.time.localeCompare(b.time));saveData();updateStats();renderShifts();updateReportInfo();document.getElementById(‘amount’).value=’’;document.getElementById(‘tip’).value=’’;document.getElementById(‘distance’).value=’’;document.getElementById(‘note’).value=’’;document.getElementById(‘startLocation’).textContent=‘Tap ARRIVED’;document.getElementById(‘endLocation’).textContent=‘Tap FINISH’;document.getElementById(‘arrivedBtn’).classList.remove(‘active’);document.getElementById(‘finishBtn’).classList.remove(‘active’);document.getElementById(‘finishBtn’).classList.add(‘disabled’);document.getElementById(‘rideForm’).classList.remove(‘active’);document.querySelectorAll(’.category-pill’).forEach(b=>b.classList.remove(‘active’));selectedCategory=null;startLoc=null;endLoc=null;rideInProgress=false;updateTaxBadge();notify(‘Ride added’)}function updateStats(){const today=new Date().toISOString().split(‘T’)[0];const weekAgo=new Date(Date.now()-7*86400000).toISOString().split(‘T’)[0];const monthStart=new Date(new Date().getFullYear(),new Date().getMonth(),1).toISOString().split(‘T’)[0];let todayT=0,weekT=0,monthT=0,allT=0,todayR=0,weekR=0,monthR=0,allR=0,monthTax=0;shifts.forEach(shift=>{const shiftT=shift.rides.reduce((s,r)=>s+r.totalAmount,0);const shiftR=shift.rides.length;if(shift.date===today){todayT+=shiftT;todayR+=shiftR}if(shift.date>=weekAgo){weekT+=shiftT;weekR+=shiftR}if(shift.date>=monthStart){monthT+=shiftT;monthR+=shiftR;monthTax+=shift.rides.reduce((s,r)=>s+(r.taxAmount||0),0)}allT+=shiftT;allR+=shiftR});document.getElementById(‘statToday’).textContent=todayT.toFixed(2)+settings.currency;document.getElementById(‘statWeek’).textContent=weekT.toFixed(2)+settings.currency;document.getElementById(‘statMonth’).textContent=monthT.toFixed(2)+settings.currency;document.getElementById(‘statTotal’).textContent=allT.toFixed(2)+settings.currency;document.getElementById(‘todayRides’).textContent=todayR+’ rides’;document.getElementById(‘weekRides’).textContent=weekR+’ rides’;document.getElementById(‘monthRides’).textContent=monthR+’ rides’;document.getElementById(‘totalRides’).textContent=allR+’ rides’;document.getElementById(‘infoTotalRides’).textContent=allR;const taxG=monthT;const taxN=taxG-monthTax;document.getElementById(‘taxGross’).textContent=taxG.toFixed(2)+settings.currency;document.getElementById(‘taxAmount’).textContent=monthTax.toFixed(2)+settings.currency;document.getElementById(‘taxNet’).textContent=taxN.toFixed(2)+settings.currency;if(settings.goal>0){const prog=Math.min((todayT/settings.goal)*100,100);document.getElementById(‘goalProgress’).style.width=prog+’%’;document.getElementById(‘goalText’).textContent=`${todayT.toFixed(2)}${settings.currency}/${settings.goal}${settings.currency} (${Math.round(prog)}%)`}updateChart();updateBreakdown()}function setGoal(){const g=parseFloat(document.getElementById(‘goalAmount’).value);if(g>0){settings.goal=g;saveData();updateStats();notify(‘Goal set’)}}function updateChart(){const bars=document.getElementById(‘chartBars’);bars.innerHTML=’’;const days=[];for(let i=6;i>=0;i–){const d=new Date(Date.now()-i*86400000);const ds=d.toISOString().split(‘T’)[0];const sh=shifts.find(s=>s.date===ds);const t=sh?sh.rides.reduce((s,r)=>s+r.totalAmount,0):0;days.push({date:ds,total:t})}const max=Math.max(…days.map(d=>d.total),1);days.forEach(day=>{const w=document.createElement(‘div’);w.className=‘chart-bar-wrapper’;const b=document.createElement(‘div’);b.className=‘chart-bar’;b.style.height=(day.total/max)*100+’%’;b.title=`${day.total.toFixed(2)}${settings.currency}`;const l=document.createElement(‘div’);l.className=‘chart-label’;l.textContent=new Date(day.date).toLocaleDateString(‘de-DE’,{weekday:‘short’});w.appendChild(b);w.appendChild(l);bars.appendChild(w)})}function updateBreakdown(){const br=document.getElementById(‘breakdown’);const types={card:{label:‘💳 Card’,total:0,count:0},cash:{label:‘💵 Cash’,total:0,count:0},invoice:{label:‘🧾 Invoice’,total:0,count:0},wheelchair:{label:‘♿ Wheelchair’,total:0,count:0}};shifts.forEach(shift=>shift.rides.forEach(r=>{types[r.type].total+=r.totalAmount;types[r.type].count++}));br.innerHTML=’’;Object.entries(types).forEach(([t,d])=>{if(d.count>0){const i=document.createElement(‘div’);i.className=‘breakdown-item’;i.innerHTML=`<div class="breakdown-label">${d.label} (${d.count}×)</div><div class="breakdown-value">${d.total.toFixed(2)}${settings.currency}</div>`;br.appendChild(i)}})}function renderShifts(){const cont=document.getElementById(‘shiftsContainer’);const search=document.getElementById(‘searchInput’).value.toLowerCase();const filter=document.getElementById(‘filterType’).value;let filtered=shifts.map(s=>({…s,rides:s.rides.filter(r=>{const ms=!search||r.note.toLowerCase().includes(search)||r.totalAmount.toString().includes(search)||(r.startLocation&&r.startLocation.toLowerCase().includes(search))||(r.endLocation&&r.endLocation.toLowerCase().includes(search));const mt=filter===‘all’||r.type===filter;return ms&&mt})})).filter(s=>s.rides.length>0);if(filtered.length===0){cont.innerHTML=’<div class="card"><div class="empty-state"><div class="empty-icon">📋</div><div>No rides</div></div></div>’;return}cont.innerHTML=’’;filtered.forEach((shift,si)=>{const total=shift.rides.reduce((s,r)=>s+r.totalAmount,0);const card=document.createElement(‘div’);card.className=‘card’;card.innerHTML=`<div class="shift-header"><div><div class="shift-date">${formatDate(shift.date)}</div><div class="shift-count">${shift.rides.length} rides</div></div><div style="text-align:right"><div style="font-size:0.75rem;font-weight:600;">TOTAL</div><div class="shift-total-value">${total.toFixed(2)}${shift.rides[0].currency||settings.currency}</div></div></div><div class="rides-list" id="rides-${si}"></div>`;cont.appendChild(card);const list=document.getElementById(`rides-${si}`);shift.rides.forEach((r,ri)=>list.appendChild(createRideElem(r,si,ri)))})}function createRideElem(r,si,ri){const d=document.createElement(‘div’);d.className=‘ride-item’;d.innerHTML=`<div class="ride-badge">${getBadge(r.type)}</div><div class="ride-info"><div class="ride-time">${r.time}</div>${r.note?`<div class="ride-note">${r.note}</div>`:''}${r.startLocation||r.endLocation?`<div class="ride-location">📍 ${r.startLocation||’’} → ${r.endLocation||’’}</div>`:''}${r.category||r.tip>0||r.distance?`<div class="ride-meta">${r.category?`<span class="ride-category">${r.category}</span>`:’’}${r.tip>0?`<span class="ride-tip">+${r.tip.toFixed(2)}</span>`:’’}${r.distance?`<span class="ride-tax">${r.distance.toFixed(1)}km • ${r.taxRate}%</span>`:’’}</div>`:''}</div><div class="ride-amount">${r.totalAmount.toFixed(2)}${r.currency||settings.currency}</div><div class="ride-actions"><button class="ride-action-btn edit">✏️</button><button class="ride-action-btn delete">×</button></div>`;d.querySelector(’.edit’).addEventListener(‘click’,()=>openEdit(si,ri));d.querySelector(’.delete’).addEventListener(‘click’,()=>deleteRide(si,ri));return d}function deleteRide(si,ri){if(confirm(‘Delete?’)){shifts[si].rides.splice(ri,1);if(shifts[si].rides.length===0)shifts.splice(si,1);saveData();updateStats();renderShifts();updateReportInfo();notify(‘Deleted’)}}function openEdit(si,ri){currentEditRide={si,ri};const r=shifts[si].rides[ri];const s=shifts[si];document.getElementById(‘editDate’).value=s.date;document.getElementById(‘editTime’).value=r.time;document.getElementById(‘editAmount’).value=r.amount;document.getElementById(‘editTip’).value=r.tip||0;document.getElementById(‘editDistance’).value=r.distance||0;document.getElementById(‘editNote’).value=r.note||’’;document.querySelectorAll(’#editTypeGrid .type-btn’).forEach(b=>b.classList.toggle(‘active’,b.getAttribute(‘data-type’)===r.type));document.getElementById(‘editModal’).classList.add(‘active’)}function closeEditModal(){document.getElementById(‘editModal’).classList.remove(‘active’);currentEditRide=null}function saveEdit(){if(!currentEditRide)return;const{si,ri}=currentEditRide;const r=shifts[si].rides[ri];const newD=document.getElementById(‘editDate’).value;const newT=document.getElementById(‘editTime’).value;const newA=parseFloat(document.getElementById(‘editAmount’).value);const newTip=parseFloat(document.getElementById(‘editTip’).value)||0;const newDist=parseFloat(document.getElementById(‘editDistance’).value)||0;const newN=document.getElementById(‘editNote’).value.trim();const newType=document.querySelector(’#editTypeGrid .type-btn.active’).getAttribute(‘data-type’);if(!newA||newA<=0){notify(‘Invalid’);return}const taxRate=newDist>50?0.19:0.07;const taxAmt=newA*taxRate;shifts[si].rides.splice(ri,1);if(shifts[si].rides.length===0&&shifts[si].date!==newD)shifts.splice(si,1);let ts=shifts.find(s=>s.date===newD);if(!ts){ts={date:newD,rides:[]};shifts.push(ts);shifts.sort((a,b)=>new Date(b.date)-new Date(a.date))}ts.rides.push({…r,type:newType,amount:newA,tip:newTip,distance:newDist,taxRate:taxRate*100,taxAmount:taxAmt,totalAmount:newA+newTip,note:newN,time:newT,timestamp:new Date(newD+‘T’+newT).toISOString()});ts.rides.sort((a,b)=>a.time.localeCompare(b.time));saveData();updateStats();renderShifts();updateReportInfo();closeEditModal();notify(‘Updated’)}function startVoice(){if(!(‘webkitSpeechRecognition’in window)){notify(‘Voice N/A’);return}const rec=new webkitSpeechRecognition();rec.lang=‘de-DE’;const btn=document.getElementById(‘voiceBtn’);btn.style.background=’#00ff00’;rec.onresult=(e)=>{const txt=e.results[0][0].transcript.toLowerCase();const m=txt.match(/(\d+[,.]?\d*)/);if(m)document.getElementById(‘amount’).value=parseFloat(m[1].replace(’,’,’.’));btn.style.background=‘var(–accent-yellow)’;notify(‘Voice OK’)};rec.onerror=()=>{btn.style.background=‘var(–accent-yellow)’;notify(‘Voice failed’)};rec.onend=()=>{btn.style.background=‘var(–accent-yellow)’};rec.start()}function updateReportInfo(){const total=shifts.length;let hours=0;if(settings.shiftStart&&settings.shiftEnd){hours=Math.round((new Date(settings.shiftEnd)-new Date(settings.shiftStart))/3600000)}const income=shifts.reduce((s,sh)=>s+sh.rides.reduce((s,r)=>s+r.totalAmount,0),0);const tax=shifts.reduce((s,sh)=>s+sh.rides.reduce((s,r)=>s+(r.taxAmount||0),0),0);document.getElementById(‘reportShifts’).textContent=total;document.getElementById(‘reportHours’).textContent=hours+‘h’;document.getElementById(‘reportIncome’).textContent=income.toFixed(2)+settings.currency;document.getElementById(‘reportTax’).textContent=tax.toFixed(2)+settings.currency}function generateReport(){const start=document.getElementById(‘reportStartDate’).value;const end=document.getElementById(‘reportEndDate’).value;if(!start||!end){notify(‘Select dates’);return}let report=’=== TaxiLog - REPORT ===\n\n’;report+=`Period: ${formatDate(start)} - ${formatDate(end)}\n\n`;const filtered=shifts.filter(s=>s.date>=start&&s.date<=end);filtered.forEach(s=>{const total=s.rides.reduce((sum,r)=>sum+r.totalAmount,0);const totalTax=s.rides.reduce((sum,r)=>sum+(r.taxAmount||0),0);report+=`Date: ${formatDate(s.date)}\nRides: ${s.rides.length}\nGross: ${total.toFixed(2)}${s.rides[0]?.currency||settings.currency}\nTax: ${totalTax.toFixed(2)}${s.rides[0]?.currency||settings.currency}\n\n`;s.rides.forEach(r=>{report+=`  ${r.time} | ${getBadge(r.type)}: ${r.totalAmount.toFixed(2)}${r.currency||settings.currency}`;if(r.distance)report+=` | ${r.distance}km (${r.taxRate}%)`;if(r.category)report+=` [${r.category}]`;if(r.startLocation)report+=`\n    Start: ${r.startLocation}`;if(r.endLocation)report+=`\n    End: ${r.endLocation}`;if(r.note)report+=` - ${r.note}`;report+=’\n’});report+=’\n’});const grandT=filtered.reduce((s,sh)=>s+sh.rides.reduce((s,r)=>s+r.totalAmount,0),0);const grandTax=filtered.reduce((s,sh)=>s+sh.rides.reduce((s,r)=>s+(r.taxAmount||0),0),0);report+=`TOTAL GROSS: ${grandT.toFixed(2)}${settings.currency}\n`;report+=`TOTAL TAX: ${grandTax.toFixed(2)}${settings.currency}\n`;report+=`TOTAL NET: ${(grandT-grandTax).toFixed(2)}${settings.currency}\n`;downloadFile(report,`taxilog-report-${Date.now()}.txt`,‘text/plain’);notify(‘Report generated’)}function generateTaxReport(){let report=’=== TaxiLog - TAX REPORT ===\n\n’;const monthStart=new Date(new Date().getFullYear(),new Date().getMonth(),1).toISOString().split(‘T’)[0];const monthRides=shifts.filter(s=>s.date>=monthStart);const gross=monthRides.reduce((s,sh)=>s+sh.rides.reduce((s,r)=>s+r.totalAmount,0),0);const tax=monthRides.reduce((s,sh)=>s+sh.rides.reduce((s,r)=>s+(r.taxAmount||0),0),0);const net=gross-tax;report+=`Month: ${new Date().toLocaleDateString('de-DE',{month:'long',year:'numeric'})}\n\n`;report+=`Gross: ${gross.toFixed(2)}${settings.currency}\n`;report+=`Tax: ${tax.toFixed(2)}${settings.currency}\n`;report+=`Net: ${net.toFixed(2)}${settings.currency}\n\n`;report+=’=== TAX BREAKDOWN ===\n\n’;let tax7=0,tax19=0;monthRides.forEach(s=>s.rides.forEach(r=>{if(r.taxRate===7)tax7+=r.taxAmount||0;else if(r.taxRate===19)tax19+=r.taxAmount||0}));report+=`7% (under 50km): ${tax7.toFixed(2)}${settings.currency}\n`;report+=`19% (over 50km): ${tax19.toFixed(2)}${settings.currency}\n\n`;report+=’=== DAILY ===\n\n’;monthRides.forEach(s=>{const total=s.rides.reduce((sum,r)=>sum+r.totalAmount,0);const sTax=s.rides.reduce((sum,r)=>sum+(r.taxAmount||0),0);report+=`${formatDate(s.date)}: ${total.toFixed(2)}${s.rides[0]?.currency||settings.currency} (Tax: ${sTax.toFixed(2)})\n`});downloadFile(report,`taxilog-tax-${Date.now()}.txt`,‘text/plain’);notify(‘Tax report’)}function exportTXT(){let txt=’=== TaxiLog EXPORT ===\n\n’;shifts.forEach(s=>{const total=s.rides.reduce((sum,r)=>sum+r.totalAmount,0);txt+=`Date: ${formatDate(s.date)}\nRides: ${s.rides.length}\nTotal: ${total.toFixed(2)}${s.rides[0]?.currency||settings.currency}\n\n`;s.rides.forEach(r=>{txt+=`${r.time} | ${getBadge(r.type)}: ${r.totalAmount.toFixed(2)}${r.currency||settings.currency}`;if(r.distance)txt+=` | ${r.distance}km (${r.taxRate}%)`;if(r.category)txt+=` [${r.category}]`;if(r.tip>0)txt+=` (+${r.tip.toFixed(2)})`;if(r.startLocation)txt+=`\n  Start: ${r.startLocation}`;if(r.endLocation)txt+=`\n  End: ${r.endLocation}`;if(r.note)txt+=` - ${r.note}`;txt+=’\n’});txt+=’\n’});const total=shifts.reduce((s,sh)=>s+sh.rides.reduce((s,r)=>s+r.totalAmount,0),0);txt+=`TOTAL: ${total.toFixed(2)}${settings.currency}\n`;downloadFile(txt,`taxilog-${Date.now()}.txt`,‘text/plain’);notify(‘TXT exported’)}function exportCSV(){let csv=‘Date,Time,Type,Category,Amount,Tip,Distance,Tax,TaxAmt,Total,Currency,Start,End,Note\n’;shifts.forEach(s=>s.rides.forEach(r=>{csv+=`${s.date},${r.time},${r.type},${r.category||''},${r.amount},${r.tip||0},${r.distance||0},${r.taxRate||0},${r.taxAmount||0},${r.totalAmount},${r.currency||settings.currency},"${r.startLocation||''}","${r.endLocation||''}","${r.note||''}"\n`}));downloadFile(csv,`taxilog-${Date.now()}.csv`,‘text/csv’);notify(‘CSV exported’)}function exportExcel(){let data=‘Date\tTime\tType\tCategory\tAmount\tTip\tDistance\tTax\tTaxAmt\tTotal\tCurrency\tStart\tEnd\tNote\n’;shifts.forEach(s=>s.rides.forEach(r=>{data+=`${s.date}\t${r.time}\t${r.type}\t${r.category||''}\t${r.amount}\t${r.tip||0}\t${r.distance||0}\t${r.taxRate||0}\t${r.taxAmount||0}\t${r.totalAmount}\t${r.currency||settings.currency}\t${r.startLocation||''}\t${r.endLocation||''}\t${r.note||''}\n`}));downloadFile(data,`taxilog-${Date.now()}.xls`,‘application/vnd.ms-excel’);notify(‘Excel exported’)}function backupJSON(){const backup={shifts:shifts,settings:settings,version:‘TaxiLog-1.0’,timestamp:new Date().toISOString()};downloadFile(JSON.stringify(backup,null,2),`taxilog-backup-${Date.now()}.json`,‘application/json’);notify(‘Backup created’)}function restoreJSON(e){const f=e.target.files[0];if(!f)return;const reader=new FileReader();reader.onload=(ev)=>{try{const backup=JSON.parse(ev.target.result);if(backup.shifts&&backup.settings){if(confirm(‘Restore? All data replaced.’)){shifts=backup.shifts;settings=backup.settings;saveData();loadData();updateStats();renderShifts();updateReportInfo();notify(‘Restored’)}}else{notify(‘Invalid backup’)}}catch(err){notify(‘Restore failed’)}};reader.readAsText(f)}function downloadFile(content,filename,type){const blob=new Blob([content],{type:type});const url=URL.createObjectURL(blob);const a=document.createElement(‘a’);a.href=url;a.download=filename;a.click();URL.revokeObjectURL(url)}function clearAll(){if(confirm(‘DELETE ALL?’)){if(confirm(‘SURE?’)){shifts=[];settings.goal=0;settings.shiftStart=null;settings.shiftEnd=null;isDriving=false;saveData();updateStats();renderShifts();updateReportInfo();updateDriveUI();document.getElementById(‘goalAmount’).value=’’;notify(‘Cleared’)}}}function formatDate(d){const date=new Date(d+‘T00:00:00’);return date.toLocaleDateString(‘de-DE’,{weekday:‘short’,day:‘2-digit’,month:‘2-digit’,year:‘numeric’})}function getBadge(t){const b={card:‘💳’,cash:‘💵’,invoice:‘🧾’,wheelchair:‘♿’};return b[t]||t}function notify(msg){const n=document.createElement(‘div’);n.className=‘notification’;n.textContent=msg;document.body.appendChild(n);setTimeout(()=>n.remove(),2000)}
 </script>
 
 </body>
