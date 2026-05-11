@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>TAXI COMMAND CENTER</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Taxi Pro Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,588 +17,393 @@
         }
 
 ```
-    :root {
-        --bg-primary: #0a0e14;
-        --bg-secondary: #13171f;
-        --bg-card: #1a1f2e;
-        --accent-yellow: #ffd600;
-        --accent-cyan: #00f7ff;
-        --accent-magenta: #ff00ff;
-        --accent-green: #00ff88;
-        --accent-red: #ff3366;
-        --text-primary: #ffffff;
-        --text-secondary: #8b92a8;
-        --border: #2a2f3f;
-        --shadow: rgba(0, 247, 255, 0.2);
+    /* DARK PROFESSIONAL THEME */
+    :root[data-theme="dark"] {
+        --bg-primary: #0d1117;
+        --bg-secondary: #161b22;
+        --bg-tertiary: #21262d;
+        --bg-card: #1c2128;
+        --accent-primary: #58a6ff;
+        --accent-secondary: #238636;
+        --accent-warning: #d29922;
+        --accent-danger: #da3633;
+        --text-primary: #e6edf3;
+        --text-secondary: #8b949e;
+        --text-tertiary: #6e7681;
+        --border-primary: #30363d;
+        --border-secondary: #21262d;
+        --shadow: rgba(1, 4, 9, 0.85);
     }
 
-    [data-theme="light"] {
-        --bg-primary: #f5f5f5;
+    /* LIGHT CORPORATE THEME */
+    :root[data-theme="light"] {
+        --bg-primary: #f6f8fa;
         --bg-secondary: #ffffff;
+        --bg-tertiary: #f6f8fa;
         --bg-card: #ffffff;
-        --accent-yellow: #ffb700;
-        --accent-cyan: #0088cc;
-        --accent-magenta: #cc00cc;
-        --accent-green: #00cc66;
-        --accent-red: #ff3366;
-        --text-primary: #1a1f2e;
-        --text-secondary: #6b7280;
-        --border: #e5e7eb;
-        --shadow: rgba(0, 0, 0, 0.1);
+        --accent-primary: #0969da;
+        --accent-secondary: #1a7f37;
+        --accent-warning: #bf8700;
+        --accent-danger: #cf222e;
+        --text-primary: #1f2328;
+        --text-secondary: #656d76;
+        --text-tertiary: #8c959f;
+        --border-primary: #d0d7de;
+        --border-secondary: #e8ecef;
+        --shadow: rgba(31, 35, 40, 0.15);
+    }
+
+    /* BUSINESS MINIMAL THEME */
+    :root[data-theme="business"] {
+        --bg-primary: #fafafa;
+        --bg-secondary: #ffffff;
+        --bg-tertiary: #f5f5f5;
+        --bg-card: #ffffff;
+        --accent-primary: #2563eb;
+        --accent-secondary: #059669;
+        --accent-warning: #d97706;
+        --accent-danger: #dc2626;
+        --text-primary: #18181b;
+        --text-secondary: #52525b;
+        --text-tertiary: #a1a1aa;
+        --border-primary: #e4e4e7;
+        --border-secondary: #f4f4f5;
+        --shadow: rgba(0, 0, 0, 0.08);
     }
 
     body {
-        font-family: 'Rajdhani', sans-serif;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         background: var(--bg-primary);
         color: var(--text-primary);
         min-height: 100vh;
-        overflow-x: hidden;
-        position: relative;
-    }
-
-    body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: 
-            radial-gradient(circle at 20% 30%, var(--accent-cyan) 0%, transparent 50%),
-            radial-gradient(circle at 80% 70%, var(--accent-magenta) 0%, transparent 50%);
-        opacity: 0.03;
-        pointer-events: none;
-        z-index: 0;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
     }
 
     .container {
-        max-width: 600px;
+        max-width: 680px;
         margin: 0 auto;
-        padding: 20px;
-        position: relative;
-        z-index: 1;
-        padding-bottom: 80px;
+        padding: 24px 16px 90px;
     }
 
     /* HEADER */
     .header {
-        text-align: center;
-        margin-bottom: 30px;
-        animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        margin-bottom: 32px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--border-primary);
     }
 
-    @keyframes slideDown {
-        from { opacity: 0; transform: translateY(-50px) scale(0.9); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
+    .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
     }
 
     .header h1 {
-        font-family: 'Orbitron', monospace;
-        font-size: 2.5rem;
-        font-weight: 900;
-        background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-magenta) 50%, var(--accent-yellow) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        margin-bottom: 8px;
-        text-shadow: 0 0 30px var(--shadow);
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text-primary);
+    }
+
+    .header-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .theme-btn {
+        width: 36px;
+        height: 36px;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-primary);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.2s;
+    }
+
+    .theme-btn:hover {
+        background: var(--bg-tertiary);
+        border-color: var(--accent-primary);
     }
 
     .header p {
         color: var(--text-secondary);
-        font-size: 0.9rem;
-        font-weight: 500;
-        letter-spacing: 2px;
-        text-transform: uppercase;
+        font-size: 0.875rem;
     }
 
-    /* NAV TABS */
-    .nav-tabs {
+    /* TABS */
+    .tabs {
         display: flex;
-        gap: 8px;
-        margin-bottom: 20px;
-        overflow-x: auto;
-        animation: fadeIn 0.8s ease 0.2s backwards;
-        padding-bottom: 10px;
+        gap: 4px;
+        margin-bottom: 24px;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-primary);
+        border-radius: 8px;
+        padding: 4px;
     }
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    .nav-tab {
+    .tab {
         flex: 1;
-        min-width: 100px;
-        background: var(--bg-card);
-        border: 2px solid var(--border);
-        border-radius: 12px;
-        padding: 12px;
+        padding: 10px;
+        background: transparent;
+        border: none;
+        border-radius: 6px;
         color: var(--text-secondary);
-        font-family: 'Orbitron', monospace;
-        font-size: 0.75rem;
-        font-weight: 700;
+        font-size: 0.875rem;
+        font-weight: 600;
         cursor: pointer;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        position: relative;
-        overflow: hidden;
+        transition: all 0.2s;
     }
 
-    .nav-tab::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
-        transition: left 0.5s;
+    .tab:hover {
+        color: var(--text-primary);
+        background: var(--bg-tertiary);
     }
 
-    .nav-tab:hover::before {
-        left: 100%;
+    .tab.active {
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        box-shadow: 0 1px 3px var(--shadow);
     }
 
-    .nav-tab.active {
-        border-color: var(--accent-cyan);
-        color: var(--accent-cyan);
-        background: rgba(0, 247, 255, 0.1);
-        box-shadow: 0 0 20px var(--shadow);
-    }
-
-    /* CARD STYLE */
+    /* CARDS */
     .card {
         background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: 16px;
+        border: 1px solid var(--border-primary);
+        border-radius: 8px;
         padding: 20px;
-        margin-bottom: 20px;
-        animation: fadeIn 0.8s ease backwards;
-        position: relative;
-        overflow: hidden;
+        margin-bottom: 16px;
     }
 
-    .card::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta), var(--accent-yellow));
-    }
-
-    .card h3 {
-        font-family: 'Orbitron', monospace;
-        font-size: 0.9rem;
+    .card-title {
+        font-size: 0.875rem;
+        font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 15px;
-        color: var(--accent-cyan);
+        letter-spacing: 0.05em;
+        color: var(--text-secondary);
+        margin-bottom: 16px;
     }
 
-    /* INPUT STYLES */
-    .input-row {
+    /* INPUTS */
+    .input-group {
         display: flex;
-        gap: 10px;
-        margin-bottom: 15px;
+        gap: 8px;
+        margin-bottom: 12px;
     }
 
     input, select {
         flex: 1;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 12px;
+        padding: 10px 12px;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-primary);
+        border-radius: 6px;
         color: var(--text-primary);
-        font-family: 'Rajdhani', sans-serif;
-        font-size: 1rem;
-        font-weight: 500;
-        transition: all 0.3s ease;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9375rem;
+        transition: all 0.2s;
     }
 
     input:focus, select:focus {
         outline: none;
-        border-color: var(--accent-cyan);
-        background: rgba(0, 247, 255, 0.05);
-        box-shadow: 0 0 15px var(--shadow);
+        border-color: var(--accent-primary);
+        box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
     }
 
     input::placeholder {
-        color: var(--text-secondary);
-        opacity: 0.5;
+        color: var(--text-tertiary);
     }
 
     /* BUTTONS */
     .btn {
+        padding: 10px 16px;
         border: none;
-        border-radius: 8px;
-        padding: 14px 20px;
-        font-family: 'Orbitron', monospace;
-        font-size: 0.85rem;
-        font-weight: 700;
+        border-radius: 6px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.875rem;
+        font-weight: 600;
         cursor: pointer;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .btn::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
-        transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
-    }
-
-    .btn:active::before {
-        width: 300px;
-        height: 300px;
+        transition: all 0.2s;
+        white-space: nowrap;
     }
 
     .btn-primary {
-        background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
-        color: #000;
-        box-shadow: 0 5px 20px var(--shadow);
+        background: var(--accent-primary);
+        color: #ffffff;
     }
 
     .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 30px var(--shadow);
+        filter: brightness(1.1);
+    }
+
+    .btn-primary:active {
+        transform: translateY(1px);
     }
 
     .btn-secondary {
-        background: rgba(255, 255, 255, 0.05);
-        border: 2px solid var(--border);
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-primary);
         color: var(--text-primary);
     }
 
     .btn-secondary:hover {
-        border-color: var(--accent-cyan);
-        background: rgba(0, 247, 255, 0.1);
+        background: var(--bg-tertiary);
+        border-color: var(--accent-primary);
     }
 
-    .now-btn {
-        background: rgba(0, 255, 136, 0.1);
-        border: 2px solid var(--accent-green);
-        color: var(--accent-green);
-        padding: 12px 20px;
-        white-space: nowrap;
+    .btn-success {
+        background: var(--accent-secondary);
+        color: #ffffff;
     }
 
-    .now-btn:hover {
-        background: var(--accent-green);
-        color: #000;
+    .btn-danger {
+        background: var(--accent-danger);
+        color: #ffffff;
+    }
+
+    .btn-full {
+        width: 100%;
     }
 
     /* TYPE SELECTOR */
-    .type-selector {
+    .type-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
     }
 
     .type-btn {
-        background: rgba(255, 255, 255, 0.03);
-        border: 2px solid var(--border);
-        border-radius: 8px;
         padding: 12px;
+        background: var(--bg-secondary);
+        border: 2px solid var(--border-primary);
+        border-radius: 6px;
         color: var(--text-secondary);
-        font-family: 'Rajdhani', sans-serif;
-        font-size: 0.85rem;
-        font-weight: 700;
+        font-size: 0.875rem;
+        font-weight: 600;
         cursor: pointer;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        transition: all 0.2s;
+        text-align: center;
     }
 
     .type-btn:hover {
-        transform: scale(1.02);
+        border-color: var(--accent-primary);
     }
 
     .type-btn.active {
-        border-color: currentColor;
-        background: currentColor;
-        color: #000;
-        box-shadow: 0 0 20px currentColor;
+        background: var(--accent-primary);
+        border-color: var(--accent-primary);
+        color: #ffffff;
     }
 
-    .type-btn[data-type="card"] { color: var(--accent-yellow); }
-    .type-btn[data-type="cash"] { color: var(--accent-green); }
-    .type-btn[data-type="invoice"] { color: var(--accent-red); }
-    .type-btn[data-type="wheelchair"] { color: var(--accent-cyan); }
+    .type-btn.type-card.active {
+        background: var(--accent-warning);
+        border-color: var(--accent-warning);
+    }
 
-    /* CATEGORY SELECTOR */
-    .category-selector {
+    .type-btn.type-cash.active {
+        background: var(--accent-secondary);
+        border-color: var(--accent-secondary);
+    }
+
+    .type-btn.type-invoice.active {
+        background: var(--accent-danger);
+        border-color: var(--accent-danger);
+    }
+
+    .type-btn.type-wheelchair.active {
+        background: var(--accent-primary);
+        border-color: var(--accent-primary);
+    }
+
+    /* CATEGORIES */
+    .category-pills {
         display: flex;
         gap: 8px;
-        margin-bottom: 15px;
-        overflow-x: auto;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
     }
 
-    .category-btn {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        padding: 8px 16px;
-        color: var(--text-secondary);
-        font-size: 0.75rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        white-space: nowrap;
-    }
-
-    .category-btn.active {
-        border-color: var(--accent-magenta);
-        background: rgba(255, 0, 255, 0.1);
-        color: var(--accent-magenta);
-    }
-
-    /* RIDES LIST */
-    .rides-list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .ride-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        background: rgba(255, 255, 255, 0.02);
-        border-left: 3px solid;
-        border-radius: 8px;
-        padding: 15px;
-        transition: all 0.3s ease;
-        animation: slideIn 0.5s ease backwards;
-        cursor: pointer;
-        position: relative;
-    }
-
-    @keyframes slideIn {
-        from { opacity: 0; transform: translateX(-30px); }
-        to { opacity: 1; transform: translateX(0); }
-    }
-
-    .ride-item:hover {
-        background: rgba(255, 255, 255, 0.05);
-        transform: translateX(5px);
-    }
-
-    .ride-item[data-type="card"] { border-left-color: var(--accent-yellow); }
-    .ride-item[data-type="cash"] { border-left-color: var(--accent-green); }
-    .ride-item[data-type="invoice"] { border-left-color: var(--accent-red); }
-    .ride-item[data-type="wheelchair"] { border-left-color: var(--accent-cyan); }
-
-    .ride-item.swiped-left {
-        transform: translateX(-100px);
-        opacity: 0.5;
-    }
-
-    .ride-type-badge {
+    .category-pill {
         padding: 6px 12px;
-        border-radius: 6px;
-        font-size: 0.7rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        white-space: nowrap;
-    }
-
-    .ride-item[data-type="card"] .ride-type-badge {
-        background: rgba(255, 214, 0, 0.15);
-        color: var(--accent-yellow);
-    }
-
-    .ride-item[data-type="cash"] .ride-type-badge {
-        background: rgba(0, 255, 136, 0.15);
-        color: var(--accent-green);
-    }
-
-    .ride-item[data-type="invoice"] .ride-type-badge {
-        background: rgba(255, 51, 102, 0.15);
-        color: var(--accent-red);
-    }
-
-    .ride-item[data-type="wheelchair"] .ride-type-badge {
-        background: rgba(0, 247, 255, 0.15);
-        color: var(--accent-cyan);
-    }
-
-    .ride-details {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        min-width: 0;
-    }
-
-    .ride-time {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-primary);
+        border-radius: 16px;
         color: var(--text-secondary);
-        font-size: 0.8rem;
+        font-size: 0.8125rem;
         font-weight: 500;
-    }
-
-    .ride-note {
-        color: var(--text-secondary);
-        font-style: italic;
-        font-size: 0.85rem;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .ride-category {
-        display: inline-block;
-        background: rgba(255, 0, 255, 0.1);
-        color: var(--accent-magenta);
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-size: 0.7rem;
-        font-weight: 700;
-        text-transform: uppercase;
-    }
-
-    .ride-tip {
-        background: rgba(0, 255, 136, 0.15);
-        color: var(--accent-green);
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-size: 0.75rem;
-        font-weight: 700;
-        white-space: nowrap;
-    }
-
-    .ride-amount {
-        font-family: 'Orbitron', monospace;
-        font-size: 1.2rem;
-        font-weight: 900;
-        color: var(--text-primary);
-        margin-left: auto;
-    }
-
-    .delete-btn, .edit-btn {
-        background: rgba(255, 51, 102, 0.1);
-        border: 1px solid rgba(255, 51, 102, 0.3);
-        border-radius: 6px;
-        padding: 6px 10px;
-        color: var(--accent-red);
-        font-size: 0.75rem;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.2s;
     }
 
-    .edit-btn {
-        background: rgba(0, 247, 255, 0.1);
-        border-color: rgba(0, 247, 255, 0.3);
-        color: var(--accent-cyan);
-    }
-
-    .delete-btn:hover, .edit-btn:hover {
-        transform: scale(1.1);
+    .category-pill.active {
+        background: var(--accent-primary);
+        border-color: var(--accent-primary);
+        color: #ffffff;
     }
 
     /* STATS GRID */
     .stats-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin-bottom: 20px;
+        gap: 12px;
+        margin-bottom: 16px;
     }
 
     .stat-card {
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 20px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .stat-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-primary);
+        border-radius: 8px;
+        padding: 16px;
     }
 
     .stat-label {
         font-size: 0.75rem;
-        color: var(--text-secondary);
+        font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.05em;
+        color: var(--text-tertiary);
         margin-bottom: 8px;
     }
 
     .stat-value {
-        font-family: 'Orbitron', monospace;
-        font-size: 2rem;
-        font-weight: 900;
-        color: var(--accent-cyan);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-primary);
     }
 
     /* PROGRESS BAR */
+    .progress-container {
+        margin: 16px 0;
+    }
+
     .progress-bar {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
-        height: 20px;
+        height: 8px;
+        background: var(--bg-tertiary);
+        border-radius: 4px;
         overflow: hidden;
-        margin: 15px 0;
-        position: relative;
     }
 
     .progress-fill {
         height: 100%;
-        background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+        background: var(--accent-secondary);
         transition: width 0.5s ease;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .progress-fill::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-        animation: shimmer 2s infinite;
-    }
-
-    @keyframes shimmer {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(100%); }
     }
 
     .progress-text {
-        text-align: center;
-        margin-top: 10px;
-        font-size: 0.85rem;
+        font-size: 0.8125rem;
         color: var(--text-secondary);
+        margin-top: 8px;
     }
 
     /* CHART */
     .chart-container {
-        height: 200px;
+        height: 180px;
         margin: 20px 0;
         position: relative;
     }
@@ -606,94 +411,236 @@
     .chart-bars {
         display: flex;
         align-items: flex-end;
-        justify-content: space-around;
+        justify-content: space-between;
         height: 100%;
-        gap: 8px;
+        gap: 6px;
+    }
+
+    .chart-bar-wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
     }
 
     .chart-bar {
-        flex: 1;
-        background: linear-gradient(to top, var(--accent-cyan), var(--accent-magenta));
-        border-radius: 8px 8px 0 0;
-        position: relative;
+        width: 100%;
+        background: var(--accent-primary);
+        border-radius: 4px 4px 0 0;
         transition: all 0.5s ease;
-        animation: growBar 1s ease backwards;
-    }
-
-    @keyframes growBar {
-        from { transform: scaleY(0); }
-        to { transform: scaleY(1); }
-    }
-
-    .chart-bar:hover {
-        transform: scaleX(1.1);
-        box-shadow: 0 0 20px var(--shadow);
     }
 
     .chart-label {
-        position: absolute;
-        bottom: -25px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 0.7rem;
+        font-size: 0.75rem;
+        color: var(--text-tertiary);
+        margin-top: 8px;
+    }
+
+    /* RIDES LIST */
+    .rides-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .ride-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-primary);
+        border-left: 3px solid;
+        border-radius: 6px;
+        transition: all 0.2s;
+        cursor: pointer;
+    }
+
+    .ride-item:hover {
+        background: var(--bg-tertiary);
+    }
+
+    .ride-item[data-type="card"] { border-left-color: var(--accent-warning); }
+    .ride-item[data-type="cash"] { border-left-color: var(--accent-secondary); }
+    .ride-item[data-type="invoice"] { border-left-color: var(--accent-danger); }
+    .ride-item[data-type="wheelchair"] { border-left-color: var(--accent-primary); }
+
+    .ride-badge {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .ride-item[data-type="card"] .ride-badge {
+        background: rgba(217, 151, 34, 0.1);
+        color: var(--accent-warning);
+    }
+
+    .ride-item[data-type="cash"] .ride-badge {
+        background: rgba(26, 127, 55, 0.1);
+        color: var(--accent-secondary);
+    }
+
+    .ride-item[data-type="invoice"] .ride-badge {
+        background: rgba(218, 54, 51, 0.1);
+        color: var(--accent-danger);
+    }
+
+    .ride-item[data-type="wheelchair"] .ride-badge {
+        background: rgba(88, 166, 255, 0.1);
+        color: var(--accent-primary);
+    }
+
+    .ride-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .ride-time {
+        font-size: 0.8125rem;
+        color: var(--text-tertiary);
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    .ride-note {
+        font-size: 0.875rem;
         color: var(--text-secondary);
+        overflow: hidden;
+        text-overflow: ellipsis;
         white-space: nowrap;
     }
 
-    /* THEME TOGGLE */
-    .theme-toggle {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-        background: var(--bg-card);
-        border: 2px solid var(--border);
-        border-radius: 50%;
+    .ride-meta {
+        display: flex;
+        gap: 8px;
+        margin-top: 4px;
+    }
+
+    .ride-category {
+        font-size: 0.75rem;
+        padding: 2px 6px;
+        background: rgba(88, 166, 255, 0.1);
+        color: var(--accent-primary);
+        border-radius: 3px;
+    }
+
+    .ride-tip {
+        font-size: 0.75rem;
+        padding: 2px 6px;
+        background: rgba(26, 127, 55, 0.1);
+        color: var(--accent-secondary);
+        border-radius: 3px;
+        font-weight: 600;
+    }
+
+    .ride-amount {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-left: auto;
+    }
+
+    .ride-actions {
+        display: flex;
+        gap: 4px;
+    }
+
+    .ride-action-btn {
+        width: 32px;
+        height: 32px;
+        background: transparent;
+        border: 1px solid var(--border-primary);
+        border-radius: 4px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        font-size: 1.5rem;
-        transition: all 0.3s ease;
-        z-index: 1000;
+        font-size: 0.875rem;
+        transition: all 0.2s;
     }
 
-    .theme-toggle:hover {
-        transform: rotate(180deg) scale(1.1);
-        box-shadow: 0 0 20px var(--shadow);
+    .ride-action-btn:hover {
+        background: var(--bg-tertiary);
     }
 
-    /* BOTTOM NAV */
-    .bottom-nav {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: var(--bg-card);
-        border-top: 2px solid var(--border);
+    .ride-action-btn.edit:hover {
+        border-color: var(--accent-primary);
+        color: var(--accent-primary);
+    }
+
+    .ride-action-btn.delete:hover {
+        border-color: var(--accent-danger);
+        color: var(--accent-danger);
+    }
+
+    /* SHIFT HEADER */
+    .shift-header {
         display: flex;
-        justify-content: space-around;
-        padding: 15px 0;
-        z-index: 1000;
-        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid var(--border-secondary);
     }
 
-    .bottom-nav-btn {
-        flex: 1;
-        background: none;
-        border: none;
+    .shift-date {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+
+    .shift-count {
+        font-size: 0.8125rem;
+        color: var(--text-tertiary);
+    }
+
+    .shift-total {
+        text-align: right;
+    }
+
+    .shift-total-label {
+        font-size: 0.75rem;
+        color: var(--text-tertiary);
+        text-transform: uppercase;
+    }
+
+    .shift-total-value {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--accent-secondary);
+    }
+
+    /* BREAKDOWN */
+    .breakdown-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-primary);
+        border-left: 3px solid;
+        border-radius: 6px;
+        margin-bottom: 8px;
+    }
+
+    .breakdown-item.type-card { border-left-color: var(--accent-warning); }
+    .breakdown-item.type-cash { border-left-color: var(--accent-secondary); }
+    .breakdown-item.type-invoice { border-left-color: var(--accent-danger); }
+    .breakdown-item.type-wheelchair { border-left-color: var(--accent-primary); }
+
+    .breakdown-label {
+        font-size: 0.875rem;
         color: var(--text-secondary);
-        font-size: 1.5rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        padding: 10px;
     }
 
-    .bottom-nav-btn:hover,
-    .bottom-nav-btn.active {
-        color: var(--accent-cyan);
-        transform: scale(1.2);
+    .breakdown-value {
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 700;
+        color: var(--text-primary);
     }
 
     /* MODAL */
@@ -704,33 +651,27 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.9);
-        backdrop-filter: blur(10px);
-        z-index: 2000;
-        animation: fadeIn 0.3s ease;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
     }
 
     .modal.active {
         display: flex;
-        align-items: center;
-        justify-content: center;
     }
 
     .modal-content {
         background: var(--bg-card);
-        border: 2px solid var(--border);
-        border-radius: 20px;
-        padding: 30px;
+        border: 1px solid var(--border-primary);
+        border-radius: 12px;
+        padding: 24px;
         max-width: 500px;
-        width: 90%;
-        max-height: 80vh;
+        width: 100%;
+        max-height: 90vh;
         overflow-y: auto;
-        animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    @keyframes slideUp {
-        from { opacity: 0; transform: translateY(50px) scale(0.9); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .modal-header {
@@ -738,227 +679,304 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--border-primary);
     }
 
     .modal-title {
-        font-family: 'Orbitron', monospace;
-        font-size: 1.2rem;
-        font-weight: 900;
-        color: var(--accent-cyan);
-        text-transform: uppercase;
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--text-primary);
     }
 
     .modal-close {
-        background: none;
-        border: none;
-        color: var(--text-secondary);
-        font-size: 1.5rem;
+        width: 32px;
+        height: 32px;
+        background: transparent;
+        border: 1px solid var(--border-primary);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
-        transition: all 0.3s ease;
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        transition: all 0.2s;
     }
 
     .modal-close:hover {
-        color: var(--accent-red);
-        transform: rotate(90deg);
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+    }
+
+    /* BOTTOM NAV */
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--bg-card);
+        border-top: 1px solid var(--border-primary);
+        display: flex;
+        padding: 12px 16px;
+        gap: 8px;
+        z-index: 100;
+    }
+
+    .nav-btn {
+        flex: 1;
+        padding: 10px;
+        background: transparent;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 1.25rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        border-radius: 6px;
+    }
+
+    .nav-btn:hover {
+        background: var(--bg-tertiary);
+    }
+
+    .nav-btn.active {
+        color: var(--accent-primary);
+        background: var(--bg-tertiary);
     }
 
     /* EMPTY STATE */
     .empty-state {
         text-align: center;
         padding: 60px 20px;
-        color: var(--text-secondary);
+        color: var(--text-tertiary);
     }
 
-    .empty-state-icon {
-        font-size: 4rem;
-        margin-bottom: 20px;
-        opacity: 0.3;
-        animation: pulse 2s infinite;
+    .empty-icon {
+        font-size: 3rem;
+        margin-bottom: 16px;
+        opacity: 0.5;
     }
 
-    @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.1); }
+    .empty-text {
+        font-size: 0.875rem;
     }
 
-    /* LOADING */
-    .loading {
-        display: none;
+    /* NOTIFICATION */
+    .notification {
         position: fixed;
-        top: 50%;
+        top: 20px;
         left: 50%;
-        transform: translate(-50%, -50%);
-        font-family: 'Orbitron', monospace;
-        font-size: 1.5rem;
-        color: var(--accent-cyan);
-        z-index: 3000;
+        transform: translateX(-50%);
+        background: var(--bg-card);
+        border: 1px solid var(--border-primary);
+        border-radius: 8px;
+        padding: 12px 20px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        box-shadow: 0 4px 12px var(--shadow);
+        z-index: 2000;
+        animation: slideDown 0.3s ease;
     }
 
-    .loading.active {
+    @keyframes slideDown {
+        from { opacity: 0; transform: translate(-50%, -20px); }
+        to { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    /* TAB CONTENT */
+    .tab-content {
+        display: none;
+    }
+
+    .tab-content.active {
         display: block;
-        animation: pulse 1s infinite;
     }
 
-    /* VOICE INPUT */
+    /* VOICE BUTTON */
     .voice-btn {
         position: fixed;
         bottom: 80px;
         right: 20px;
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, var(--accent-red), var(--accent-magenta));
+        width: 56px;
+        height: 56px;
+        background: var(--accent-primary);
         border: none;
         border-radius: 50%;
-        color: #fff;
+        color: #ffffff;
         font-size: 1.5rem;
         cursor: pointer;
-        box-shadow: 0 5px 20px rgba(255, 0, 255, 0.5);
-        transition: all 0.3s ease;
-        z-index: 999;
+        box-shadow: 0 4px 12px var(--shadow);
+        transition: all 0.2s;
+        z-index: 99;
     }
 
     .voice-btn:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 
     .voice-btn.listening {
-        animation: pulse 0.5s infinite;
-        background: var(--accent-green);
+        background: var(--accent-secondary);
+        animation: pulse 0.8s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    /* THEME SELECTOR MODAL */
+    .theme-options {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .theme-option {
+        padding: 16px;
+        background: var(--bg-secondary);
+        border: 2px solid var(--border-primary);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .theme-option:hover {
+        border-color: var(--accent-primary);
+    }
+
+    .theme-option.active {
+        border-color: var(--accent-primary);
+        background: var(--bg-tertiary);
+    }
+
+    .theme-option-name {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 4px;
+    }
+
+    .theme-option-desc {
+        font-size: 0.8125rem;
+        color: var(--text-secondary);
     }
 
     /* RESPONSIVE */
     @media (max-width: 600px) {
-        .header h1 {
-            font-size: 2rem;
+        .container {
+            padding: 16px 12px 90px;
         }
 
         .stats-grid {
             grid-template-columns: 1fr;
         }
 
-        .type-selector {
+        .type-grid {
             grid-template-columns: 1fr;
         }
-    }
-
-    /* SCROLLBAR */
-    ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: var(--bg-secondary);
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: var(--accent-cyan);
-        border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: var(--accent-magenta);
     }
 </style>
 ```
 
 </head>
 <body data-theme="dark">
-    <div class="theme-toggle" id="themeToggle">🌙</div>
-    <div class="loading" id="loading">LOADING...</div>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-top">
+                <h1>Taxi Pro Analytics</h1>
+                <div class="header-actions">
+                    <button class="theme-btn" id="themeBtn">🎨</button>
+                </div>
+            </div>
+            <p>Professional Ride Tracking System</p>
+        </div>
 
 ```
-<div class="container">
-    <div class="header">
-        <h1>🚕 TAXI CMD</h1>
-        <p>Command Center Online</p>
+    <!-- TABS -->
+    <div class="tabs">
+        <button class="tab active" data-tab="add">Add</button>
+        <button class="tab" data-tab="stats">Stats</button>
+        <button class="tab" data-tab="history">History</button>
+        <button class="tab" data-tab="settings">Settings</button>
     </div>
 
-    <!-- NAV TABS -->
-    <div class="nav-tabs">
-        <div class="nav-tab active" data-tab="add">ADD</div>
-        <div class="nav-tab" data-tab="stats">STATS</div>
-        <div class="nav-tab" data-tab="history">HISTORY</div>
-        <div class="nav-tab" data-tab="settings">SETTINGS</div>
-    </div>
-
-    <!-- TAB: ADD RIDE -->
+    <!-- TAB: ADD -->
     <div class="tab-content active" data-content="add">
         <div class="card">
-            <h3>⚡ NEUE FAHRT</h3>
+            <h3 class="card-title">New Ride</h3>
             
-            <div class="input-row">
+            <div class="input-group">
                 <input type="date" id="rideDate">
                 <input type="time" id="rideTime">
-                <button class="btn now-btn" id="nowBtn">JETZT</button>
+                <button class="btn btn-success" id="nowBtn">Now</button>
             </div>
 
-            <div class="input-row">
-                <input type="number" step="0.01" id="amount" placeholder="Betrag">
+            <div class="input-group">
+                <input type="number" step="0.01" id="amount" placeholder="Amount">
                 <select id="currency">
-                    <option value="€">€</option>
-                    <option value="$">$</option>
-                    <option value="£">£</option>
-                    <option value="¥">¥</option>
+                    <option value="€">€ EUR</option>
+                    <option value="$">$ USD</option>
+                    <option value="£">£ GBP</option>
+                    <option value="¥">¥ JPY</option>
                 </select>
             </div>
 
-            <div class="input-row">
-                <input type="number" step="0.01" id="tip" placeholder="Trinkgeld">
+            <div class="input-group">
+                <input type="number" step="0.01" id="tip" placeholder="Tip (optional)">
             </div>
 
-            <div class="type-selector">
-                <button class="type-btn active" data-type="card">💳 KARTE</button>
-                <button class="type-btn" data-type="cash">💵 BAR</button>
-                <button class="type-btn" data-type="invoice">🧾 RECHNUNG</button>
-                <button class="type-btn" data-type="wheelchair">♿ ROLLSTUHL</button>
+            <div class="type-grid">
+                <button class="type-btn type-card active" data-type="card">💳 Card</button>
+                <button class="type-btn type-cash" data-type="cash">💵 Cash</button>
+                <button class="type-btn type-invoice" data-type="invoice">🧾 Invoice</button>
+                <button class="type-btn type-wheelchair" data-type="wheelchair">♿ Wheelchair</button>
             </div>
 
-            <div class="category-selector">
-                <button class="category-btn" data-category="city">🏙️ City</button>
-                <button class="category-btn" data-category="airport">✈️ Airport</button>
-                <button class="category-btn" data-category="long">🛣️ Long</button>
-                <button class="category-btn" data-category="vip">⭐ VIP</button>
+            <div class="category-pills">
+                <button class="category-pill" data-category="city">City</button>
+                <button class="category-pill" data-category="airport">Airport</button>
+                <button class="category-pill" data-category="long">Long Distance</button>
+                <button class="category-pill" data-category="vip">VIP</button>
             </div>
 
-            <div class="input-row">
-                <input type="text" id="note" placeholder="Notiz / Kunde">
+            <div class="input-group">
+                <input type="text" id="note" placeholder="Note / Customer">
             </div>
 
-            <button class="btn btn-primary" id="addBtn" style="width: 100%;">+ FAHRT HINZUFÜGEN</button>
+            <button class="btn btn-primary btn-full" id="addBtn">Add Ride</button>
         </div>
 
         <!-- SHIFT TRACKER -->
         <div class="card">
-            <h3>⏱️ SCHICHT</h3>
-            <div class="input-row">
-                <button class="btn btn-secondary" id="shiftStartBtn" style="flex: 1;">START</button>
-                <button class="btn btn-secondary" id="shiftEndBtn" style="flex: 1;">ENDE</button>
+            <h3 class="card-title">Shift Tracking</h3>
+            <div class="input-group">
+                <button class="btn btn-secondary" id="shiftStartBtn">Start Shift</button>
+                <button class="btn btn-secondary" id="shiftEndBtn">End Shift</button>
             </div>
-            <div id="shiftStatus" style="text-align: center; margin-top: 10px; color: var(--text-secondary);"></div>
+            <div id="shiftStatus" style="text-align: center; margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);"></div>
         </div>
     </div>
 
     <!-- TAB: STATS -->
     <div class="tab-content" data-content="stats">
         <div class="card">
-            <h3>📊 STATISTICS</h3>
+            <h3 class="card-title">Statistics</h3>
             
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-label">Heute</div>
+                    <div class="stat-label">Today</div>
                     <div class="stat-value" id="statToday">0€</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Diese Woche</div>
+                    <div class="stat-label">This Week</div>
                     <div class="stat-value" id="statWeek">0€</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Dieser Monat</div>
+                    <div class="stat-label">This Month</div>
                     <div class="stat-value" id="statMonth">0€</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Gesamt</div>
+                    <div class="stat-label">Total</div>
                     <div class="stat-value" id="statTotal">0€</div>
                 </div>
             </div>
@@ -966,20 +984,22 @@
 
         <!-- GOAL TRACKER -->
         <div class="card">
-            <h3>🎯 TAGESZIEL</h3>
-            <div class="input-row">
-                <input type="number" id="goalAmount" placeholder="Ziel (€)">
-                <button class="btn btn-secondary" id="setGoalBtn">SET</button>
+            <h3 class="card-title">Daily Goal</h3>
+            <div class="input-group">
+                <input type="number" id="goalAmount" placeholder="Goal amount">
+                <button class="btn btn-primary" id="setGoalBtn">Set Goal</button>
             </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="goalProgress" style="width: 0%"></div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="goalProgress" style="width: 0%"></div>
+                </div>
+                <div class="progress-text" id="goalText">No goal set</div>
             </div>
-            <div class="progress-text" id="goalText">Kein Ziel gesetzt</div>
         </div>
 
         <!-- CHART -->
         <div class="card">
-            <h3>📈 LETZTE 7 TAGE</h3>
+            <h3 class="card-title">Last 7 Days</h3>
             <div class="chart-container">
                 <div class="chart-bars" id="chartBars"></div>
             </div>
@@ -987,7 +1007,7 @@
 
         <!-- BREAKDOWN -->
         <div class="card">
-            <h3>💰 BREAKDOWN</h3>
+            <h3 class="card-title">Breakdown by Type</h3>
             <div id="breakdown"></div>
         </div>
     </div>
@@ -995,15 +1015,15 @@
     <!-- TAB: HISTORY -->
     <div class="tab-content" data-content="history">
         <div class="card">
-            <h3>📜 FAHRTEN HISTORIE</h3>
-            <div class="input-row">
-                <input type="text" id="searchInput" placeholder="Suchen...">
+            <h3 class="card-title">Filter & Search</h3>
+            <div class="input-group">
+                <input type="text" id="searchInput" placeholder="Search...">
                 <select id="filterType">
-                    <option value="all">Alle</option>
-                    <option value="card">Karte</option>
-                    <option value="cash">Bar</option>
-                    <option value="invoice">Rechnung</option>
-                    <option value="wheelchair">Rollstuhl</option>
+                    <option value="all">All Types</option>
+                    <option value="card">Card</option>
+                    <option value="cash">Cash</option>
+                    <option value="invoice">Invoice</option>
+                    <option value="wheelchair">Wheelchair</option>
                 </select>
             </div>
         </div>
@@ -1014,24 +1034,26 @@
     <!-- TAB: SETTINGS -->
     <div class="tab-content" data-content="settings">
         <div class="card">
-            <h3>⚙️ EINSTELLUNGEN</h3>
-            
-            <button class="btn btn-secondary" id="exportBtn" style="width: 100%; margin-bottom: 10px;">📊 EXPORT TXT</button>
-            <button class="btn btn-secondary" id="exportCSVBtn" style="width: 100%; margin-bottom: 10px;">📄 EXPORT CSV</button>
-            <button class="btn btn-secondary" id="backupBtn" style="width: 100%; margin-bottom: 10px;">💾 BACKUP JSON</button>
-            <button class="btn btn-secondary" id="restoreBtn" style="width: 100%; margin-bottom: 10px;">📥 RESTORE JSON</button>
-            <button class="btn btn-secondary" id="clearBtn" style="width: 100%; background: rgba(255, 51, 102, 0.1); border-color: var(--accent-red); color: var(--accent-red);">🗑️ ALLES LÖSCHEN</button>
+            <h3 class="card-title">Export Data</h3>
+            <button class="btn btn-secondary btn-full" id="exportBtn" style="margin-bottom: 8px;">Export TXT</button>
+            <button class="btn btn-secondary btn-full" id="exportCSVBtn" style="margin-bottom: 8px;">Export CSV</button>
+            <button class="btn btn-secondary btn-full" id="backupBtn" style="margin-bottom: 8px;">Backup JSON</button>
+            <button class="btn btn-secondary btn-full" id="restoreBtn" style="margin-bottom: 8px;">Restore JSON</button>
             <input type="file" id="restoreFile" accept=".json" style="display: none;">
         </div>
 
         <div class="card">
-            <h3>ℹ️ INFO</h3>
-            <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
-                <strong>Version:</strong> 2.0 ULTIMATE<br>
-                <strong>Fahrten:</strong> <span id="totalRides">0</span><br>
+            <h3 class="card-title">Danger Zone</h3>
+            <button class="btn btn-danger btn-full" id="clearBtn">Clear All Data</button>
+        </div>
+
+        <div class="card">
+            <h3 class="card-title">Information</h3>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6;">
+                <strong>Version:</strong> 3.0 Professional<br>
+                <strong>Total Rides:</strong> <span id="totalRides">0</span><br>
                 <strong>Storage:</strong> LocalStorage<br>
-                <strong>Swipe left:</strong> Löschen<br>
-                <strong>Tap:</strong> Bearbeiten
+                <strong>Features:</strong> Stats, Goals, Export, Backup
             </p>
         </div>
     </div>
@@ -1039,52 +1061,76 @@
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
-    <button class="bottom-nav-btn active" data-tab="add">➕</button>
-    <button class="bottom-nav-btn" data-tab="stats">📊</button>
-    <button class="bottom-nav-btn" data-tab="history">📜</button>
-    <button class="bottom-nav-btn" data-tab="settings">⚙️</button>
+    <button class="nav-btn active" data-tab="add">➕</button>
+    <button class="nav-btn" data-tab="stats">📊</button>
+    <button class="nav-btn" data-tab="history">📋</button>
+    <button class="nav-btn" data-tab="settings">⚙️</button>
 </div>
 
 <!-- VOICE BUTTON -->
 <button class="voice-btn" id="voiceBtn">🎤</button>
 
+<!-- THEME MODAL -->
+<div class="modal" id="themeModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">Choose Theme</div>
+            <button class="modal-close" id="closeThemeModal">×</button>
+        </div>
+        <div class="theme-options">
+            <div class="theme-option active" data-theme="dark">
+                <div class="theme-option-name">Dark Professional</div>
+                <div class="theme-option-desc">Clean dark interface for night shifts</div>
+            </div>
+            <div class="theme-option" data-theme="light">
+                <div class="theme-option-name">Light Corporate</div>
+                <div class="theme-option-desc">Bright professional theme for daylight</div>
+            </div>
+            <div class="theme-option" data-theme="business">
+                <div class="theme-option-name">Business Minimal</div>
+                <div class="theme-option-desc">Clean minimal design for focus</div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- EDIT MODAL -->
 <div class="modal" id="editModal">
     <div class="modal-content">
         <div class="modal-header">
-            <div class="modal-title">FAHRT BEARBEITEN</div>
+            <div class="modal-title">Edit Ride</div>
             <button class="modal-close" id="closeEditModal">×</button>
         </div>
         
-        <div class="input-row">
+        <div class="input-group">
             <input type="date" id="editDate">
             <input type="time" id="editTime">
         </div>
 
-        <div class="input-row">
-            <input type="number" step="0.01" id="editAmount" placeholder="Betrag">
-            <input type="number" step="0.01" id="editTip" placeholder="Trinkgeld">
+        <div class="input-group">
+            <input type="number" step="0.01" id="editAmount" placeholder="Amount">
+            <input type="number" step="0.01" id="editTip" placeholder="Tip">
         </div>
 
-        <div class="input-row">
-            <input type="text" id="editNote" placeholder="Notiz">
+        <div class="input-group">
+            <input type="text" id="editNote" placeholder="Note">
         </div>
 
-        <div class="type-selector" id="editTypeSelector">
-            <button class="type-btn" data-type="card">💳 KARTE</button>
-            <button class="type-btn" data-type="cash">💵 BAR</button>
-            <button class="type-btn" data-type="invoice">🧾 RECHNUNG</button>
-            <button class="type-btn" data-type="wheelchair">♿ ROLLSTUHL</button>
+        <div class="type-grid" id="editTypeGrid">
+            <button class="type-btn type-card" data-type="card">💳 Card</button>
+            <button class="type-btn type-cash" data-type="cash">💵 Cash</button>
+            <button class="type-btn type-invoice" data-type="invoice">🧾 Invoice</button>
+            <button class="type-btn type-wheelchair" data-type="wheelchair">♿ Wheelchair</button>
         </div>
 
-        <button class="btn btn-primary" id="saveEditBtn" style="width: 100%;">💾 SPEICHERN</button>
+        <button class="btn btn-primary btn-full" id="saveEditBtn">Save Changes</button>
     </div>
 </div>
 
 <script>
     // ==================== CORE DATA ====================
-    const STORAGE_KEY = 'taxi_shifts_ultimate';
-    const SETTINGS_KEY = 'taxi_settings';
+    const STORAGE_KEY = 'taxi_pro_data';
+    const SETTINGS_KEY = 'taxi_pro_settings';
     let shifts = [];
     let settings = {
         currency: '€',
@@ -1107,7 +1153,7 @@
         updateShiftStatus();
     });
 
-    // ==================== DATA MANAGEMENT ====================
+    // ==================== DATA ====================
     function loadData() {
         try {
             const stored = localStorage.getItem(STORAGE_KEY);
@@ -1133,98 +1179,90 @@
             localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
         } catch (e) {
             console.error('Save error:', e);
-            alert('Fehler beim Speichern!');
+            showNotification('Save failed!');
         }
     }
 
     // ==================== EVENT LISTENERS ====================
     function initEventListeners() {
-        // Tab navigation
-        document.querySelectorAll('.nav-tab, .bottom-nav-btn').forEach(btn => {
+        // Tabs
+        document.querySelectorAll('.tab, .nav-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                const tab = this.getAttribute('data-tab');
-                switchTab(tab);
+                switchTab(this.getAttribute('data-tab'));
             });
         });
 
         // Type selector
         document.querySelectorAll('.type-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+                const parent = this.parentElement;
+                parent.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 selectedType = this.getAttribute('data-type');
             });
         });
 
-        // Category selector
-        document.querySelectorAll('.category-btn').forEach(btn => {
+        // Category pills
+        document.querySelectorAll('.category-pill').forEach(btn => {
             btn.addEventListener('click', function() {
                 if (this.classList.contains('active')) {
                     this.classList.remove('active');
                     selectedCategory = null;
                 } else {
-                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.category-pill').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     selectedCategory = this.getAttribute('data-category');
                 }
             });
         });
 
-        // Now button
+        // Buttons
         document.getElementById('nowBtn').addEventListener('click', setCurrentDateTime);
-
-        // Add ride
         document.getElementById('addBtn').addEventListener('click', addRide);
-
-        // Shift tracking
         document.getElementById('shiftStartBtn').addEventListener('click', startShift);
         document.getElementById('shiftEndBtn').addEventListener('click', endShift);
-
-        // Theme toggle
-        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-
-        // Currency change
+        document.getElementById('themeBtn').addEventListener('click', () => document.getElementById('themeModal').classList.add('active'));
+        document.getElementById('closeThemeModal').addEventListener('click', () => document.getElementById('themeModal').classList.remove('active'));
         document.getElementById('currency').addEventListener('change', function() {
             settings.currency = this.value;
             saveData();
             updateStats();
             renderShifts();
         });
-
-        // Goal
         document.getElementById('setGoalBtn').addEventListener('click', setGoal);
-
-        // Search & filter
         document.getElementById('searchInput').addEventListener('input', renderShifts);
         document.getElementById('filterType').addEventListener('change', renderShifts);
-
-        // Export/Import
         document.getElementById('exportBtn').addEventListener('click', exportTXT);
         document.getElementById('exportCSVBtn').addEventListener('click', exportCSV);
         document.getElementById('backupBtn').addEventListener('click', backupJSON);
         document.getElementById('restoreBtn').addEventListener('click', () => document.getElementById('restoreFile').click());
         document.getElementById('restoreFile').addEventListener('change', restoreJSON);
         document.getElementById('clearBtn').addEventListener('click', clearAll);
-
-        // Edit modal
         document.getElementById('closeEditModal').addEventListener('click', closeEditModal);
         document.getElementById('saveEditBtn').addEventListener('click', saveEdit);
-        
-        // Edit type selector
-        document.querySelectorAll('#editTypeSelector .type-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('#editTypeSelector .type-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
+        document.getElementById('voiceBtn').addEventListener('click', startVoiceInput);
+
+        // Theme options
+        document.querySelectorAll('.theme-option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                const theme = this.getAttribute('data-theme');
+                setTheme(theme);
+                document.getElementById('themeModal').classList.remove('active');
             });
         });
 
-        // Voice input
-        document.getElementById('voiceBtn').addEventListener('click', startVoiceInput);
+        // Edit type selector
+        document.querySelectorAll('#editTypeGrid .type-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#editTypeGrid .type-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
     }
 
     // ==================== TAB SWITCHING ====================
     function switchTab(tab) {
-        document.querySelectorAll('.nav-tab, .bottom-nav-btn').forEach(btn => {
+        document.querySelectorAll('.tab, .nav-btn').forEach(btn => {
             btn.classList.toggle('active', btn.getAttribute('data-tab') === tab);
         });
 
@@ -1252,12 +1290,12 @@
         const currency = document.getElementById('currency').value;
 
         if (!amount || amount <= 0) {
-            alert('Bitte gültigen Betrag eingeben');
+            showNotification('Please enter valid amount');
             return;
         }
 
         if (!rideDate || !rideTime) {
-            alert('Bitte Datum und Zeit auswählen');
+            showNotification('Please select date and time');
             return;
         }
 
@@ -1291,11 +1329,10 @@
         document.getElementById('amount').value = '';
         document.getElementById('tip').value = '';
         document.getElementById('note').value = '';
-        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.category-pill').forEach(b => b.classList.remove('active'));
         selectedCategory = null;
 
-        // Show success
-        showNotification('Fahrt hinzugefügt! 🚕');
+        showNotification('Ride added successfully');
     }
 
     // ==================== SHIFT TRACKING ====================
@@ -1304,36 +1341,34 @@
         settings.shiftEnd = null;
         saveData();
         updateShiftStatus();
-        showNotification('Schicht gestartet! ⏱️');
+        showNotification('Shift started');
     }
 
     function endShift() {
         if (!settings.shiftStart) {
-            alert('Keine aktive Schicht!');
+            showNotification('No active shift');
             return;
         }
         settings.shiftEnd = new Date().toISOString();
         saveData();
         updateShiftStatus();
-        showNotification('Schicht beendet! ✅');
+        showNotification('Shift ended');
     }
 
     function updateShiftStatus() {
         const status = document.getElementById('shiftStatus');
         if (!settings.shiftStart) {
-            status.textContent = 'Keine aktive Schicht';
+            status.textContent = 'No active shift';
             return;
         }
 
         if (settings.shiftEnd) {
             const duration = Math.round((new Date(settings.shiftEnd) - new Date(settings.shiftStart)) / 1000 / 60);
-            status.textContent = `Letzte Schicht: ${duration} min`;
-            status.style.color = 'var(--accent-green)';
+            status.textContent = `Last shift: ${duration} minutes`;
         } else {
             const duration = Math.round((new Date() - new Date(settings.shiftStart)) / 1000 / 60);
-            status.textContent = `Aktive Schicht: ${duration} min`;
-            status.style.color = 'var(--accent-cyan)';
-            setTimeout(updateShiftStatus, 60000); // Update every minute
+            status.textContent = `Active shift: ${duration} minutes`;
+            setTimeout(updateShiftStatus, 60000);
         }
     }
 
@@ -1362,7 +1397,7 @@
         document.getElementById('statMonth').textContent = monthTotal.toFixed(2) + settings.currency;
         document.getElementById('statTotal').textContent = allTotal.toFixed(2) + settings.currency;
 
-        // Update goal progress
+        // Goal progress
         if (settings.goal > 0) {
             const progress = Math.min((todayTotal / settings.goal) * 100, 100);
             document.getElementById('goalProgress').style.width = progress + '%';
@@ -1370,13 +1405,9 @@
                 `${todayTotal.toFixed(2)}${settings.currency} / ${settings.goal}${settings.currency} (${Math.round(progress)}%)`;
         }
 
-        // Update chart
         updateChart();
-
-        // Update breakdown
         updateBreakdown();
 
-        // Update total rides count
         const totalRides = shifts.reduce((sum, shift) => sum + shift.rides.length, 0);
         document.getElementById('totalRides').textContent = totalRides;
     }
@@ -1387,7 +1418,7 @@
             settings.goal = goal;
             saveData();
             updateStats();
-            showNotification('Ziel gesetzt! 🎯');
+            showNotification('Goal set successfully');
         }
     }
 
@@ -1406,30 +1437,33 @@
 
         const maxTotal = Math.max(...last7Days.map(d => d.total), 1);
 
-        last7Days.forEach((day, index) => {
+        last7Days.forEach((day) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'chart-bar-wrapper';
+            
             const bar = document.createElement('div');
             bar.className = 'chart-bar';
             const height = (day.total / maxTotal) * 100;
             bar.style.height = height + '%';
-            bar.style.animationDelay = (index * 0.1) + 's';
+            bar.title = `${day.total.toFixed(2)}${settings.currency}`;
             
             const label = document.createElement('div');
             label.className = 'chart-label';
             label.textContent = new Date(day.date).toLocaleDateString('de-DE', { weekday: 'short' });
             
-            bar.appendChild(label);
-            bar.title = `${day.total.toFixed(2)}${settings.currency}`;
-            chartBars.appendChild(bar);
+            wrapper.appendChild(bar);
+            wrapper.appendChild(label);
+            chartBars.appendChild(wrapper);
         });
     }
 
     function updateBreakdown() {
         const breakdown = document.getElementById('breakdown');
         const byType = {
-            card: { label: '💳 Karte', total: 0, count: 0, color: 'var(--accent-yellow)' },
-            cash: { label: '💵 Bar', total: 0, count: 0, color: 'var(--accent-green)' },
-            invoice: { label: '🧾 Rechnung', total: 0, count: 0, color: 'var(--accent-red)' },
-            wheelchair: { label: '♿ Rollstuhl', total: 0, count: 0, color: 'var(--accent-cyan)' }
+            card: { label: '💳 Card', total: 0, count: 0 },
+            cash: { label: '💵 Cash', total: 0, count: 0 },
+            invoice: { label: '🧾 Invoice', total: 0, count: 0 },
+            wheelchair: { label: '♿ Wheelchair', total: 0, count: 0 }
         };
 
         shifts.forEach(shift => {
@@ -1440,21 +1474,13 @@
         });
 
         breakdown.innerHTML = '';
-        Object.values(byType).forEach(type => {
-            if (type.count > 0) {
+        Object.entries(byType).forEach(([type, data]) => {
+            if (data.count > 0) {
                 const item = document.createElement('div');
-                item.style.cssText = `
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 10px;
-                    margin: 5px 0;
-                    background: rgba(255, 255, 255, 0.02);
-                    border-left: 3px solid ${type.color};
-                    border-radius: 8px;
-                `;
+                item.className = `breakdown-item type-${type}`;
                 item.innerHTML = `
-                    <span>${type.label} (${type.count}x)</span>
-                    <span style="font-family: Orbitron; font-weight: 700;">${type.total.toFixed(2)}${settings.currency}</span>
+                    <div class="breakdown-label">${data.label} (${data.count}×)</div>
+                    <div class="breakdown-value">${data.total.toFixed(2)}${settings.currency}</div>
                 `;
                 breakdown.appendChild(item);
             }
@@ -1482,8 +1508,8 @@
             container.innerHTML = `
                 <div class="card">
                     <div class="empty-state">
-                        <div class="empty-state-icon">🚕</div>
-                        <p>Keine Fahrten gefunden</p>
+                        <div class="empty-icon">📋</div>
+                        <div class="empty-text">No rides found</div>
                     </div>
                 </div>
             `;
@@ -1498,22 +1524,14 @@
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border);">
+                <div class="shift-header">
                     <div>
-                        <div style="font-family: Orbitron; font-size: 1.2rem; font-weight: 900; color: var(--accent-yellow);">
-                            ${formatDate(shift.date)}
-                        </div>
-                        <div style="font-size: 0.85rem; color: var(--text-secondary);">
-                            ${shift.rides.length} Fahrt${shift.rides.length !== 1 ? 'en' : ''}
-                        </div>
+                        <div class="shift-date">${formatDate(shift.date)}</div>
+                        <div class="shift-count">${shift.rides.length} ride${shift.rides.length !== 1 ? 's' : ''}</div>
                     </div>
-                    <div style="text-align: right;">
-                        <div style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">
-                            Gesamt${totalTips > 0 ? ' (inkl. TG)' : ''}
-                        </div>
-                        <div style="font-family: Orbitron; font-size: 1.5rem; font-weight: 900; color: var(--accent-green);">
-                            ${total.toFixed(2)}${shift.rides[0].currency || settings.currency}
-                        </div>
+                    <div class="shift-total">
+                        <div class="shift-total-label">Total${totalTips > 0 ? ' (incl. tips)' : ''}</div>
+                        <div class="shift-total-value">${total.toFixed(2)}${shift.rides[0].currency || settings.currency}</div>
                     </div>
                 </div>
                 <div class="rides-list" id="rides-${shiftIndex}"></div>
@@ -1532,64 +1550,32 @@
         const div = document.createElement('div');
         div.className = 'ride-item';
         div.setAttribute('data-type', ride.type);
-        div.style.animationDelay = (rideIndex * 0.05) + 's';
 
         div.innerHTML = `
-            <div class="ride-type-badge">${getTypeLabel(ride.type)}</div>
-            <div class="ride-details">
+            <div class="ride-badge">${getTypeBadge(ride.type)}</div>
+            <div class="ride-info">
                 <div class="ride-time">${ride.time}</div>
-                ${ride.category ? `<span class="ride-category">${getCategoryLabel(ride.category)}</span>` : ''}
                 ${ride.note ? `<div class="ride-note">${ride.note}</div>` : ''}
-                ${ride.tip > 0 ? `<span class="ride-tip">+${ride.tip.toFixed(2)}${ride.currency || settings.currency} TIP</span>` : ''}
+                <div class="ride-meta">
+                    ${ride.category ? `<span class="ride-category">${ride.category}</span>` : ''}
+                    ${ride.tip > 0 ? `<span class="ride-tip">+${ride.tip.toFixed(2)}${ride.currency || settings.currency}</span>` : ''}
+                </div>
             </div>
             <div class="ride-amount">${ride.totalAmount.toFixed(2)}${ride.currency || settings.currency}</div>
-            <button class="edit-btn">✏️</button>
-            <button class="delete-btn">×</button>
+            <div class="ride-actions">
+                <button class="ride-action-btn edit">✏️</button>
+                <button class="ride-action-btn delete">×</button>
+            </div>
         `;
 
-        // Swipe to delete
-        let startX = 0;
-        let currentX = 0;
-
-        div.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-        });
-
-        div.addEventListener('touchmove', (e) => {
-            currentX = e.touches[0].clientX;
-            const diffX = startX - currentX;
-            if (diffX > 0) {
-                div.style.transform = `translateX(-${diffX}px)`;
-            }
-        });
-
-        div.addEventListener('touchend', () => {
-            const diffX = startX - currentX;
-            if (diffX > 100) {
-                div.classList.add('swiped-left');
-                setTimeout(() => deleteRide(shiftIndex, rideIndex), 300);
-            } else {
-                div.style.transform = 'translateX(0)';
-            }
-        });
-
-        // Edit button
-        div.querySelector('.edit-btn').addEventListener('click', (e) => {
-            e.stopPropagation();
-            openEditModal(shiftIndex, rideIndex);
-        });
-
-        // Delete button
-        div.querySelector('.delete-btn').addEventListener('click', (e) => {
-            e.stopPropagation();
-            deleteRide(shiftIndex, rideIndex);
-        });
+        div.querySelector('.edit').addEventListener('click', () => openEditModal(shiftIndex, rideIndex));
+        div.querySelector('.delete').addEventListener('click', () => deleteRide(shiftIndex, rideIndex));
 
         return div;
     }
 
     function deleteRide(shiftIndex, rideIndex) {
-        if (confirm('Fahrt wirklich löschen?')) {
+        if (confirm('Delete this ride?')) {
             shifts[shiftIndex].rides.splice(rideIndex, 1);
             if (shifts[shiftIndex].rides.length === 0) {
                 shifts.splice(shiftIndex, 1);
@@ -1597,7 +1583,7 @@
             saveData();
             updateStats();
             renderShifts();
-            showNotification('Fahrt gelöscht! 🗑️');
+            showNotification('Ride deleted');
         }
     }
 
@@ -1613,7 +1599,7 @@
         document.getElementById('editTip').value = ride.tip || 0;
         document.getElementById('editNote').value = ride.note || '';
 
-        document.querySelectorAll('#editTypeSelector .type-btn').forEach(btn => {
+        document.querySelectorAll('#editTypeGrid .type-btn').forEach(btn => {
             btn.classList.toggle('active', btn.getAttribute('data-type') === ride.type);
         });
 
@@ -1636,20 +1622,18 @@
         const newAmount = parseFloat(document.getElementById('editAmount').value);
         const newTip = parseFloat(document.getElementById('editTip').value) || 0;
         const newNote = document.getElementById('editNote').value.trim();
-        const newType = document.querySelector('#editTypeSelector .type-btn.active').getAttribute('data-type');
+        const newType = document.querySelector('#editTypeGrid .type-btn.active').getAttribute('data-type');
 
         if (!newAmount || newAmount <= 0) {
-            alert('Bitte gültigen Betrag eingeben');
+            showNotification('Please enter valid amount');
             return;
         }
 
-        // Remove from old shift
         shifts[shiftIndex].rides.splice(rideIndex, 1);
         if (shifts[shiftIndex].rides.length === 0 && shifts[shiftIndex].date !== newDate) {
             shifts.splice(shiftIndex, 1);
         }
 
-        // Add to new/same shift
         let targetShift = shifts.find(s => s.date === newDate);
         if (!targetShift) {
             targetShift = { date: newDate, rides: [] };
@@ -1674,32 +1658,36 @@
         updateStats();
         renderShifts();
         closeEditModal();
-        showNotification('Fahrt aktualisiert! ✅');
+        showNotification('Ride updated');
     }
 
     // ==================== VOICE INPUT ====================
     function startVoiceInput() {
         if (!('webkitSpeechRecognition' in window)) {
-            alert('Spracherkennung nicht verfügbar in diesem Browser!');
+            showNotification('Speech recognition not available');
             return;
         }
 
         const recognition = new webkitSpeechRecognition();
         recognition.lang = 'de-DE';
-        recognition.continuous = false;
 
         const voiceBtn = document.getElementById('voiceBtn');
         voiceBtn.classList.add('listening');
 
         recognition.onresult = (event) => {
             const transcript = event.results[0][0].transcript.toLowerCase();
-            parseVoiceInput(transcript);
+            const amountMatch = transcript.match(/(\d+[,.]?\d*)/);
+            if (amountMatch) {
+                const amount = parseFloat(amountMatch[1].replace(',', '.'));
+                document.getElementById('amount').value = amount;
+            }
             voiceBtn.classList.remove('listening');
+            showNotification('Voice input received');
         };
 
         recognition.onerror = () => {
             voiceBtn.classList.remove('listening');
-            alert('Spracherkennung fehlgeschlagen!');
+            showNotification('Voice input failed');
         };
 
         recognition.onend = () => {
@@ -1709,49 +1697,27 @@
         recognition.start();
     }
 
-    function parseVoiceInput(transcript) {
-        // Extract amount
-        const amountMatch = transcript.match(/(\d+[,.]?\d*)/);
-        if (amountMatch) {
-            const amount = parseFloat(amountMatch[1].replace(',', '.'));
-            document.getElementById('amount').value = amount;
-        }
-
-        // Extract type
-        if (transcript.includes('karte') || transcript.includes('card')) {
-            document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector('.type-btn[data-type="card"]').classList.add('active');
-            selectedType = 'card';
-        } else if (transcript.includes('bar') || transcript.includes('cash')) {
-            document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector('.type-btn[data-type="cash"]').classList.add('active');
-            selectedType = 'cash';
-        }
-
-        showNotification('Spracheingabe erkannt! 🎤');
-    }
-
     // ==================== EXPORT ====================
     function exportTXT() {
-        let report = '=== TAXI COMMAND CENTER - SCHICHT NACHWEIS ===\n\n';
+        let report = '=== TAXI PRO ANALYTICS - REPORT ===\n\n';
         
         shifts.forEach(shift => {
             const total = shift.rides.reduce((sum, ride) => sum + ride.totalAmount, 0);
             const totalBase = shift.rides.reduce((sum, ride) => sum + ride.amount, 0);
             const totalTips = shift.rides.reduce((sum, ride) => sum + (ride.tip || 0), 0);
             
-            report += `Datum: ${formatDate(shift.date)}\n`;
-            report += `Fahrten: ${shift.rides.length}\n`;
-            report += `Gesamt: ${total.toFixed(2)}${shift.rides[0].currency || settings.currency}`;
+            report += `Date: ${formatDate(shift.date)}\n`;
+            report += `Rides: ${shift.rides.length}\n`;
+            report += `Total: ${total.toFixed(2)}${shift.rides[0].currency || settings.currency}`;
             if (totalTips > 0) {
-                report += ` (Fahrpreise: ${totalBase.toFixed(2)} + Trinkgeld: ${totalTips.toFixed(2)})`;
+                report += ` (Base: ${totalBase.toFixed(2)} + Tips: ${totalTips.toFixed(2)})`;
             }
             report += '\n\n';
             
             shift.rides.forEach(ride => {
-                report += `  ${ride.time} | ${getTypeLabel(ride.type)}: ${ride.totalAmount.toFixed(2)}${ride.currency || settings.currency}`;
-                if (ride.category) report += ` [${getCategoryLabel(ride.category)}]`;
-                if (ride.tip > 0) report += ` (+ ${ride.tip.toFixed(2)} TIP)`;
+                report += `  ${ride.time} | ${getTypeBadge(ride.type)}: ${ride.totalAmount.toFixed(2)}${ride.currency || settings.currency}`;
+                if (ride.category) report += ` [${ride.category}]`;
+                if (ride.tip > 0) report += ` (+ ${ride.tip.toFixed(2)} tip)`;
                 if (ride.note) report += ` - ${ride.note}`;
                 report += '\n';
             });
@@ -1761,14 +1727,14 @@
         
         const grandTotal = shifts.reduce((sum, shift) => 
             sum + shift.rides.reduce((s, r) => s + r.totalAmount, 0), 0);
-        report += `GESAMTSUMME: ${grandTotal.toFixed(2)}${settings.currency}\n`;
+        report += `GRAND TOTAL: ${grandTotal.toFixed(2)}${settings.currency}\n`;
         
         downloadFile(report, `taxi-export-${Date.now()}.txt`, 'text/plain');
-        showNotification('TXT Export erfolgreich! 📊');
+        showNotification('TXT exported');
     }
 
     function exportCSV() {
-        let csv = 'Datum,Zeit,Typ,Kategorie,Betrag,Trinkgeld,Gesamt,Währung,Notiz\n';
+        let csv = 'Date,Time,Type,Category,Amount,Tip,Total,Currency,Note\n';
         
         shifts.forEach(shift => {
             shift.rides.forEach(ride => {
@@ -1778,19 +1744,19 @@
         });
         
         downloadFile(csv, `taxi-export-${Date.now()}.csv`, 'text/csv');
-        showNotification('CSV Export erfolgreich! 📄');
+        showNotification('CSV exported');
     }
 
     function backupJSON() {
         const backup = {
             shifts: shifts,
             settings: settings,
-            version: '2.0',
+            version: '3.0',
             timestamp: new Date().toISOString()
         };
         
         downloadFile(JSON.stringify(backup, null, 2), `taxi-backup-${Date.now()}.json`, 'application/json');
-        showNotification('Backup erstellt! 💾');
+        showNotification('Backup created');
     }
 
     function restoreJSON(event) {
@@ -1802,20 +1768,20 @@
             try {
                 const backup = JSON.parse(e.target.result);
                 if (backup.shifts && backup.settings) {
-                    if (confirm('Alle aktuellen Daten werden überschrieben! Fortfahren?')) {
+                    if (confirm('Restore backup? All current data will be replaced.')) {
                         shifts = backup.shifts;
                         settings = backup.settings;
                         saveData();
                         loadData();
                         updateStats();
                         renderShifts();
-                        showNotification('Backup wiederhergestellt! 📥');
+                        showNotification('Backup restored');
                     }
                 } else {
-                    alert('Ungültiges Backup-Format!');
+                    showNotification('Invalid backup file');
                 }
             } catch (e) {
-                alert('Fehler beim Lesen der Backup-Datei!');
+                showNotification('Restore failed');
             }
         };
         reader.readAsText(file);
@@ -1832,8 +1798,8 @@
     }
 
     function clearAll() {
-        if (confirm('WARNUNG: Alle Daten werden gelöscht! Diese Aktion kann nicht rückgängig gemacht werden!')) {
-            if (confirm('Bist du WIRKLICH sicher?')) {
+        if (confirm('Delete all data? This cannot be undone.')) {
+            if (confirm('Are you absolutely sure?')) {
                 shifts = [];
                 settings.goal = 0;
                 settings.shiftStart = null;
@@ -1843,23 +1809,21 @@
                 renderShifts();
                 updateShiftStatus();
                 document.getElementById('goalAmount').value = '';
-                showNotification('Alle Daten gelöscht! 🗑️');
+                showNotification('All data cleared');
             }
         }
     }
 
     // ==================== THEME ====================
-    function toggleTheme() {
-        const currentTheme = document.body.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        setTheme(newTheme);
-    }
-
     function setTheme(theme) {
         document.body.setAttribute('data-theme', theme);
-        document.getElementById('themeToggle').textContent = theme === 'dark' ? '🌙' : '☀️';
         settings.theme = theme;
         saveData();
+        
+        // Update active theme option
+        document.querySelectorAll('.theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.getAttribute('data-theme') === theme);
+        });
     }
 
     // ==================== HELPERS ====================
@@ -1873,44 +1837,19 @@
         });
     }
 
-    function getTypeLabel(type) {
-        const labels = {
-            card: '💳 KARTE',
-            cash: '💵 BAR',
-            invoice: '🧾 RECHNUNG',
-            wheelchair: '♿ ROLLSTUHL'
+    function getTypeBadge(type) {
+        const badges = {
+            card: '💳',
+            cash: '💵',
+            invoice: '🧾',
+            wheelchair: '♿'
         };
-        return labels[type] || type;
-    }
-
-    function getCategoryLabel(category) {
-        const labels = {
-            city: '🏙️ City',
-            airport: '✈️ Airport',
-            long: '🛣️ Long',
-            vip: '⭐ VIP'
-        };
-        return labels[category] || category;
+        return badges[type] || type;
     }
 
     function showNotification(message) {
         const notification = document.createElement('div');
-        notification.style.cssText = `
-            position: fixed;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent-cyan);
-            color: #000;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-family: Orbitron;
-            font-weight: 700;
-            font-size: 0.9rem;
-            z-index: 9999;
-            animation: slideDown 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0, 247, 255, 0.5);
-        `;
+        notification.className = 'notification';
         notification.textContent = message;
         document.body.appendChild(notification);
 
@@ -1920,9 +1859,8 @@
         }, 2000);
     }
 
-    // Add fadeOut animation
     const style = document.createElement('style');
-    style.textContent = '@keyframes fadeOut { to { opacity: 0; transform: translateX(-50%) translateY(-20px); } }';
+    style.textContent = '@keyframes fadeOut { to { opacity: 0; transform: translate(-50%, -20px); } }';
     document.head.appendChild(style);
 </script>
 ```
