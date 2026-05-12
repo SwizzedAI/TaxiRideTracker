@@ -42,7 +42,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
             background: var(--bg-main);
             color: var(--text-primary);
-            padding: 20px 16px 100px;
+            padding: 20px 16px 120px;
             max-width: 600px;
             margin: 0 auto;
             transition: background 0.3s, color 0.3s;
@@ -65,6 +65,10 @@
             margin-bottom: 4px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
         }
 
         .header .subtitle {
@@ -73,41 +77,49 @@
             color: #222;
         }
 
+        /* Top Controls: Moon & Lang */
         .top-controls {
             position: absolute;
             top: 12px;
-            left: 12px;
             right: 12px;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            pointer-events: none; /* Let clicks pass through empty space */
+            gap: 8px;
+            align-items: center;
         }
 
         .theme-toggle-btn {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             background: #000;
             color: var(--accent-yellow);
-            border: 3px solid #000;
+            border: none;
             border-radius: 6px;
-            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            pointer-events: auto;
+        }
+
+        .lang-wrapper {
+            background: #000;
+            border-radius: 6px;
+            padding: 0 8px;
+            height: 32px;
+            display: flex;
+            align-items: center;
         }
 
         .lang-select {
-            background: #000;
+            background: transparent;
             color: var(--accent-yellow);
-            border: 3px solid #000;
-            border-radius: 6px;
-            padding: 4px 8px;
-            font-size: 0.8rem;
+            border: none;
+            font-size: 0.85rem;
             font-weight: 800;
             cursor: pointer;
             outline: none;
-            width: max-content; /* FIX: Prevents stretching */
-            pointer-events: auto;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
             text-align: center;
         }
 
@@ -157,246 +169,106 @@
             gap: 8px;
         }
 
-        .input-group {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-            width: 100%;
-        }
-
-        .input-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            width: 100%;
-            margin-bottom: 12px;
-        }
+        .input-group { display: flex; gap: 8px; margin-bottom: 12px; width: 100%; }
+        .input-stack { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-bottom: 12px; }
 
         input, select {
-            flex: 1;
-            padding: 14px;
-            background: var(--bg-input);
-            border: 2px solid var(--border-subtle);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            width: 100%;
+            flex: 1; padding: 14px; background: var(--bg-input); border: 2px solid var(--border-subtle);
+            border-radius: 8px; font-size: 1rem; font-weight: 600; color: var(--text-primary); width: 100%;
         }
 
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--accent-yellow);
-        }
+        input:focus, select:focus { outline: none; border-color: var(--accent-yellow); }
 
         .btn {
-            padding: 16px 20px;
-            border: 3px solid var(--border-main);
-            border-radius: 8px;
-            font-size: 0.9375rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-transform: uppercase;
-            text-align: center;
+            padding: 16px 20px; border: 3px solid var(--border-main); border-radius: 8px;
+            font-size: 0.9375rem; font-weight: 800; cursor: pointer; transition: all 0.2s;
+            text-transform: uppercase; text-align: center;
         }
 
         .btn-yellow { background: var(--accent-yellow); color: #000; }
         .btn-dark { background: var(--btn-dark); color: var(--btn-dark-text); }
         .btn-outline { background: transparent; color: var(--text-primary); border-color: var(--border-main); }
-        
         .btn-outline:hover { background: var(--accent-yellow); color: #000; }
         .btn-full { width: 100%; }
-        
-        .btn-massive {
-            padding: 24px;
-            font-size: 1.5rem;
-            border-width: 4px;
-        }
+        .btn-massive { padding: 24px; font-size: 1.5rem; border-width: 4px; }
 
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
             50% { transform: scale(1.02); box-shadow: 0 0 0 8px rgba(255, 215, 0, 0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
         }
-        
-        .is-pulsing {
-            animation: pulse 2s infinite;
-        }
+        .is-pulsing { animation: pulse 2s infinite; }
 
-        .type-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
+        .type-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
         .type-btn {
-            padding: 14px;
-            background: var(--bg-card);
-            border: 2px solid var(--border-subtle);
-            border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 700;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: var(--text-primary);
+            padding: 14px; background: var(--bg-card); border: 2px solid var(--border-subtle);
+            border-radius: 8px; font-size: 0.875rem; font-weight: 700; text-align: center;
+            cursor: pointer; transition: all 0.2s; color: var(--text-primary);
         }
+        .type-btn.active { background: var(--accent-yellow); color: #000; border-color: var(--border-main); }
 
-        .type-btn.active {
-            background: var(--accent-yellow);
-            color: #000;
-            border-color: var(--border-main);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 2px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+        .stat-card { background: var(--bg-card); border: 2px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; }
         .stat-label { font-size: 0.75rem; font-weight: 800; margin-bottom: 8px; color: var(--text-secondary); text-transform: uppercase; }
         .stat-value { font-size: 1.75rem; font-weight: 900; color: var(--text-primary); }
         .stat-subtext { font-size: 0.625rem; margin-top: 4px; color: var(--text-secondary); font-weight: 600; }
 
-        .tax-info {
-            background: var(--bg-card);
-            border: 2px solid var(--border-subtle);
-            border-radius: 8px;
-            padding: 16px;
-            margin-top: 12px;
-        }
-
-        .tax-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border-subtle);
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        .tax-row:last-child {
-            border-bottom: none;
-            font-weight: 900;
-            font-size: 1rem;
-            color: var(--accent-yellow);
-        }
-
-        .tax-section-title {
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: var(--text-secondary);
-            margin-top: 12px;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-        }
+        .tax-info { background: var(--bg-card); border: 2px solid var(--border-subtle); border-radius: 8px; padding: 16px; margin-top: 12px; }
+        .tax-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border-subtle); font-size: 0.875rem; font-weight: 600; }
+        .tax-row:last-child { border-bottom: none; font-weight: 900; font-size: 1rem; color: var(--accent-yellow); }
+        .tax-section-title { font-size: 0.75rem; font-weight: 800; color: var(--text-secondary); margin-top: 12px; margin-bottom: 4px; text-transform: uppercase; }
 
         .rides-list { display: flex; flex-direction: column; gap: 12px; }
-
-        .ride-item {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            padding: 16px;
-            background: var(--bg-card);
-            border: 2px solid var(--border-subtle);
-            border-radius: 8px;
-        }
-
-        .ride-main-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .ride-badge {
-            padding: 6px 10px;
-            border: 2px solid var(--border-main);
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            background: var(--bg-main);
-        }
-
+        .ride-item { display: flex; flex-direction: column; gap: 8px; padding: 16px; background: var(--bg-card); border: 2px solid var(--border-subtle); border-radius: 8px; }
+        .ride-main-info { display: flex; align-items: center; gap: 12px; }
+        .ride-badge { padding: 6px 10px; border: 2px solid var(--border-main); border-radius: 6px; font-size: 0.75rem; font-weight: 800; color: var(--text-primary); background: var(--bg-main); }
         .ride-info { flex: 1; }
         .ride-time { font-size: 0.875rem; font-weight: 800; color: var(--text-primary); }
         .ride-note { font-size: 0.875rem; color: var(--text-secondary); font-weight: 500; margin-top: 4px; }
         .ride-address { font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px; border-left: 2px solid var(--accent-yellow); padding-left: 6px; }
-        
         .ride-meta { display: flex; gap: 8px; margin-top: 6px; }
         .ride-tag { padding: 2px 8px; border: 1px solid var(--border-subtle); border-radius: 4px; font-size: 0.7rem; font-weight: 700; }
         .ride-tag-yellow { background: var(--accent-yellow); color: #000; border-color: var(--accent-yellow); }
-        
         .ride-amount { font-size: 1.25rem; font-weight: 900; margin-left: auto; color: var(--text-primary); }
 
-        .shift-header {
-            display: flex;
-            justify-content: space-between;
-            padding-bottom: 16px;
-            margin-bottom: 16px;
-            border-bottom: 2px solid var(--border-subtle);
-        }
-
+        .shift-header { display: flex; justify-content: space-between; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 2px solid var(--border-subtle); }
         .shift-date { font-size: 1.125rem; font-weight: 900; color: var(--text-primary); }
         .shift-count { font-size: 0.875rem; color: var(--text-secondary); font-weight: 600; }
         .shift-total-value { font-size: 1.5rem; font-weight: 900; color: var(--accent-yellow); }
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.9); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
         .modal.active { display: flex; }
+        .modal-content { background: var(--bg-card); border: 4px solid var(--border-main); border-radius: 12px; padding: 24px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; }
 
-        .modal-content {
-            background: var(--bg-card);
-            border: 4px solid var(--border-main);
-            border-radius: 12px;
-            padding: 24px;
-            max-width: 500px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
+        /* CHECKERED BOTTOM NAV */
         .bottom-nav {
             position: fixed;
             bottom: 0; left: 0; right: 0;
-            background: var(--accent-yellow);
+            background-color: #000000;
+            background-image:
+              linear-gradient(45deg, var(--accent-yellow) 25%, transparent 25%, transparent 75%, var(--accent-yellow) 75%, var(--accent-yellow)),
+              linear-gradient(45deg, var(--accent-yellow) 25%, transparent 25%, transparent 75%, var(--accent-yellow) 75%, var(--accent-yellow));
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
             border-top: 4px solid var(--border-main);
             display: flex;
-            padding: 12px;
-            gap: 8px;
+            padding: 16px 12px 24px;
+            gap: 12px;
             z-index: 100;
         }
 
         .nav-btn {
             flex: 1;
-            padding: 12px;
+            padding: 14px 0;
             background: var(--bg-card);
             border: 3px solid var(--border-main);
             border-radius: 8px;
-            font-size: 1.25rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
             transition: all 0.2s;
+            color: var(--text-primary);
         }
 
         .nav-btn.active {
@@ -404,73 +276,43 @@
             color: var(--accent-yellow);
         }
 
-        .notification {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent-yellow);
-            border: 4px solid #000;
-            border-radius: 8px;
-            padding: 16px 24px;
-            font-weight: 800;
-            color: #000;
-            z-index: 2000;
-            text-transform: uppercase;
+        .nav-btn svg {
+            width: 24px; height: 24px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
+        .notification { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--accent-yellow); border: 4px solid #000; border-radius: 8px; padding: 16px 24px; font-weight: 800; color: #000; z-index: 2000; text-transform: uppercase; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        
-        #paymentSection {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 2px dashed var(--border-subtle);
-        }
-
-        .active-timer {
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: 900;
-            margin-top: 16px;
-            color: var(--text-primary);
-            letter-spacing: 2px;
-        }
-        
-        .calendar-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .price-panel {
-            background: var(--bg-input);
-            border: 2px solid var(--border-subtle);
-            border-radius: 8px;
-            padding: 16px;
-            margin-top: 12px;
-            font-family: monospace;
-            font-size: 0.85rem;
-            line-height: 1.4;
-            white-space: pre-wrap;
-            color: var(--text-primary);
-            display: none;
-        }
+        #paymentSection { margin-top: 20px; padding-top: 20px; border-top: 2px dashed var(--border-subtle); }
+        .active-timer { text-align: center; font-size: 1.5rem; font-weight: 900; margin-top: 16px; color: var(--text-primary); letter-spacing: 2px; }
+        .calendar-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .price-panel { background: var(--bg-input); border: 2px solid var(--border-subtle); border-radius: 8px; padding: 16px; margin-top: 12px; font-family: monospace; font-size: 0.85rem; line-height: 1.4; white-space: pre-wrap; color: var(--text-primary); display: none; }
     </style>
 </head>
 <body data-theme="dark">
     <div class="header">
         <div class="top-controls">
-            <button class="theme-toggle-btn" id="themeToggle">🌓</button>
-            <select class="lang-select" id="langSelect">
-                <option value="de">DE</option>
-                <option value="en">ENG</option>
-                <option value="ru">RUS</option>
-            </select>
+            <button class="theme-toggle-btn" id="themeToggle">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+            <div class="lang-wrapper">
+                <select class="lang-select" id="langSelect">
+                    <option value="de">DE</option>
+                    <option value="en">EN</option>
+                    <option value="ru">RU</option>
+                </select>
+            </div>
         </div>
-        <h1>TaxiLog</h1>
-        <p class="subtitle" data-i18n="subtitle">Smarter Schicht- & Umsatz-Tracker</p>
+        <h1>
+            <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2.5" fill="none"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H12c-.6 0-1.2.3-1.6.8L8 10s-2.7.6-4.5 1.1c-.8.2-1.5 1-1.5 1.9v3c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+            TaxiLog
+        </h1>
+        <p class="subtitle" data-i18n="subtitle">Schicht- & Umsatz-Tracker</p>
     </div>
 
     <div class="tabs">
@@ -554,8 +396,8 @@
                 </div>
 
                 <div class="input-group" style="margin-top: 16px;">
-                    <button class="btn btn-dark" id="cancelRideBtn" style="flex: 1;" data-i18n="cancel">CANCEL</button>
-                    <button class="btn btn-yellow" id="saveRideBtn" style="flex: 2;" data-i18n="saveRide">SAVE RIDE</button>
+                    <button class="btn btn-dark" id="cancelRideBtn" style="flex: 1;" data-i18n="cancel">ABBRECHEN</button>
+                    <button class="btn btn-yellow" id="saveRideBtn" style="flex: 2;" data-i18n="saveRide">FAHRT SPEICHERN</button>
                 </div>
             </div>
         </div>
@@ -573,14 +415,13 @@
     </div>
 
     <div class="tab-content" data-content="stats">
-        
         <div class="card">
             <h3 class="card-title" data-i18n="dailyBreakdown">💵 Tagesabrechnung</h3>
             <div class="tax-info">
-                <div class="tax-row"><span>💳 <span data-i18n="cardPay">Card</span></span><span id="dayCard">0.00€</span></div>
-                <div class="tax-row"><span>💵 <span data-i18n="cashPay">Cash</span></span><span id="dayCash">0.00€</span></div>
-                <div class="tax-row"><span>🧾 <span data-i18n="invPay">Invoice</span></span><span id="dayInvoice">0.00€</span></div>
-                <div class="tax-row"><span>♿ <span data-i18n="wheelPay">Wheelchair</span></span><span id="dayWheelchair">0.00€</span></div>
+                <div class="tax-row"><span>💳 <span data-i18n="cardPay">Karte</span></span><span id="dayCard">0.00€</span></div>
+                <div class="tax-row"><span>💵 <span data-i18n="cashPay">Bar</span></span><span id="dayCash">0.00€</span></div>
+                <div class="tax-row"><span>🧾 <span data-i18n="invPay">Rechnung</span></span><span id="dayInvoice">0.00€</span></div>
+                <div class="tax-row"><span>♿ <span data-i18n="wheelPay">Rollstuhl</span></span><span id="dayWheelchair">0.00€</span></div>
             </div>
         </div>
 
@@ -645,12 +486,10 @@
     <div class="modal" id="startShiftModal">
         <div class="modal-content">
             <h3 class="card-title" style="margin-bottom: 20px;" data-i18n="shiftModalTitle">🚕 Schicht Starten</h3>
-            
             <div class="input-stack" style="margin-bottom: 16px;">
                 <input type="text" id="driverName" placeholder="Vollständiger Name" required>
                 <input type="text" id="ordnungsnummer" placeholder="Ordnungsnummer" required>
             </div>
-
             <div class="input-group">
                 <button class="btn btn-dark" id="cancelShiftStartBtn" style="flex: 1;" data-i18n="cancel">ABBRECHEN</button>
                 <button class="btn btn-yellow" id="confirmShiftStartBtn" style="flex: 2;" data-i18n="startShift">SCHICHT STARTEN</button>
@@ -661,35 +500,29 @@
     <div class="modal" id="manualRideModal">
         <div class="modal-content">
             <h3 class="card-title" style="margin-bottom: 20px;" data-i18n="addTourTitle">➕ Tour Nachtragen</h3>
-            
             <div class="input-group">
                 <input type="date" id="manualDate" required>
                 <input type="time" id="manualTime" required>
             </div>
-
             <div class="input-group">
                 <input type="number" step="0.01" id="manualAmount" placeholder="Amount" required>
                 <input type="number" step="0.01" id="manualTip" placeholder="Tip">
             </div>
-
             <div class="type-grid" id="manualTaxGrid">
                 <button class="type-btn active" data-tax="7">&lt; 50km (7%)</button>
                 <button class="type-btn" data-tax="19">&gt; 50km (19%)</button>
             </div>
-
             <div class="type-grid" id="manualTypeGrid">
                 <button class="type-btn active" data-type="card">💳 CARD</button>
                 <button class="type-btn" data-type="cash">💵 CASH</button>
                 <button class="type-btn" data-type="invoice">🧾 INVOICE</button>
                 <button class="type-btn" data-type="wheelchair">♿ WHEELCHAIR</button>
             </div>
-
             <div class="input-stack" style="margin-bottom: 12px;">
                 <input type="text" id="manualStart" placeholder="Start Address">
                 <input type="text" id="manualEnd" placeholder="End Address">
                 <input type="text" id="manualNote" placeholder="Note">
             </div>
-
             <div class="input-group">
                 <button class="btn btn-dark" id="closeManualModal" style="flex: 1;" data-i18n="cancel">ABBRECHEN</button>
                 <button class="btn btn-yellow" id="saveManualRideBtn" style="flex: 2;" data-i18n="saveTour">TOUR SPEICHERN</button>
@@ -698,22 +531,30 @@
     </div>
 
     <div class="bottom-nav">
-        <button class="nav-btn active" data-tab="add">🚖</button>
-        <button class="nav-btn" data-tab="history">📅</button>
-        <button class="nav-btn" data-tab="stats">📊</button>
-        <button class="nav-btn" data-tab="reports">📄</button>
-        <button class="nav-btn" data-tab="settings">⚙️</button>
+        <button class="nav-btn active" data-tab="add">
+            <svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H12c-.6 0-1.2.3-1.6.8L8 10s-2.7.6-4.5 1.1c-.8.2-1.5 1-1.5 1.9v3c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+        </button>
+        <button class="nav-btn" data-tab="history">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        </button>
+        <button class="nav-btn" data-tab="stats">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        </button>
+        <button class="nav-btn" data-tab="reports">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        </button>
+        <button class="nav-btn" data-tab="settings">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </button>
     </div>
 
 <script>
-    // System Constants
-    const STORAGE_KEY = 'taxi_pro_data_v5';
-    const SETTINGS_KEY = 'taxi_pro_settings_v5';
+    const STORAGE_KEY = 'taxi_pro_data_v6';
+    const SETTINGS_KEY = 'taxi_pro_settings_v6';
     
-    // Translations Dictionary
     const translations = {
         en: {
-            subtitle: "Smart Shift & Revenue Tracker",
+            subtitle: "Shift & Revenue Tracker",
             tabDrive: "Drive", tabHistory: "History", tabStats: "Stats", tabReports: "Reports", tabConfig: "Config",
             shiftControl: "⏱️ Shift Control", startShift: "START SHIFT", endShift: "END SHIFT",
             driveTitle: "📍 Drive", startRide: "START RIDE", arrived: "ARRIVED / PAYMENT", completePayment: "COMPLETE PAYMENT",
@@ -729,7 +570,7 @@
             addTourTitle: "➕ Add Past Tour", saveTour: "SAVE TOUR"
         },
         de: {
-            subtitle: "Smarter Schicht- & Umsatz-Tracker",
+            subtitle: "Schicht- & Umsatz-Tracker",
             tabDrive: "Fahrt", tabHistory: "Verlauf", tabStats: "Statistik", tabReports: "Berichte", tabConfig: "Einst.",
             shiftControl: "⏱️ Schichtkontrolle", startShift: "SCHICHT STARTEN", endShift: "SCHICHT BEENDEN",
             driveTitle: "📍 Fahrt", startRide: "FAHRT STARTEN", arrived: "ANGEKOMMEN / ZAHLUNG", completePayment: "ZAHLUNG ABSCHLIESSEN",
@@ -745,14 +586,14 @@
             addTourTitle: "➕ Tour Nachtragen", saveTour: "TOUR SPEICHERN"
         },
         ru: {
-            subtitle: "Умный трекер смен и доходов",
+            subtitle: "Трекер смен и доходов",
             tabDrive: "Поездка", tabHistory: "История", tabStats: "Стат.", tabReports: "Отчеты", tabConfig: "Настр.",
             shiftControl: "⏱️ Смена", startShift: "НАЧАТЬ СМЕНУ", endShift: "ЗАВЕРШИТЬ СМЕНУ",
             driveTitle: "📍 Поездка", startRide: "НАЧАТЬ ПОЕЗДКУ", arrived: "ПРИБЫЛИ / ОПЛАТА", completePayment: "ЗАВЕРШИТЬ ОПЛАТУ",
             pricesBtn: "💰 ЦЕНЫ", lblDistance: "Дистанция / Налог", lblPayment: "Способ оплаты",
             toggleAddress: "📍 Добавить адреса (Опционально)", cancel: "ОТМЕНА", saveRide: "СОХРАНИТЬ",
             calendarLog: "📅 Календарь / Журнал", addTour: "➕ ДОБАВИТЬ МАРШРУТ", overview: "📊 Обзор",
-            dailyBreakdown: "💵 Выручка за сегодня", cardPay: "Карта", cashPay: "Наличные", invPay: "Счет", wheelPay: "Инвалидная коляска",
+            dailyBreakdown: "💵 Выручка за сегодня", cardPay: "Карта", cashPay: "Наличные", invPay: "Счет", wheelPay: "Коляска",
             today: "Сегодня", month: "Месяц", taxCalc: "💰 Расчет налогов", tax7Title: "Поездки до 50км (7% Налог)",
             tax19Title: "Поездки свыше 50км (19% Налог)", totalResults: "Итоговые результаты", totalGross: "Общая сумма (Брутто)",
             totalTax: "Налоговый резерв", totalNet: "ЧИСТЫЙ ДОХОД (Нетто)", reportsTitle: "📋 Отчет о смене",
@@ -762,239 +603,136 @@
         }
     };
 
-    // Global State
     let shifts = [];
-    let settings = {
-        currency: '€',
-        shiftStart: null,
-        driverName: '',
-        ordnungsnummer: '',
-        theme: 'dark',
-        lang: 'de'
-    };
-    
-    // Active Ride State Machine
+    let settings = { currency: '€', shiftStart: null, driverName: '', ordnungsnummer: '', theme: 'dark', lang: 'de' };
     let rideState = { isActive: false, startTime: null, timerInterval: null };
-
-    let currentType = 'card';
-    let currentTax = 7;
-    let manualType = 'card';
-    let manualTax = 7;
+    let currentType = 'card', currentTax = 7, manualType = 'card', manualTax = 7;
 
     document.addEventListener('DOMContentLoaded', () => {
-        loadData();
-        initUI();
-        initEvents();
-        updateShiftUI();
-        updateStats();
+        loadData(); initUI(); initEvents(); updateShiftUI(); updateStats();
         document.getElementById('calendarFilter').value = new Date().toISOString().split('T')[0];
         renderShifts();
     });
 
     function loadData() {
         try {
-            const data = localStorage.getItem(STORAGE_KEY);
-            if (data) shifts = JSON.parse(data);
-            
-            const sets = localStorage.getItem(SETTINGS_KEY);
-            if (sets) settings = { ...settings, ...JSON.parse(sets) };
-            
+            const data = localStorage.getItem(STORAGE_KEY); if (data) shifts = JSON.parse(data);
+            const sets = localStorage.getItem(SETTINGS_KEY); if (sets) settings = { ...settings, ...JSON.parse(sets) };
             document.getElementById('settingsCurrency').value = settings.currency;
             document.getElementById('langSelect').value = settings.lang;
             document.getElementById('driverName').value = settings.driverName || '';
             document.getElementById('ordnungsnummer').value = settings.ordnungsnummer || '';
-        } catch (e) { console.error("Data load failed", e); }
+        } catch (e) { console.error(e); }
     }
 
-    function saveData() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(shifts));
-        localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
-    }
-
-    function initUI() {
-        document.body.setAttribute('data-theme', settings.theme);
-        applyLanguage(settings.lang);
-    }
-
+    function saveData() { localStorage.setItem(STORAGE_KEY, JSON.stringify(shifts)); localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); }
+    function initUI() { document.body.setAttribute('data-theme', settings.theme); applyLanguage(settings.lang); }
     function applyLanguage(lang) {
-        settings.lang = lang;
-        saveData();
-        const dict = translations[lang] || translations['de'];
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if(dict[key]) el.textContent = dict[key];
-        });
+        settings.lang = lang; saveData(); const dict = translations[lang] || translations['de'];
+        document.querySelectorAll('[data-i18n]').forEach(el => { if(dict[el.getAttribute('data-i18n')]) el.textContent = dict[el.getAttribute('data-i18n')]; });
         updateShiftUI(); 
     }
 
     function initEvents() {
-        document.querySelectorAll('.tab, .nav-btn').forEach(btn => {
-            btn.addEventListener('click', function() { switchTab(this.getAttribute('data-tab')); });
-        });
-
-        document.getElementById('themeToggle').addEventListener('click', () => {
-            settings.theme = settings.theme === 'light' ? 'dark' : 'light';
-            document.body.setAttribute('data-theme', settings.theme);
-            saveData();
-        });
-
+        document.querySelectorAll('.tab, .nav-btn').forEach(btn => { btn.addEventListener('click', function() { switchTab(this.getAttribute('data-tab')); }); });
+        document.getElementById('themeToggle').addEventListener('click', () => { settings.theme = settings.theme === 'light' ? 'dark' : 'light'; document.body.setAttribute('data-theme', settings.theme); saveData(); });
         document.getElementById('langSelect').addEventListener('change', function() { applyLanguage(this.value); });
-        
         document.getElementById('shiftToggleBtn').addEventListener('click', handleShiftToggle);
         document.getElementById('cancelShiftStartBtn').addEventListener('click', () => document.getElementById('startShiftModal').classList.remove('active'));
         document.getElementById('confirmShiftStartBtn').addEventListener('click', confirmStartShift);
-
         document.getElementById('rideFlowBtn').addEventListener('click', handleRideFlow);
         document.getElementById('cancelRideBtn').addEventListener('click', cancelRideFlow);
         document.getElementById('saveRideBtn').addEventListener('click', saveRide);
-
-        document.getElementById('priceToggleBtn').addEventListener('click', function() {
-            const p = document.getElementById('priceInfo');
-            p.style.display = p.style.display === 'none' ? 'block' : 'none';
-        });
-
-        document.getElementById('toggleAddressBtn').addEventListener('click', function() {
-            const sec = document.getElementById('addressSection');
-            sec.style.display = sec.style.display === 'none' ? 'flex' : 'none';
-        });
-
+        document.getElementById('priceToggleBtn').addEventListener('click', function() { const p = document.getElementById('priceInfo'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; });
+        document.getElementById('toggleAddressBtn').addEventListener('click', function() { const sec = document.getElementById('addressSection'); sec.style.display = sec.style.display === 'none' ? 'flex' : 'none'; });
         setupGridSelection('typeGrid', 'data-type', (val) => currentType = val);
         setupGridSelection('taxGrid', 'data-tax', (val) => currentTax = parseInt(val));
         setupGridSelection('manualTypeGrid', 'data-type', (val) => manualType = val);
         setupGridSelection('manualTaxGrid', 'data-tax', (val) => manualTax = parseInt(val));
-
         document.getElementById('calendarFilter').addEventListener('change', renderShifts);
         document.getElementById('openManualRideBtn').addEventListener('click', openManualModal);
         document.getElementById('closeManualModal').addEventListener('click', closeManualModal);
         document.getElementById('saveManualRideBtn').addEventListener('click', saveManualRide);
-        
-        document.getElementById('settingsCurrency').addEventListener('change', function() {
-            settings.currency = this.value || '€'; saveData(); updateStats(); renderShifts();
-        });
+        document.getElementById('settingsCurrency').addEventListener('change', function() { settings.currency = this.value || '€'; saveData(); updateStats(); renderShifts(); });
         document.getElementById('clearBtn').addEventListener('click', clearAllData);
     }
 
     function setupGridSelection(gridId, dataAttr, callback) {
         const btns = document.querySelectorAll(`#${gridId} .type-btn`);
-        btns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                btns.forEach(x => x.classList.remove('active'));
-                this.classList.add('active');
-                callback(this.getAttribute(dataAttr));
-            });
-        });
+        btns.forEach(btn => { btn.addEventListener('click', function() { btns.forEach(x => x.classList.remove('active')); this.classList.add('active'); callback(this.getAttribute(dataAttr)); }); });
     }
 
     function switchTab(tabId) {
         document.querySelectorAll('.tab, .nav-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-tab') === tabId));
         document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.getAttribute('data-content') === tabId));
-        if (tabId === 'stats') updateStats();
-        if (tabId === 'history') renderShifts();
+        if (tabId === 'stats') updateStats(); if (tabId === 'history') renderShifts();
     }
 
     function handleShiftToggle() {
-        if (!settings.shiftStart) {
-            document.getElementById('startShiftModal').classList.add('active');
-        } else {
-            if(confirm('End current shift?')) {
-                settings.shiftStart = null;
-                saveData();
-                updateShiftUI();
-                notify('Shift Ended 🏁');
-            }
-        }
+        if (!settings.shiftStart) { document.getElementById('startShiftModal').classList.add('active'); } 
+        else { if(confirm('End current shift?')) { settings.shiftStart = null; saveData(); updateShiftUI(); notify('Shift Ended 🏁'); } }
     }
 
     function confirmStartShift() {
-        const name = document.getElementById('driverName').value.trim();
-        const ord = document.getElementById('ordnungsnummer').value.trim();
+        const name = document.getElementById('driverName').value.trim(), ord = document.getElementById('ordnungsnummer').value.trim();
         if(!name || !ord) return notify('Bitte Name & Ordnungsnummer eingeben!');
-        
         settings.driverName = name; settings.ordnungsnummer = ord; settings.shiftStart = new Date().toISOString();
-        saveData(); document.getElementById('startShiftModal').classList.remove('active');
-        updateShiftUI(); notify('Shift Started 🚕');
+        saveData(); document.getElementById('startShiftModal').classList.remove('active'); updateShiftUI(); notify('Shift Started 🚕');
     }
 
     function updateShiftUI() {
-        const btn = document.getElementById('shiftToggleBtn');
-        const status = document.getElementById('shiftStatus');
-        const dict = translations[settings.lang] || translations['de'];
-        
+        const btn = document.getElementById('shiftToggleBtn'), status = document.getElementById('shiftStatus'), dict = translations[settings.lang] || translations['de'];
         if (settings.shiftStart) {
-            btn.textContent = dict.endShift;
-            btn.classList.remove('btn-outline'); btn.classList.add('btn-yellow');
-            status.innerHTML = `🟢 ACTIVE: ${settings.driverName} (${settings.ordnungsnummer})`;
-            status.style.color = 'var(--accent-yellow)';
+            btn.textContent = dict.endShift; btn.classList.remove('btn-outline'); btn.classList.add('btn-yellow');
+            status.innerHTML = `🟢 ACTIVE: ${settings.driverName} (${settings.ordnungsnummer})`; status.style.color = 'var(--accent-yellow)';
         } else {
-            btn.textContent = dict.startShift;
-            btn.classList.remove('btn-yellow'); btn.classList.add('btn-outline');
+            btn.textContent = dict.startShift; btn.classList.remove('btn-yellow'); btn.classList.add('btn-outline');
             status.innerHTML = '⚫ OFFLINE'; status.style.color = 'var(--text-secondary)';
         }
     }
 
     function handleRideFlow() {
-        const btn = document.getElementById('rideFlowBtn'), timer = document.getElementById('activeRideTimer'), paymentSection = document.getElementById('paymentSection');
-        const dict = translations[settings.lang] || translations['de'];
-
+        const btn = document.getElementById('rideFlowBtn'), timer = document.getElementById('activeRideTimer'), paymentSection = document.getElementById('paymentSection'), dict = translations[settings.lang] || translations['de'];
         if (!rideState.isActive) {
-            rideState.isActive = true; rideState.startTime = new Date();
-            btn.textContent = dict.arrived; btn.classList.add('is-pulsing');
-            timer.style.display = 'block'; paymentSection.style.display = 'none';
-            rideState.timerInterval = setInterval(updateRideTimer, 1000); notify('Meter Running...');
+            rideState.isActive = true; rideState.startTime = new Date(); btn.textContent = dict.arrived; btn.classList.add('is-pulsing');
+            timer.style.display = 'block'; paymentSection.style.display = 'none'; rideState.timerInterval = setInterval(updateRideTimer, 1000); notify('Meter Running...');
         } else {
-            clearInterval(rideState.timerInterval);
-            btn.textContent = dict.completePayment; btn.classList.remove('is-pulsing'); btn.disabled = true;
+            clearInterval(rideState.timerInterval); btn.textContent = dict.completePayment; btn.classList.remove('is-pulsing'); btn.disabled = true;
             paymentSection.style.display = 'block'; document.getElementById('amount').focus();
         }
     }
 
     function updateRideTimer() {
-        if(!rideState.startTime) return;
-        const diff = Math.floor((new Date() - rideState.startTime) / 1000);
+        if(!rideState.startTime) return; const diff = Math.floor((new Date() - rideState.startTime) / 1000);
         document.getElementById('activeRideTimer').textContent = `${String(Math.floor(diff/60)).padStart(2,'0')}:${String(diff%60).padStart(2,'0')}`;
     }
 
     function cancelRideFlow() { resetRideState(); notify('Ride Canceled'); }
 
     function saveRide() {
-        const amtInput = document.getElementById('amount').value;
-        const amount = parseFloat(amtInput.replace(',', '.'));
+        const amount = parseFloat(document.getElementById('amount').value.replace(',', '.'));
         if (!amount || amount <= 0) return notify('Error: Enter valid amount');
-
-        const tip = parseFloat(document.getElementById('tip').value.replace(',', '.')) || 0;
         const now = new Date();
-        processNewRideRecord(now.toISOString().split('T')[0], now.toTimeString().substring(0, 5), amount, tip, currentTax, currentType, 
-            document.getElementById('startAddress').value.trim(), document.getElementById('endAddress').value.trim(), 
-            document.getElementById('note').value.trim(), document.getElementById('activeRideTimer').textContent);
+        processNewRideRecord(now.toISOString().split('T')[0], now.toTimeString().substring(0, 5), amount, parseFloat(document.getElementById('tip').value.replace(',', '.')) || 0, currentTax, currentType, document.getElementById('startAddress').value.trim(), document.getElementById('endAddress').value.trim(), document.getElementById('note').value.trim(), document.getElementById('activeRideTimer').textContent);
         resetRideState(); notify('Ride Saved! 💰');
     }
 
     function openManualModal() {
-        const calDate = document.getElementById('calendarFilter').value;
-        if(calDate) document.getElementById('manualDate').value = calDate;
-        document.getElementById('manualTime').value = new Date().toTimeString().substring(0, 5);
-        document.getElementById('manualRideModal').classList.add('active');
+        const calDate = document.getElementById('calendarFilter').value; if(calDate) document.getElementById('manualDate').value = calDate;
+        document.getElementById('manualTime').value = new Date().toTimeString().substring(0, 5); document.getElementById('manualRideModal').classList.add('active');
     }
 
-    function closeManualModal() {
-        document.getElementById('manualRideModal').classList.remove('active');
-        ['manualAmount', 'manualTip', 'manualStart', 'manualEnd', 'manualNote'].forEach(id => document.getElementById(id).value = '');
-    }
+    function closeManualModal() { document.getElementById('manualRideModal').classList.remove('active'); ['manualAmount', 'manualTip', 'manualStart', 'manualEnd', 'manualNote'].forEach(id => document.getElementById(id).value = ''); }
 
     function saveManualRide() {
-        const dateStr = document.getElementById('manualDate').value, timeStr = document.getElementById('manualTime').value;
-        const amount = parseFloat(document.getElementById('manualAmount').value.replace(',', '.'));
+        const dateStr = document.getElementById('manualDate').value, timeStr = document.getElementById('manualTime').value, amount = parseFloat(document.getElementById('manualAmount').value.replace(',', '.'));
         if (!dateStr || !timeStr || !amount || amount <= 0) return notify('Invalid Date, Time, or Amount');
-
-        processNewRideRecord(dateStr, timeStr, amount, parseFloat(document.getElementById('manualTip').value.replace(',', '.')) || 0, 
-            manualTax, manualType, document.getElementById('manualStart').value.trim(), document.getElementById('manualEnd').value.trim(), 
-            document.getElementById('manualNote').value.trim(), 'Manual');
+        processNewRideRecord(dateStr, timeStr, amount, parseFloat(document.getElementById('manualTip').value.replace(',', '.')) || 0, manualTax, manualType, document.getElementById('manualStart').value.trim(), document.getElementById('manualEnd').value.trim(), document.getElementById('manualNote').value.trim(), 'Manual');
         closeManualModal(); document.getElementById('calendarFilter').value = dateStr; renderShifts(); notify('Missing Tour Saved!');
     }
 
     function processNewRideRecord(dateStr, timeStr, amount, tip, taxRate, type, startAddr, endAddr, note, duration) {
-        let shift = shifts.find(s => s.date === dateStr);
-        if (!shift) { shift = { date: dateStr, rides: [] }; shifts.push(shift); }
+        let shift = shifts.find(s => s.date === dateStr); if (!shift) { shift = { date: dateStr, rides: [] }; shifts.push(shift); }
         shift.rides.push({ id: Date.now(), time: timeStr, duration: duration, amount: amount, tip: tip, totalAmount: amount + tip, taxRate: taxRate, type: type, startAddress: startAddr, endAddress: endAddr, note: note });
         shifts.sort((a, b) => new Date(b.date) - new Date(a.date)); shift.rides.sort((a, b) => b.time.localeCompare(a.time));
         saveData(); updateStats(); renderShifts();
@@ -1004,84 +742,39 @@
         rideState.isActive = false; rideState.startTime = null; clearInterval(rideState.timerInterval);
         const btn = document.getElementById('rideFlowBtn'), dict = translations[settings.lang] || translations['de'];
         btn.textContent = dict.startRide; btn.classList.remove('is-pulsing'); btn.disabled = false;
-        document.getElementById('activeRideTimer').style.display = 'none'; document.getElementById('activeRideTimer').textContent = '00:00';
-        document.getElementById('paymentSection').style.display = 'none';
+        document.getElementById('activeRideTimer').style.display = 'none'; document.getElementById('activeRideTimer').textContent = '00:00'; document.getElementById('paymentSection').style.display = 'none';
         ['amount', 'tip', 'startAddress', 'endAddress', 'note'].forEach(id => document.getElementById(id).value = '');
     }
 
     function updateStats() {
-        const todayStr = new Date().toISOString().split('T')[0];
-        const monthStartStr = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
-        let tDay=0, rDay=0, tMonth=0, rMonth=0, g7=0, g19=0;
-        let dCard=0, dCash=0, dInvoice=0, dWheel=0;
+        const todayStr = new Date().toISOString().split('T')[0], monthStartStr = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
+        let tDay=0, rDay=0, tMonth=0, rMonth=0, g7=0, g19=0, dCard=0, dCash=0, dInvoice=0, dWheel=0;
 
         shifts.forEach(shift => {
             const shiftTotal = shift.rides.reduce((sum, r) => sum + r.totalAmount, 0);
             if (shift.date === todayStr) { 
                 tDay += shiftTotal; rDay += shift.rides.length; 
-                shift.rides.forEach(r => {
-                    if (r.type === 'card') dCard += r.totalAmount;
-                    else if (r.type === 'cash') dCash += r.totalAmount;
-                    else if (r.type === 'invoice') dInvoice += r.totalAmount;
-                    else if (r.type === 'wheelchair') dWheel += r.totalAmount;
-                });
+                shift.rides.forEach(r => { if (r.type === 'card') dCard += r.totalAmount; else if (r.type === 'cash') dCash += r.totalAmount; else if (r.type === 'invoice') dInvoice += r.totalAmount; else if (r.type === 'wheelchair') dWheel += r.totalAmount; });
             }
-            if (shift.date >= monthStartStr) { 
-                tMonth += shiftTotal; rMonth += shift.rides.length; 
-                shift.rides.forEach(r => r.taxRate === 19 ? g19 += r.amount : g7 += r.amount);
-            }
+            if (shift.date >= monthStartStr) { tMonth += shiftTotal; rMonth += shift.rides.length; shift.rides.forEach(r => r.taxRate === 19 ? g19 += r.amount : g7 += r.amount); }
         });
 
-        document.getElementById('dayCard').textContent = dCard.toFixed(2) + settings.currency;
-        document.getElementById('dayCash').textContent = dCash.toFixed(2) + settings.currency;
-        document.getElementById('dayInvoice').textContent = dInvoice.toFixed(2) + settings.currency;
-        document.getElementById('dayWheelchair').textContent = dWheel.toFixed(2) + settings.currency;
+        ['Card', 'Cash', 'Invoice', 'Wheelchair'].forEach((k, i) => document.getElementById('day'+k).textContent = [dCard, dCash, dInvoice, dWheel][i].toFixed(2) + settings.currency);
+        document.getElementById('statToday').textContent = tDay.toFixed(2) + settings.currency; document.getElementById('todayRides').textContent = rDay + ' rides';
+        document.getElementById('statMonth').textContent = tMonth.toFixed(2) + settings.currency; document.getElementById('monthRides').textContent = rMonth + ' rides';
 
-        document.getElementById('statToday').textContent = tDay.toFixed(2) + settings.currency;
-        document.getElementById('todayRides').textContent = rDay + ' rides';
-        document.getElementById('statMonth').textContent = tMonth.toFixed(2) + settings.currency;
-        document.getElementById('monthRides').textContent = rMonth + ' rides';
-
-        const net7 = g7 / 1.07, tax7 = g7 - net7, net19 = g19 / 1.19, tax19 = g19 - net19;
-        const totalG = g7 + g19, totalTax = tax7 + tax19, totalNet = totalG - totalTax;
-
-        document.getElementById('gross7').textContent = g7.toFixed(2) + settings.currency; document.getElementById('tax7').textContent = tax7.toFixed(2) + settings.currency;
-        document.getElementById('gross19').textContent = g19.toFixed(2) + settings.currency; document.getElementById('tax19').textContent = tax19.toFixed(2) + settings.currency;
-        document.getElementById('totalGross').textContent = totalG.toFixed(2) + settings.currency; document.getElementById('totalTax').textContent = totalTax.toFixed(2) + settings.currency;
-        document.getElementById('totalNet').textContent = totalNet.toFixed(2) + settings.currency;
+        const net7 = g7 / 1.07, tax7 = g7 - net7, net19 = g19 / 1.19, tax19 = g19 - net19, totalG = g7 + g19, totalTax = tax7 + tax19, totalNet = totalG - totalTax;
+        ['gross7', 'tax7', 'gross19', 'tax19', 'totalGross', 'totalTax', 'totalNet'].forEach((id, i) => document.getElementById(id).textContent = [g7, tax7, g19, tax19, totalG, totalTax, totalNet][i].toFixed(2) + settings.currency);
     }
 
     function renderShifts() {
-        const container = document.getElementById('shiftsContainer'), filterDate = document.getElementById('calendarFilter').value;
-        container.innerHTML = '';
+        const container = document.getElementById('shiftsContainer'), filterDate = document.getElementById('calendarFilter').value; container.innerHTML = '';
         let displayShifts = filterDate ? shifts.filter(s => s.date === filterDate) : shifts;
-        
         if (displayShifts.length === 0) return container.innerHTML = `<div class="card" style="text-align: center; color: var(--text-secondary); padding: 40px 20px;">No tours logged for this date.</div>`;
 
         displayShifts.forEach(shift => {
-            const shiftTotal = shift.rides.reduce((sum, r) => sum + r.totalAmount, 0);
-            const card = document.createElement('div'); card.className = 'card';
-            card.innerHTML = `
-                <div class="shift-header">
-                    <div><div class="shift-date">${new Date(shift.date).toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' })}</div><div class="shift-count">${shift.rides.length} rides</div></div>
-                    <div style="text-align:right"><div class="shift-total-value">${shiftTotal.toFixed(2)}${settings.currency}</div></div>
-                </div>
-                <div class="rides-list">
-                    ${shift.rides.map(r => `
-                        <div class="ride-item">
-                            <div class="ride-main-info">
-                                <div class="ride-badge">${getBadge(r.type)}</div>
-                                <div class="ride-info">
-                                    <div class="ride-time">${r.time} <span style="font-size:0.7rem; font-weight: 500; color:var(--text-secondary);">(${r.duration})</span></div>
-                                    <div class="ride-meta"><span class="ride-tag ride-tag-yellow">${r.taxRate}% TAX</span>${r.tip > 0 ? `<span class="ride-tag">TIP +${r.tip.toFixed(2)}</span>` : ''}</div>
-                                </div>
-                                <div class="ride-amount">${r.totalAmount.toFixed(2)}${settings.currency}</div>
-                            </div>
-                            ${r.startAddress || r.endAddress ? `<div class="ride-address">${r.startAddress ? `A: ${r.startAddress}<br>` : ''}${r.endAddress ? `B: ${r.endAddress}` : ''}</div>` : ''}
-                            ${r.note ? `<div class="ride-note">📝 ${r.note}</div>` : ''}
-                        </div>
-                    `).join('')}
-                </div>`;
+            const shiftTotal = shift.rides.reduce((sum, r) => sum + r.totalAmount, 0), card = document.createElement('div'); card.className = 'card';
+            card.innerHTML = `<div class="shift-header"><div><div class="shift-date">${new Date(shift.date).toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' })}</div><div class="shift-count">${shift.rides.length} rides</div></div><div style="text-align:right"><div class="shift-total-value">${shiftTotal.toFixed(2)}${settings.currency}</div></div></div><div class="rides-list">${shift.rides.map(r => `<div class="ride-item"><div class="ride-main-info"><div class="ride-badge">${getBadge(r.type)}</div><div class="ride-info"><div class="ride-time">${r.time} <span style="font-size:0.7rem; font-weight: 500; color:var(--text-secondary);">(${r.duration})</span></div><div class="ride-meta"><span class="ride-tag ride-tag-yellow">${r.taxRate}% TAX</span>${r.tip > 0 ? `<span class="ride-tag">TIP +${r.tip.toFixed(2)}</span>` : ''}</div></div><div class="ride-amount">${r.totalAmount.toFixed(2)}${settings.currency}</div></div>${r.startAddress || r.endAddress ? `<div class="ride-address">${r.startAddress ? `A: ${r.startAddress}<br>` : ''}${r.endAddress ? `B: ${r.endAddress}` : ''}</div>` : ''}${r.note ? `<div class="ride-note">📝 ${r.note}</div>` : ''}</div>`).join('')}</div>`;
             container.appendChild(card);
         });
     }
