@@ -42,7 +42,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
             background: var(--bg-main);
             color: var(--text-primary);
-            padding: 20px 16px 120px;
+            padding: 20px 16px 40px;
             max-width: 600px;
             margin: 0 auto;
             transition: background 0.3s, color 0.3s;
@@ -53,7 +53,7 @@
             border: 4px solid var(--border-main);
             border-radius: 12px;
             padding: 30px 20px 20px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             text-align: center;
             position: relative;
         }
@@ -77,7 +77,7 @@
             color: #222;
         }
 
-        /* Top Controls: Split Left (Moon) and Right (Lang) */
+        /* Top Controls */
         .top-controls {
             position: absolute;
             top: 10px; 
@@ -86,7 +86,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            pointer-events: none; /* Allows clicks to pass through the empty middle space */
+            pointer-events: none; 
         }
 
         .theme-toggle-btn {
@@ -100,7 +100,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            pointer-events: auto; /* Restores clicks */
+            pointer-events: auto; 
         }
 
         .lang-wrapper {
@@ -111,7 +111,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            pointer-events: auto; /* Restores clicks */
+            pointer-events: auto; 
         }
 
         .lang-select {
@@ -130,32 +130,64 @@
             width: max-content;
         }
 
-        .tabs {
+        /* TOP NAV (REPLACED TABS & BOTTOM NAV) */
+        .top-nav {
+            background-color: #000000;
+            background-image:
+              linear-gradient(45deg, var(--accent-yellow) 25%, transparent 25%, transparent 75%, var(--accent-yellow) 75%, var(--accent-yellow)),
+              linear-gradient(45deg, var(--accent-yellow) 25%, transparent 25%, transparent 75%, var(--accent-yellow) 75%, var(--accent-yellow));
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            border: 4px solid var(--border-main);
+            border-radius: 12px;
             display: flex;
-            gap: 8px;
+            padding: 16px 12px;
+            gap: 12px;
             margin-bottom: 20px;
+            z-index: 100;
         }
 
-        .tab {
+        .nav-btn {
             flex: 1;
-            padding: 14px 4px;
+            padding: 14px 0;
             background: var(--bg-card);
             border: 3px solid var(--border-main);
             border-radius: 8px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
             transition: all 0.2s;
             color: var(--text-primary);
-            text-transform: uppercase;
         }
 
-        .tab.active {
-            background: var(--accent-yellow);
-            color: #000;
-            border-color: var(--border-main);
+        .nav-btn.active {
+            background: #000;
+            color: var(--accent-yellow);
         }
+
+        .nav-btn svg {
+            width: 24px; height: 24px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* TAB CONTENT & DESCRIPTIONS */
+        .tab-description {
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
         .card {
             background: var(--bg-card);
@@ -182,7 +214,7 @@
         input, select {
             flex: 1; padding: 14px; background: var(--bg-input); border: 2px solid var(--border-subtle);
             border-radius: 8px; font-size: 1rem; font-weight: 600; color: var(--text-primary); width: 100%;
-            min-width: 0; /* Prevents flexbox blowout */
+            min-width: 0;
         }
 
         input:focus, select:focus { outline: none; border-color: var(--accent-yellow); }
@@ -243,58 +275,14 @@
         .shift-date { font-size: 1.125rem; font-weight: 900; color: var(--text-primary); }
         .shift-count { font-size: 0.875rem; color: var(--text-secondary); font-weight: 600; }
         .shift-total-value { font-size: 1.5rem; font-weight: 900; color: var(--accent-yellow); }
+        .shift-times-badge { font-size: 0.75rem; background: var(--bg-input); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border-subtle); font-weight: 800; color: var(--text-secondary); margin-top: 6px; display: inline-block; }
 
         .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.9); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
         .modal.active { display: flex; }
         .modal-content { background: var(--bg-card); border: 4px solid var(--border-main); border-radius: 12px; padding: 24px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; }
 
-        /* CHECKERED BOTTOM NAV */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            background-color: #000000;
-            background-image:
-              linear-gradient(45deg, var(--accent-yellow) 25%, transparent 25%, transparent 75%, var(--accent-yellow) 75%, var(--accent-yellow)),
-              linear-gradient(45deg, var(--accent-yellow) 25%, transparent 25%, transparent 75%, var(--accent-yellow) 75%, var(--accent-yellow));
-            background-size: 24px 24px;
-            background-position: 0 0, 12px 12px;
-            display: flex;
-            padding: 16px 12px 24px;
-            gap: 12px;
-            z-index: 100;
-        }
-
-        .nav-btn {
-            flex: 1;
-            padding: 14px 0;
-            background: var(--bg-card);
-            border: 3px solid var(--border-main);
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: var(--text-primary);
-        }
-
-        .nav-btn.active {
-            background: #000;
-            color: var(--accent-yellow);
-        }
-
-        .nav-btn svg {
-            width: 24px; height: 24px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
         .notification { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--accent-yellow); border: 4px solid #000; border-radius: 8px; padding: 16px 24px; font-weight: 800; color: #000; z-index: 2000; text-transform: uppercase; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        
         #paymentSection { margin-top: 20px; padding-top: 20px; border-top: 2px dashed var(--border-subtle); }
         .active-timer { text-align: center; font-size: 1.5rem; font-weight: 900; margin-top: 16px; color: var(--text-primary); letter-spacing: 2px; }
         .calendar-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
@@ -322,16 +310,27 @@
         <p class="subtitle" data-i18n="subtitle">Schicht- & Umsatz-Tracker</p>
     </div>
 
-    <div class="tabs">
-        <button class="tab active" data-tab="add" data-i18n="tabDrive">Fahrt</button>
-        <button class="tab" data-tab="history" data-i18n="tabHistory">Verlauf</button>
-        <button class="tab" data-tab="stats" data-i18n="tabStats">Statistik</button>
-        <button class="tab" data-tab="reports" data-i18n="tabReports">Berichte</button>
-        <button class="tab" data-tab="settings" data-i18n="tabConfig">Einst.</button>
+    <div class="top-nav">
+        <button class="nav-btn active" data-tab="add">
+            <svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H12c-.6 0-1.2.3-1.6.8L8 10s-2.7.6-4.5 1.1c-.8.2-1.5 1-1.5 1.9v3c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+        </button>
+        <button class="nav-btn" data-tab="history">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        </button>
+        <button class="nav-btn" data-tab="stats">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        </button>
+        <button class="nav-btn" data-tab="reports">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        </button>
+        <button class="nav-btn" data-tab="settings">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </button>
     </div>
 
     <div class="tab-content active" data-content="add">
-        
+        <p class="tab-description" data-i18n="descDrive">Erfassen Sie Ihre aktuelle Tour und Zahlungen.</p>
+
         <div class="card">
             <h3 class="card-title" data-i18n="shiftControl">⏱️ Schichtkontrolle</h3>
             <button class="btn btn-outline btn-full" id="shiftToggleBtn" data-i18n="startShift">SCHICHT STARTEN</button>
@@ -411,6 +410,7 @@
     </div>
 
     <div class="tab-content" data-content="history">
+        <p class="tab-description" data-i18n="descHistory">Vergangene Fahrten und Schichtzeiten prüfen.</p>
         <div class="card">
             <h3 class="card-title" data-i18n="calendarLog">📅 Kalender / Log</h3>
             <div class="calendar-header">
@@ -422,6 +422,7 @@
     </div>
 
     <div class="tab-content" data-content="stats">
+        <p class="tab-description" data-i18n="descStats">Umsatz und Steuerrücklagen analysieren.</p>
         <div class="card">
             <h3 class="card-title" data-i18n="dailyBreakdown">💵 Tagesabrechnung</h3>
             <div class="tax-info">
@@ -468,6 +469,7 @@
     </div>
 
     <div class="tab-content" data-content="reports">
+        <p class="tab-description" data-i18n="descReports">Schichtnachweise exportieren.</p>
         <div class="card">
             <h3 class="card-title" data-i18n="reportsTitle">📋 Schichtnachweis</h3>
             <div class="input-group">
@@ -479,6 +481,7 @@
     </div>
 
     <div class="tab-content" data-content="settings">
+        <p class="tab-description" data-i18n="descConfig">App-Einstellungen verwalten.</p>
         <div class="card">
             <h3 class="card-title" data-i18n="configTitle">⚙️ Einstellungen</h3>
             <div class="input-stack" style="margin-bottom: 16px;">
@@ -537,32 +540,14 @@
         </div>
     </div>
 
-    <div class="bottom-nav">
-        <button class="nav-btn active" data-tab="add">
-            <svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H12c-.6 0-1.2.3-1.6.8L8 10s-2.7.6-4.5 1.1c-.8.2-1.5 1-1.5 1.9v3c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
-        </button>
-        <button class="nav-btn" data-tab="history">
-            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-        </button>
-        <button class="nav-btn" data-tab="stats">
-            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-        </button>
-        <button class="nav-btn" data-tab="reports">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-        </button>
-        <button class="nav-btn" data-tab="settings">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-        </button>
-    </div>
-
 <script>
-    const STORAGE_KEY = 'taxi_pro_data_v6';
-    const SETTINGS_KEY = 'taxi_pro_settings_v6';
+    const STORAGE_KEY = 'taxi_pro_data_v7';
+    const SETTINGS_KEY = 'taxi_pro_settings_v7';
     
     const translations = {
         en: {
             subtitle: "Shift & Revenue Tracker",
-            tabDrive: "Drive", tabHistory: "History", tabStats: "Stats", tabReports: "Reports", tabConfig: "Config",
+            descDrive: "Track your current trip and payments.", descHistory: "Review past tours and shift times.", descStats: "Analyze your revenue and tax reserves.", descReports: "Export your shift logs.", descConfig: "Manage your app preferences.",
             shiftControl: "⏱️ Shift Control", startShift: "START SHIFT", endShift: "END SHIFT",
             driveTitle: "📍 Drive", startRide: "START RIDE", arrived: "ARRIVED / PAYMENT", completePayment: "COMPLETE PAYMENT",
             pricesBtn: "💰 PRICES", lblDistance: "Distance / Tax Rate", lblPayment: "Payment Method",
@@ -578,7 +563,7 @@
         },
         de: {
             subtitle: "Schicht- & Umsatz-Tracker",
-            tabDrive: "Fahrt", tabHistory: "Verlauf", tabStats: "Statistik", tabReports: "Berichte", tabConfig: "Einst.",
+            descDrive: "Erfassen Sie Ihre aktuelle Tour und Zahlungen.", descHistory: "Vergangene Fahrten und Schichtzeiten prüfen.", descStats: "Umsatz und Steuerrücklagen analysieren.", descReports: "Schichtnachweise exportieren.", descConfig: "App-Einstellungen verwalten.",
             shiftControl: "⏱️ Schichtkontrolle", startShift: "SCHICHT STARTEN", endShift: "SCHICHT BEENDEN",
             driveTitle: "📍 Fahrt", startRide: "FAHRT STARTEN", arrived: "ANGEKOMMEN / ZAHLUNG", completePayment: "ZAHLUNG ABSCHLIESSEN",
             pricesBtn: "💰 PREISLISTE", lblDistance: "Distanz / Steuersatz", lblPayment: "Zahlungsmethode",
@@ -594,7 +579,7 @@
         },
         ru: {
             subtitle: "Трекер смен и доходов",
-            tabDrive: "Поездка", tabHistory: "История", tabStats: "Стат.", tabReports: "Отчеты", tabConfig: "Настр.",
+            descDrive: "Отслеживайте текущую поездку и оплату.", descHistory: "Просмотр прошлых поездок и времени смен.", descStats: "Анализ доходов и налоговых резервов.", descReports: "Экспорт отчетов о сменах.", descConfig: "Управление настройками приложения.",
             shiftControl: "⏱️ Смена", startShift: "НАЧАТЬ СМЕНУ", endShift: "ЗАВЕРШИТЬ СМЕНУ",
             driveTitle: "📍 Поездка", startRide: "НАЧАТЬ ПОЕЗДКУ", arrived: "ПРИБЫЛИ / ОПЛАТА", completePayment: "ЗАВЕРШИТЬ ОПЛАТУ",
             pricesBtn: "💰 ЦЕНЫ", lblDistance: "Дистанция / Налог", lblPayment: "Способ оплаты",
@@ -634,6 +619,7 @@
 
     function saveData() { localStorage.setItem(STORAGE_KEY, JSON.stringify(shifts)); localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); }
     function initUI() { document.body.setAttribute('data-theme', settings.theme); applyLanguage(settings.lang); }
+    
     function applyLanguage(lang) {
         settings.lang = lang; saveData(); const dict = translations[lang] || translations['de'];
         document.querySelectorAll('[data-i18n]').forEach(el => { if(dict[el.getAttribute('data-i18n')]) el.textContent = dict[el.getAttribute('data-i18n')]; });
@@ -641,27 +627,34 @@
     }
 
     function initEvents() {
-        document.querySelectorAll('.tab, .nav-btn').forEach(btn => { btn.addEventListener('click', function() { switchTab(this.getAttribute('data-tab')); }); });
+        document.querySelectorAll('.nav-btn').forEach(btn => { btn.addEventListener('click', function() { switchTab(this.getAttribute('data-tab')); }); });
         document.getElementById('themeToggle').addEventListener('click', () => { settings.theme = settings.theme === 'light' ? 'dark' : 'light'; document.body.setAttribute('data-theme', settings.theme); saveData(); });
         document.getElementById('langSelect').addEventListener('change', function() { applyLanguage(this.value); });
+        
         document.getElementById('shiftToggleBtn').addEventListener('click', handleShiftToggle);
         document.getElementById('cancelShiftStartBtn').addEventListener('click', () => document.getElementById('startShiftModal').classList.remove('active'));
         document.getElementById('confirmShiftStartBtn').addEventListener('click', confirmStartShift);
+        
         document.getElementById('rideFlowBtn').addEventListener('click', handleRideFlow);
         document.getElementById('cancelRideBtn').addEventListener('click', cancelRideFlow);
         document.getElementById('saveRideBtn').addEventListener('click', saveRide);
+        
         document.getElementById('priceToggleBtn').addEventListener('click', function() { const p = document.getElementById('priceInfo'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; });
         document.getElementById('toggleAddressBtn').addEventListener('click', function() { const sec = document.getElementById('addressSection'); sec.style.display = sec.style.display === 'none' ? 'flex' : 'none'; });
+        
         setupGridSelection('typeGrid', 'data-type', (val) => currentType = val);
         setupGridSelection('taxGrid', 'data-tax', (val) => currentTax = parseInt(val));
         setupGridSelection('manualTypeGrid', 'data-type', (val) => manualType = val);
         setupGridSelection('manualTaxGrid', 'data-tax', (val) => manualTax = parseInt(val));
+        
         document.getElementById('calendarFilter').addEventListener('change', renderShifts);
         document.getElementById('openManualRideBtn').addEventListener('click', openManualModal);
         document.getElementById('closeManualModal').addEventListener('click', closeManualModal);
         document.getElementById('saveManualRideBtn').addEventListener('click', saveManualRide);
+        
         document.getElementById('settingsCurrency').addEventListener('change', function() { settings.currency = this.value || '€'; saveData(); updateStats(); renderShifts(); });
         document.getElementById('clearBtn').addEventListener('click', clearAllData);
+        document.getElementById('generateReportBtn').addEventListener('click', generateReport);
     }
 
     function setupGridSelection(gridId, dataAttr, callback) {
@@ -670,21 +663,41 @@
     }
 
     function switchTab(tabId) {
-        document.querySelectorAll('.tab, .nav-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-tab') === tabId));
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-tab') === tabId));
         document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.getAttribute('data-content') === tabId));
         if (tabId === 'stats') updateStats(); if (tabId === 'history') renderShifts();
     }
 
+    // --- SHIFT LOGIC (NOW WITH TIME LOGGING) ---
     function handleShiftToggle() {
         if (!settings.shiftStart) { document.getElementById('startShiftModal').classList.add('active'); } 
-        else { if(confirm('End current shift?')) { settings.shiftStart = null; saveData(); updateShiftUI(); notify('Shift Ended 🏁'); } }
+        else { 
+            if(confirm('End current shift?')) { 
+                const dateStr = new Date().toISOString().split('T')[0];
+                const timeStr = new Date().toTimeString().substring(0, 5);
+                let shift = shifts.find(s => s.date === dateStr);
+                if (shift) shift.shiftEnd = timeStr; // Log End Time
+                
+                settings.shiftStart = null; 
+                saveData(); updateShiftUI(); updateStats(); renderShifts(); notify('Shift Ended 🏁'); 
+            } 
+        }
     }
 
     function confirmStartShift() {
         const name = document.getElementById('driverName').value.trim(), ord = document.getElementById('ordnungsnummer').value.trim();
         if(!name || !ord) return notify('Bitte Name & Ordnungsnummer eingeben!');
+        
         settings.driverName = name; settings.ordnungsnummer = ord; settings.shiftStart = new Date().toISOString();
-        saveData(); document.getElementById('startShiftModal').classList.remove('active'); updateShiftUI(); notify('Shift Started 🚕');
+        
+        // Log Start Time to today's shift
+        const dateStr = new Date().toISOString().split('T')[0];
+        const timeStr = new Date().toTimeString().substring(0, 5);
+        let shift = shifts.find(s => s.date === dateStr);
+        if (!shift) { shift = { date: dateStr, rides: [] }; shifts.push(shift); }
+        if (!shift.shiftStart) shift.shiftStart = timeStr;
+
+        saveData(); document.getElementById('startShiftModal').classList.remove('active'); updateShiftUI(); updateStats(); renderShifts(); notify('Shift Started 🚕');
     }
 
     function updateShiftUI() {
@@ -698,6 +711,7 @@
         }
     }
 
+    // --- RIDE FLOW ---
     function handleRideFlow() {
         const btn = document.getElementById('rideFlowBtn'), timer = document.getElementById('activeRideTimer'), paymentSection = document.getElementById('paymentSection'), dict = translations[settings.lang] || translations['de'];
         if (!rideState.isActive) {
@@ -705,13 +719,10 @@
             timer.style.display = 'block'; paymentSection.style.display = 'none'; rideState.timerInterval = setInterval(updateRideTimer, 1000); notify('Meter Running...');
         } else {
             clearInterval(rideState.timerInterval); btn.textContent = dict.completePayment; btn.classList.remove('is-pulsing'); btn.disabled = true;
-            paymentSection.style.display = 'block'; 
-            document.getElementById('amount').focus();
+            paymentSection.style.display = 'block'; document.getElementById('amount').focus();
             
             // Auto-scroll to the payment section
-            setTimeout(() => {
-                paymentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 50);
+            setTimeout(() => { paymentSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
         }
     }
 
@@ -787,9 +798,57 @@
 
         displayShifts.forEach(shift => {
             const shiftTotal = shift.rides.reduce((sum, r) => sum + r.totalAmount, 0), card = document.createElement('div'); card.className = 'card';
-            card.innerHTML = `<div class="shift-header"><div><div class="shift-date">${new Date(shift.date).toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' })}</div><div class="shift-count">${shift.rides.length} rides</div></div><div style="text-align:right"><div class="shift-total-value">${shiftTotal.toFixed(2)}${settings.currency}</div></div></div><div class="rides-list">${shift.rides.map(r => `<div class="ride-item"><div class="ride-main-info"><div class="ride-badge">${getBadge(r.type)}</div><div class="ride-info"><div class="ride-time">${r.time} <span style="font-size:0.7rem; font-weight: 500; color:var(--text-secondary);">(${r.duration})</span></div><div class="ride-meta"><span class="ride-tag ride-tag-yellow">${r.taxRate}% TAX</span>${r.tip > 0 ? `<span class="ride-tag">TIP +${r.tip.toFixed(2)}</span>` : ''}</div></div><div class="ride-amount">${r.totalAmount.toFixed(2)}${settings.currency}</div></div>${r.startAddress || r.endAddress ? `<div class="ride-address">${r.startAddress ? `A: ${r.startAddress}<br>` : ''}${r.endAddress ? `B: ${r.endAddress}` : ''}</div>` : ''}${r.note ? `<div class="ride-note">📝 ${r.note}</div>` : ''}</div>`).join('')}</div>`;
+            const shiftStatusText = `${shift.shiftStart || '--:--'} - ${shift.shiftEnd ? shift.shiftEnd : 'Aktiv'}`;
+            card.innerHTML = `<div class="shift-header"><div><div class="shift-date">${new Date(shift.date).toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' })}</div><div class="shift-times-badge">⏱️ ${shiftStatusText}</div></div><div style="text-align:right"><div class="shift-total-value">${shiftTotal.toFixed(2)}${settings.currency}</div><div class="shift-count">${shift.rides.length} rides</div></div></div><div class="rides-list">${shift.rides.map(r => `<div class="ride-item"><div class="ride-main-info"><div class="ride-badge">${getBadge(r.type)}</div><div class="ride-info"><div class="ride-time">${r.time} <span style="font-size:0.7rem; font-weight: 500; color:var(--text-secondary);">(${r.duration})</span></div><div class="ride-meta"><span class="ride-tag ride-tag-yellow">${r.taxRate}% TAX</span>${r.tip > 0 ? `<span class="ride-tag">TIP +${r.tip.toFixed(2)}</span>` : ''}</div></div><div class="ride-amount">${r.totalAmount.toFixed(2)}${settings.currency}</div></div>${r.startAddress || r.endAddress ? `<div class="ride-address">${r.startAddress ? `A: ${r.startAddress}<br>` : ''}${r.endAddress ? `B: ${r.endAddress}` : ''}</div>` : ''}${r.note ? `<div class="ride-note">📝 ${r.note}</div>` : ''}</div>`).join('')}</div>`;
             container.appendChild(card);
         });
+    }
+
+    // --- REPORT GENERATOR ---
+    function generateReport() {
+        const start = document.getElementById('reportStartDate').value;
+        const end = document.getElementById('reportEndDate').value;
+        if (!start || !end) return notify('Bitte Start- und Enddatum wählen!');
+
+        const filtered = shifts.filter(s => s.date >= start && s.date <= end);
+        if(filtered.length === 0) return notify('Keine Daten in diesem Zeitraum.');
+
+        let txt = `TAXI SCHICHTNACHWEIS\nZeitraum: ${start} bis ${end}\n`;
+        txt += `Fahrer: ${settings.driverName || 'Nicht angegeben'} | Ordnungsnummer: ${settings.ordnungsnummer || 'Nicht angegeben'}\n`;
+        txt += `====================================\n\n`;
+
+        let totalGross = 0;
+
+        filtered.forEach(s => {
+            const shiftTotal = s.rides.reduce((sum, r) => sum + r.totalAmount, 0);
+            totalGross += shiftTotal;
+            txt += `DATUM: ${s.date} | SCHICHT: ${s.shiftStart || '--:--'} bis ${s.shiftEnd || '--:--'}\n`;
+            txt += `Umsatz: ${shiftTotal.toFixed(2)}${settings.currency} (${s.rides.length} Fahrten)\n`;
+            txt += `------------------------------------\n`;
+            s.rides.forEach(r => {
+                txt += `[${r.time}] ${r.duration && r.duration !== 'Manual' ? '('+r.duration+') ' : ''}| ${r.type.toUpperCase()} | ${r.taxRate}% MwSt\n`;
+                txt += `Betrag: ${r.totalAmount.toFixed(2)}${settings.currency} (inkl. Tip: ${r.tip.toFixed(2)})\n`;
+                if(r.startAddress || r.endAddress) txt += `Route: ${r.startAddress || '-'} -> ${r.endAddress || '-'}\n`;
+                if(r.note) txt += `Notiz: ${r.note}\n`;
+                txt += `\n`;
+            });
+            txt += `====================================\n\n`;
+        });
+
+        txt += `GESAMTUMSATZ: ${totalGross.toFixed(2)}${settings.currency}\n`;
+
+        // Trigger Download
+        const blob = new Blob([txt], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Schichtnachweis_${start}_bis_${end}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        notify('Bericht heruntergeladen! 📄');
     }
 
     function getBadge(type) { return { card: '💳 CRD', cash: '💵 CSH', invoice: '🧾 INV', wheelchair: '♿ WHL' }[type] || type.toUpperCase(); }
