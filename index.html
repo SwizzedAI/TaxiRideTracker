@@ -77,7 +77,6 @@
             color: #222;
         }
 
-        /* Top Controls */
         .top-controls {
             position: absolute;
             top: 10px; 
@@ -130,7 +129,7 @@
             width: max-content;
         }
 
-        /* TOP NAV (REPLACED TABS & BOTTOM NAV) */
+        /* TOP NAV */
         .top-nav {
             background-color: #000000;
             background-image:
@@ -175,7 +174,6 @@
             stroke-linejoin: round;
         }
 
-        /* TAB CONTENT & DESCRIPTIONS */
         .tab-description {
             text-align: center;
             font-size: 0.85rem;
@@ -203,6 +201,13 @@
             margin-bottom: 16px;
             color: var(--text-primary);
             text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .card-title-left {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -260,6 +265,10 @@
 
         .rides-list { display: flex; flex-direction: column; gap: 12px; }
         .ride-item { display: flex; flex-direction: column; gap: 8px; padding: 16px; background: var(--bg-card); border: 2px solid var(--border-subtle); border-radius: 8px; }
+        
+        .ride-summary { cursor: pointer; transition: opacity 0.2s; }
+        .ride-summary:hover { opacity: 0.8; }
+        
         .ride-main-info { display: flex; align-items: center; gap: 12px; }
         .ride-badge { padding: 6px 10px; border: 2px solid var(--border-main); border-radius: 6px; font-size: 0.75rem; font-weight: 800; color: var(--text-primary); background: var(--bg-main); }
         .ride-info { flex: 1; }
@@ -286,7 +295,29 @@
         #paymentSection { margin-top: 20px; padding-top: 20px; border-top: 2px dashed var(--border-subtle); }
         .active-timer { text-align: center; font-size: 1.5rem; font-weight: 900; margin-top: 16px; color: var(--text-primary); letter-spacing: 2px; }
         .calendar-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-        .price-panel { background: var(--bg-input); border: 2px solid var(--border-subtle); border-radius: 8px; padding: 16px; margin-top: 12px; font-family: monospace; font-size: 0.85rem; line-height: 1.4; white-space: pre-wrap; color: var(--text-primary); display: none; }
+        
+        /* PREMIUM PRICE BOARD */
+        .price-panel { 
+            background: var(--bg-input); border: 2px solid var(--border-subtle); 
+            border-radius: 8px; padding: 16px; margin-top: 12px; display: none; 
+        }
+        .price-header { font-weight: 900; color: var(--accent-yellow); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+        .price-section { margin-bottom: 16px; }
+        .price-section h4 { font-size: 0.85rem; font-weight: 800; color: var(--text-secondary); margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 4px; }
+        .price-row-item { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; padding: 4px 0; color: var(--text-primary); }
+        .price-row-item span:last-child { font-weight: 800; }
+        
+        /* DATE PICKER MINI */
+        .date-picker-mini {
+            padding: 6px 10px;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            border: 2px solid var(--border-subtle);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
     </style>
 </head>
 <body data-theme="dark">
@@ -343,33 +374,37 @@
             <button class="btn btn-yellow btn-full btn-massive" id="rideFlowBtn" data-i18n="startRide">FAHRT STARTEN</button>
             <div id="activeRideTimer" class="active-timer" style="display: none;">00:00</div>
 
-            <button class="btn btn-outline btn-full" id="priceToggleBtn" style="margin-top: 12px; font-size: 0.8rem;" data-i18n="pricesBtn">💰 PREISLISTE</button>
-            <div id="priceInfo" class="price-panel">💰 PREISSCHÄTZUNG LÜBECK
-━━━━━━━━━━━━━━━━━━━━
+            <button class="btn btn-outline btn-full" id="priceToggleBtn" style="margin-top: 12px; font-size: 0.8rem;" data-i18n="pricesBtn">💰 PREISLISTE LÜBECK</button>
+            
+            <div id="priceInfo" class="price-panel">
+                <div class="price-header">💰 Preisschätzung Lübeck</div>
+                
+                <div class="price-section">
+                    <h4>🚕 STANDARD-TAXI</h4>
+                    <div class="price-row-item"><span>Grundpreis</span><span>€4.10</span></div>
+                    <div class="price-row-item"><span>1-3 km</span><span>€2.70/km</span></div>
+                    <div class="price-row-item"><span>3+ km</span><span>€2.20/km</span></div>
+                    <div class="price-row-item"><span>Nachtzuschlag</span><span>+€0.08/km</span></div>
+                </div>
 
-🚕 STANDARD-TAXI:
-┌─────────────────────┐
-│ Grundpreis: €4.10   │
-│ 1-3 km: €2.70/km    │
-│ 3+ km: €2.20/km     │
-│ Nacht: +€0.08/km    │
-└─────────────────────┘
+                <div class="price-section">
+                    <h4>🚐 XL-TAXI (5+ Pers.)</h4>
+                    <div class="price-row-item"><span>Aufpreis</span><span>+€6.00</span></div>
+                </div>
 
-🚐 XL-TAXI (5+ Pers.):
-• Standard + €6.00
+                <div class="price-section">
+                    <h4>♿ ROLLSTUHL</h4>
+                    <div class="price-row-item"><span>1-3 km</span><span>€33.00 flat</span></div>
+                    <div class="price-row-item"><span>3+ km</span><span>+€3.00/km</span></div>
+                </div>
 
-♿ ROLLSTUHL:
-• 1-3 km: €33.00 flat
-• 3+ km: +€3.00/km
-
-🧳 GEPÄCK:
-• Extra: +€3.00
-
-━━━━━━━━━━━━━━━━━━━━
-📊 BEISPIELE:
-• 3 km: ca. €12.20
-• 5 km: ca. €14.50
-• 10 km: ca. €25.50</div>
+                <div class="price-section" style="border-top: 2px solid var(--border-subtle); padding-top: 12px; margin-bottom: 0;">
+                    <h4>📊 BEISPIELE</h4>
+                    <div class="price-row-item"><span>3 km</span><span>ca. €12.20</span></div>
+                    <div class="price-row-item"><span>5 km</span><span>ca. €14.50</span></div>
+                    <div class="price-row-item"><span>10 km</span><span>ca. €25.50</span></div>
+                </div>
+            </div>
 
             <div id="paymentSection" style="display: none;">
                 <div class="input-group">
@@ -424,46 +459,49 @@
     <div class="tab-content" data-content="stats">
         <p class="tab-description" data-i18n="descStats">Umsatz und Steuerrücklagen analysieren.</p>
         <div class="card">
-            <h3 class="card-title" data-i18n="dailyBreakdown">💵 Tagesabrechnung</h3>
+            <div class="card-title">
+                <div class="card-title-left"><span data-i18n="dailyBreakdown">💵 Tagesabrechnung</span></div>
+                <input type="date" id="statsDateFilter" class="date-picker-mini">
+            </div>
             <div class="tax-info">
                 <div class="tax-row"><span>💳 <span data-i18n="cardPay">Karte</span></span><span id="dayCard">0.00€</span></div>
                 <div class="tax-row"><span>💵 <span data-i18n="cashPay">Bar</span></span><span id="dayCash">0.00€</span></div>
                 <div class="tax-row"><span>🧾 <span data-i18n="invPay">Rechnung</span></span><span id="dayInvoice">0.00€</span></div>
                 <div class="tax-row"><span>♿ <span data-i18n="wheelPay">Rollstuhl</span></span><span id="dayWheelchair">0.00€</span></div>
+                <div class="tax-row" style="border-top: 2px solid var(--border-subtle); padding-top: 8px;"><span><span data-i18n="totalGross">Gesamt</span></span><span id="dayTotal">0.00€</span></div>
             </div>
         </div>
 
         <div class="card">
-            <h3 class="card-title" data-i18n="overview">📊 Übersicht</h3>
+            <h3 class="card-title" data-i18n="overview">📊 Monatsübersicht</h3>
             <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-label" data-i18n="today">Heute</div>
-                    <div class="stat-value" id="statToday">0€</div>
-                    <div class="stat-subtext" id="todayRides">0 rides</div>
-                </div>
                 <div class="stat-card">
                     <div class="stat-label" data-i18n="month">Monat</div>
                     <div class="stat-value" id="statMonth">0€</div>
                     <div class="stat-subtext" id="monthRides">0 rides</div>
                 </div>
+                <div class="stat-card">
+                    <div class="stat-label">Netto (Est.)</div>
+                    <div class="stat-value" id="statNetMonth" style="color: var(--accent-yellow);">0€</div>
+                    <div class="stat-subtext">Nach Steuern</div>
+                </div>
             </div>
         </div>
 
         <div class="card">
-            <h3 class="card-title" data-i18n="taxCalc">💰 Steuerberechnung</h3>
+            <h3 class="card-title" data-i18n="taxCalc">💰 Steuerberechnung (Monat)</h3>
             <div class="tax-info">
                 <div class="tax-section-title" data-i18n="tax7Title">Fahrten unter 50km (7% MwSt)</div>
-                <div class="tax-row"><span>Gross</span><span id="gross7">0.00€</span></div>
-                <div class="tax-row"><span>Tax</span><span id="tax7">0.00€</span></div>
+                <div class="tax-row"><span>Brutto</span><span id="gross7">0.00€</span></div>
+                <div class="tax-row"><span>Steuer (7%)</span><span id="tax7">0.00€</span></div>
                 
                 <div class="tax-section-title" style="margin-top:16px;" data-i18n="tax19Title">Fahrten über 50km (19% MwSt)</div>
-                <div class="tax-row"><span>Gross</span><span id="gross19">0.00€</span></div>
-                <div class="tax-row"><span>Tax</span><span id="tax19">0.00€</span></div>
+                <div class="tax-row"><span>Brutto</span><span id="gross19">0.00€</span></div>
+                <div class="tax-row"><span>Steuer (19%)</span><span id="tax19">0.00€</span></div>
                 
                 <div class="tax-section-title" style="margin-top:16px; border-top: 2px solid var(--border-subtle); padding-top: 12px;" data-i18n="totalResults">Gesamtergebnis</div>
                 <div class="tax-row"><span data-i18n="totalGross">Brutto Gesamt</span><span id="totalGross">0.00€</span></div>
-                <div class="tax-row"><span data-i18n="totalTax">Steuerrücklage</span><span id="totalTax">0.00€</span></div>
-                <div class="tax-row"><span data-i18n="totalNet">NETTO EINKOMMEN</span><span id="totalNet">0.00€</span></div>
+                <div class="tax-row"><span data-i18n="totalTax">Steuerrücklage</span><span id="totalTax" style="color: #ff4444;">0.00€</span></div>
             </div>
         </div>
     </div>
@@ -541,8 +579,8 @@
     </div>
 
 <script>
-    const STORAGE_KEY = 'taxi_pro_data_v7';
-    const SETTINGS_KEY = 'taxi_pro_settings_v7';
+    const STORAGE_KEY = 'taxi_pro_data_v8';
+    const SETTINGS_KEY = 'taxi_pro_settings_v8';
     
     const translations = {
         en: {
@@ -552,9 +590,9 @@
             driveTitle: "📍 Drive", startRide: "START RIDE", arrived: "ARRIVED / PAYMENT", completePayment: "COMPLETE PAYMENT",
             pricesBtn: "💰 PRICES", lblDistance: "Distance / Tax Rate", lblPayment: "Payment Method",
             toggleAddress: "📍 Add Route Addresses (Optional)", cancel: "CANCEL", saveRide: "SAVE RIDE",
-            calendarLog: "📅 Calendar / Log", addTour: "➕ ADD TOUR", overview: "📊 Overview",
-            dailyBreakdown: "💵 Today's Breakdown", cardPay: "Card", cashPay: "Cash", invPay: "Invoice", wheelPay: "Wheelchair",
-            today: "Today", month: "Month", taxCalc: "💰 Tax Calculation", tax7Title: "Trips under 50km (7% Tax)",
+            calendarLog: "📅 Calendar / Log", addTour: "➕ ADD TOUR", overview: "📊 Monthly Overview",
+            dailyBreakdown: "💵 Daily Breakdown", cardPay: "Card", cashPay: "Cash", invPay: "Invoice", wheelPay: "Wheelchair",
+            today: "Today", month: "Month", taxCalc: "💰 Tax Calculation (Month)", tax7Title: "Trips under 50km (7% Tax)",
             tax19Title: "Trips over 50km (19% Tax)", totalResults: "Total Results", totalGross: "Total Gross",
             totalTax: "Total Tax Reserve", totalNet: "TOTAL NET INCOME", reportsTitle: "📋 Shift Report",
             genReport: "GENERATE REPORT", configTitle: "⚙️ Configuration", currency: "Currency Symbol",
@@ -568,9 +606,9 @@
             driveTitle: "📍 Fahrt", startRide: "FAHRT STARTEN", arrived: "ANGEKOMMEN / ZAHLUNG", completePayment: "ZAHLUNG ABSCHLIESSEN",
             pricesBtn: "💰 PREISLISTE", lblDistance: "Distanz / Steuersatz", lblPayment: "Zahlungsmethode",
             toggleAddress: "📍 Adressen hinzufügen (Optional)", cancel: "ABBRECHEN", saveRide: "FAHRT SPEICHERN",
-            calendarLog: "📅 Kalender / Log", addTour: "➕ TOUR NACHTRAGEN", overview: "📊 Übersicht",
+            calendarLog: "📅 Kalender / Log", addTour: "➕ TOUR NACHTRAGEN", overview: "📊 Monatsübersicht",
             dailyBreakdown: "💵 Tagesabrechnung", cardPay: "Karte", cashPay: "Bar", invPay: "Rechnung", wheelPay: "Rollstuhl",
-            today: "Heute", month: "Monat", taxCalc: "💰 Steuerberechnung", tax7Title: "Fahrten unter 50km (7% MwSt)",
+            today: "Heute", month: "Monat", taxCalc: "💰 Steuerberechnung (Monat)", tax7Title: "Fahrten unter 50km (7% MwSt)",
             tax19Title: "Fahrten über 50km (19% MwSt)", totalResults: "Gesamtergebnis", totalGross: "Brutto Gesamt",
             totalTax: "Steuerrücklage", totalNet: "NETTO EINKOMMEN", reportsTitle: "📋 Schichtnachweis",
             genReport: "BERICHT ERSTELLEN", configTitle: "⚙️ Einstellungen", currency: "Währungssymbol",
@@ -584,9 +622,9 @@
             driveTitle: "📍 Поездка", startRide: "НАЧАТЬ ПОЕЗДКУ", arrived: "ПРИБЫЛИ / ОПЛАТА", completePayment: "ЗАВЕРШИТЬ ОПЛАТУ",
             pricesBtn: "💰 ЦЕНЫ", lblDistance: "Дистанция / Налог", lblPayment: "Способ оплаты",
             toggleAddress: "📍 Добавить адреса (Опционально)", cancel: "ОТМЕНА", saveRide: "СОХРАНИТЬ",
-            calendarLog: "📅 Календарь / Журнал", addTour: "➕ ДОБАВИТЬ МАРШРУТ", overview: "📊 Обзор",
-            dailyBreakdown: "💵 Выручка за сегодня", cardPay: "Карта", cashPay: "Наличные", invPay: "Счет", wheelPay: "Коляска",
-            today: "Сегодня", month: "Месяц", taxCalc: "💰 Расчет налогов", tax7Title: "Поездки до 50км (7% Налог)",
+            calendarLog: "📅 Календарь / Журнал", addTour: "➕ ДОБАВИТЬ МАРШРУТ", overview: "📊 Месячный Обзор",
+            dailyBreakdown: "💵 Выручка за день", cardPay: "Карта", cashPay: "Наличные", invPay: "Счет", wheelPay: "Коляска",
+            today: "Сегодня", month: "Месяц", taxCalc: "💰 Расчет налогов (Месяц)", tax7Title: "Поездки до 50км (7% Налог)",
             tax19Title: "Поездки свыше 50км (19% Налог)", totalResults: "Итоговые результаты", totalGross: "Общая сумма (Брутто)",
             totalTax: "Налоговый резерв", totalNet: "ЧИСТЫЙ ДОХОД (Нетто)", reportsTitle: "📋 Отчет о смене",
             genReport: "СОЗДАТЬ ОТЧЕТ", configTitle: "⚙️ Настройки", currency: "Символ валюты",
@@ -601,9 +639,13 @@
     let currentType = 'card', currentTax = 7, manualType = 'card', manualTax = 7;
 
     document.addEventListener('DOMContentLoaded', () => {
-        loadData(); initUI(); initEvents(); updateShiftUI(); updateStats();
-        document.getElementById('calendarFilter').value = new Date().toISOString().split('T')[0];
-        renderShifts();
+        loadData(); initUI(); initEvents(); updateShiftUI(); 
+        
+        const todayStr = new Date().toISOString().split('T')[0];
+        document.getElementById('calendarFilter').value = todayStr;
+        document.getElementById('statsDateFilter').value = todayStr;
+        
+        updateStats(); renderShifts();
     });
 
     function loadData() {
@@ -639,8 +681,14 @@
         document.getElementById('cancelRideBtn').addEventListener('click', cancelRideFlow);
         document.getElementById('saveRideBtn').addEventListener('click', saveRide);
         
-        document.getElementById('priceToggleBtn').addEventListener('click', function() { const p = document.getElementById('priceInfo'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; });
-        document.getElementById('toggleAddressBtn').addEventListener('click', function() { const sec = document.getElementById('addressSection'); sec.style.display = sec.style.display === 'none' ? 'flex' : 'none'; });
+        document.getElementById('priceToggleBtn').addEventListener('click', function() { 
+            const p = document.getElementById('priceInfo'); 
+            p.style.display = (p.style.display === 'block') ? 'none' : 'block'; 
+        });
+        document.getElementById('toggleAddressBtn').addEventListener('click', function() { 
+            const sec = document.getElementById('addressSection'); 
+            sec.style.display = (sec.style.display === 'flex') ? 'none' : 'flex'; 
+        });
         
         setupGridSelection('typeGrid', 'data-type', (val) => currentType = val);
         setupGridSelection('taxGrid', 'data-tax', (val) => currentTax = parseInt(val));
@@ -648,6 +696,8 @@
         setupGridSelection('manualTaxGrid', 'data-tax', (val) => manualTax = parseInt(val));
         
         document.getElementById('calendarFilter').addEventListener('change', renderShifts);
+        document.getElementById('statsDateFilter').addEventListener('change', updateStats); // Switch Stats Day
+        
         document.getElementById('openManualRideBtn').addEventListener('click', openManualModal);
         document.getElementById('closeManualModal').addEventListener('click', closeManualModal);
         document.getElementById('saveManualRideBtn').addEventListener('click', saveManualRide);
@@ -668,18 +718,15 @@
         if (tabId === 'stats') updateStats(); if (tabId === 'history') renderShifts();
     }
 
-    // --- SHIFT LOGIC (NOW WITH TIME LOGGING) ---
+    // --- SHIFT LOGIC ---
     function handleShiftToggle() {
         if (!settings.shiftStart) { document.getElementById('startShiftModal').classList.add('active'); } 
         else { 
             if(confirm('End current shift?')) { 
-                const dateStr = new Date().toISOString().split('T')[0];
-                const timeStr = new Date().toTimeString().substring(0, 5);
+                const dateStr = new Date().toISOString().split('T')[0], timeStr = new Date().toTimeString().substring(0, 5);
                 let shift = shifts.find(s => s.date === dateStr);
-                if (shift) shift.shiftEnd = timeStr; // Log End Time
-                
-                settings.shiftStart = null; 
-                saveData(); updateShiftUI(); updateStats(); renderShifts(); notify('Shift Ended 🏁'); 
+                if (shift) shift.shiftEnd = timeStr; 
+                settings.shiftStart = null; saveData(); updateShiftUI(); updateStats(); renderShifts(); notify('Shift Ended 🏁'); 
             } 
         }
     }
@@ -689,10 +736,7 @@
         if(!name || !ord) return notify('Bitte Name & Ordnungsnummer eingeben!');
         
         settings.driverName = name; settings.ordnungsnummer = ord; settings.shiftStart = new Date().toISOString();
-        
-        // Log Start Time to today's shift
-        const dateStr = new Date().toISOString().split('T')[0];
-        const timeStr = new Date().toTimeString().substring(0, 5);
+        const dateStr = new Date().toISOString().split('T')[0], timeStr = new Date().toTimeString().substring(0, 5);
         let shift = shifts.find(s => s.date === dateStr);
         if (!shift) { shift = { date: dateStr, rides: [] }; shifts.push(shift); }
         if (!shift.shiftStart) shift.shiftStart = timeStr;
@@ -720,8 +764,6 @@
         } else {
             clearInterval(rideState.timerInterval); btn.textContent = dict.completePayment; btn.classList.remove('is-pulsing'); btn.disabled = true;
             paymentSection.style.display = 'block'; document.getElementById('amount').focus();
-            
-            // Auto-scroll to the payment section
             setTimeout(() => { paymentSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
         }
     }
@@ -741,6 +783,7 @@
         resetRideState(); notify('Ride Saved! 💰');
     }
 
+    // --- MANUAL RIDES & DELETION ---
     function openManualModal() {
         const calDate = document.getElementById('calendarFilter').value; if(calDate) document.getElementById('manualDate').value = calDate;
         document.getElementById('manualTime').value = new Date().toTimeString().substring(0, 5); document.getElementById('manualRideModal').classList.add('active');
@@ -761,6 +804,21 @@
         shifts.sort((a, b) => new Date(b.date) - new Date(a.date)); shift.rides.sort((a, b) => b.time.localeCompare(a.time));
         saveData(); updateStats(); renderShifts();
     }
+    
+    function toggleRideMenu(id) {
+        const el = document.getElementById('menu-' + id);
+        el.style.display = (el.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    function deleteRide(dateStr, id) {
+        if(!confirm('Diese Tour wirklich löschen?')) return;
+        let shift = shifts.find(s => s.date === dateStr);
+        if(shift) {
+            shift.rides = shift.rides.filter(r => r.id !== id);
+            if(shift.rides.length === 0) shifts = shifts.filter(s => s.date !== dateStr);
+            saveData(); updateStats(); renderShifts(); notify('Tour gelöscht!');
+        }
+    }
 
     function resetRideState() {
         rideState.isActive = false; rideState.startTime = null; clearInterval(rideState.timerInterval);
@@ -771,24 +829,44 @@
     }
 
     function updateStats() {
-        const todayStr = new Date().toISOString().split('T')[0], monthStartStr = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
-        let tDay=0, rDay=0, tMonth=0, rMonth=0, g7=0, g19=0, dCard=0, dCash=0, dInvoice=0, dWheel=0;
+        const statsDateStr = document.getElementById('statsDateFilter').value; // Read selected day
+        const monthStartStr = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
+        
+        let dCard=0, dCash=0, dInvoice=0, dWheel=0;
+        let tMonth=0, rMonth=0, g7=0, g19=0;
 
         shifts.forEach(shift => {
             const shiftTotal = shift.rides.reduce((sum, r) => sum + r.totalAmount, 0);
-            if (shift.date === todayStr) { 
-                tDay += shiftTotal; rDay += shift.rides.length; 
-                shift.rides.forEach(r => { if (r.type === 'card') dCard += r.totalAmount; else if (r.type === 'cash') dCash += r.totalAmount; else if (r.type === 'invoice') dInvoice += r.totalAmount; else if (r.type === 'wheelchair') dWheel += r.totalAmount; });
+            
+            // Selected Day Logic
+            if (shift.date === statsDateStr) { 
+                shift.rides.forEach(r => { 
+                    if (r.type === 'card') dCard += r.totalAmount; 
+                    else if (r.type === 'cash') dCash += r.totalAmount; 
+                    else if (r.type === 'invoice') dInvoice += r.totalAmount; 
+                    else if (r.type === 'wheelchair') dWheel += r.totalAmount; 
+                });
             }
-            if (shift.date >= monthStartStr) { tMonth += shiftTotal; rMonth += shift.rides.length; shift.rides.forEach(r => r.taxRate === 19 ? g19 += r.amount : g7 += r.amount); }
+            
+            // Monthly Logic
+            if (shift.date >= monthStartStr) { 
+                tMonth += shiftTotal; rMonth += shift.rides.length; 
+                shift.rides.forEach(r => r.taxRate === 19 ? g19 += r.amount : g7 += r.amount); 
+            }
         });
 
+        // Update Daily Screen
         ['Card', 'Cash', 'Invoice', 'Wheelchair'].forEach((k, i) => document.getElementById('day'+k).textContent = [dCard, dCash, dInvoice, dWheel][i].toFixed(2) + settings.currency);
-        document.getElementById('statToday').textContent = tDay.toFixed(2) + settings.currency; document.getElementById('todayRides').textContent = rDay + ' rides';
-        document.getElementById('statMonth').textContent = tMonth.toFixed(2) + settings.currency; document.getElementById('monthRides').textContent = rMonth + ' rides';
+        document.getElementById('dayTotal').textContent = (dCard + dCash + dInvoice + dWheel).toFixed(2) + settings.currency;
+
+        // Update Monthly Screen
+        document.getElementById('statMonth').textContent = tMonth.toFixed(2) + settings.currency; 
+        document.getElementById('monthRides').textContent = rMonth + ' rides';
 
         const net7 = g7 / 1.07, tax7 = g7 - net7, net19 = g19 / 1.19, tax19 = g19 - net19, totalG = g7 + g19, totalTax = tax7 + tax19, totalNet = totalG - totalTax;
+        
         ['gross7', 'tax7', 'gross19', 'tax19', 'totalGross', 'totalTax', 'totalNet'].forEach((id, i) => document.getElementById(id).textContent = [g7, tax7, g19, tax19, totalG, totalTax, totalNet][i].toFixed(2) + settings.currency);
+        document.getElementById('statNetMonth').textContent = totalNet.toFixed(2) + settings.currency;
     }
 
     function renderShifts() {
@@ -799,12 +877,22 @@
         displayShifts.forEach(shift => {
             const shiftTotal = shift.rides.reduce((sum, r) => sum + r.totalAmount, 0), card = document.createElement('div'); card.className = 'card';
             const shiftStatusText = `${shift.shiftStart || '--:--'} - ${shift.shiftEnd ? shift.shiftEnd : 'Aktiv'}`;
-            card.innerHTML = `<div class="shift-header"><div><div class="shift-date">${new Date(shift.date).toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' })}</div><div class="shift-times-badge">⏱️ ${shiftStatusText}</div></div><div style="text-align:right"><div class="shift-total-value">${shiftTotal.toFixed(2)}${settings.currency}</div><div class="shift-count">${shift.rides.length} rides</div></div></div><div class="rides-list">${shift.rides.map(r => `<div class="ride-item"><div class="ride-main-info"><div class="ride-badge">${getBadge(r.type)}</div><div class="ride-info"><div class="ride-time">${r.time} <span style="font-size:0.7rem; font-weight: 500; color:var(--text-secondary);">(${r.duration})</span></div><div class="ride-meta"><span class="ride-tag ride-tag-yellow">${r.taxRate}% TAX</span>${r.tip > 0 ? `<span class="ride-tag">TIP +${r.tip.toFixed(2)}</span>` : ''}</div></div><div class="ride-amount">${r.totalAmount.toFixed(2)}${settings.currency}</div></div>${r.startAddress || r.endAddress ? `<div class="ride-address">${r.startAddress ? `A: ${r.startAddress}<br>` : ''}${r.endAddress ? `B: ${r.endAddress}` : ''}</div>` : ''}${r.note ? `<div class="ride-note">📝 ${r.note}</div>` : ''}</div>`).join('')}</div>`;
+            
+            card.innerHTML = `<div class="shift-header"><div><div class="shift-date">${new Date(shift.date).toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' })}</div><div class="shift-times-badge">⏱️ ${shiftStatusText}</div></div><div style="text-align:right"><div class="shift-total-value">${shiftTotal.toFixed(2)}${settings.currency}</div><div class="shift-count">${shift.rides.length} rides</div></div></div><div class="rides-list">${shift.rides.map(r => `
+                <div class="ride-item">
+                    <div class="ride-summary" onclick="toggleRideMenu(${r.id})">
+                        <div class="ride-main-info"><div class="ride-badge">${getBadge(r.type)}</div><div class="ride-info"><div class="ride-time">${r.time} <span style="font-size:0.7rem; font-weight: 500; color:var(--text-secondary);">(${r.duration})</span></div><div class="ride-meta"><span class="ride-tag ride-tag-yellow">${r.taxRate}% TAX</span>${r.tip > 0 ? `<span class="ride-tag">TIP +${r.tip.toFixed(2)}</span>` : ''}</div></div><div class="ride-amount">${r.totalAmount.toFixed(2)}${settings.currency}</div></div>${r.startAddress || r.endAddress ? `<div class="ride-address">${r.startAddress ? `A: ${r.startAddress}<br>` : ''}${r.endAddress ? `B: ${r.endAddress}` : ''}</div>` : ''}${r.note ? `<div class="ride-note">📝 ${r.note}</div>` : ''}
+                    </div>
+                    <div id="menu-${r.id}" style="display:none; border-top: 1px solid var(--border-subtle); padding-top: 12px; margin-top: 12px;">
+                        <button class="btn btn-full" onclick="deleteRide('${shift.date}', ${r.id})" style="padding: 10px; font-size: 0.8rem; background: #ff4444; border-color: #ff4444; color: #fff;">🗑️ LÖSCHEN</button>
+                    </div>
+                </div>
+            `).join('')}</div>`;
             container.appendChild(card);
         });
     }
 
-    // --- REPORT GENERATOR ---
+    // --- REPORT GENERATOR (NOTEPAD STYLE) ---
     function generateReport() {
         const start = document.getElementById('reportStartDate').value;
         const end = document.getElementById('reportEndDate').value;
@@ -813,29 +901,50 @@
         const filtered = shifts.filter(s => s.date >= start && s.date <= end);
         if(filtered.length === 0) return notify('Keine Daten in diesem Zeitraum.');
 
-        let txt = `TAXI SCHICHTNACHWEIS\nZeitraum: ${start} bis ${end}\n`;
-        txt += `Fahrer: ${settings.driverName || 'Nicht angegeben'} | Ordnungsnummer: ${settings.ordnungsnummer || 'Nicht angegeben'}\n`;
-        txt += `====================================\n\n`;
+        const W = 62; // Box Width
+        const sep = `╠` + `═`.repeat(W - 2) + `╣\n`;
+        const top = `╔` + `═`.repeat(W - 2) + `╗\n`;
+        const bot = `╚` + `═`.repeat(W - 2) + `╝\n`;
+        
+        const pad = (str) => `║ ${str.padEnd(W - 4)} ║\n`;
+        const center = (str) => {
+            const spaces = W - 4 - str.length;
+            const left = Math.floor(spaces / 2);
+            return `║ ` + ' '.repeat(left) + str + ' '.repeat(spaces - left) + ` ║\n`;
+        };
+
+        let txt = top;
+        txt += center('TAXI SCHICHTNACHWEIS');
+        txt += sep;
+        txt += pad(`Zeitraum: ${start} bis ${end}`);
+        txt += pad(`Fahrer:   ${settings.driverName || 'Nicht angegeben'}`);
+        txt += pad(`Ordnung:  ${settings.ordnungsnummer || 'Nicht angegeben'}`);
+        txt += sep;
 
         let totalGross = 0;
 
         filtered.forEach(s => {
             const shiftTotal = s.rides.reduce((sum, r) => sum + r.totalAmount, 0);
             totalGross += shiftTotal;
-            txt += `DATUM: ${s.date} | SCHICHT: ${s.shiftStart || '--:--'} bis ${s.shiftEnd || '--:--'}\n`;
-            txt += `Umsatz: ${shiftTotal.toFixed(2)}${settings.currency} (${s.rides.length} Fahrten)\n`;
-            txt += `------------------------------------\n`;
+            
+            txt += pad(`DATUM:    ${s.date}`);
+            txt += pad(`SCHICHT:  ${s.shiftStart || '--:--'} bis ${s.shiftEnd || '--:--'}`);
+            txt += pad(`UMSATZ:   ${shiftTotal.toFixed(2)}${settings.currency} (${s.rides.length} Fahrten)`);
+            txt += sep;
+            
             s.rides.forEach(r => {
-                txt += `[${r.time}] ${r.duration && r.duration !== 'Manual' ? '('+r.duration+') ' : ''}| ${r.type.toUpperCase()} | ${r.taxRate}% MwSt\n`;
-                txt += `Betrag: ${r.totalAmount.toFixed(2)}${settings.currency} (inkl. Tip: ${r.tip.toFixed(2)})\n`;
-                if(r.startAddress || r.endAddress) txt += `Route: ${r.startAddress || '-'} -> ${r.endAddress || '-'}\n`;
-                if(r.note) txt += `Notiz: ${r.note}\n`;
-                txt += `\n`;
+                const durStr = (r.duration && r.duration !== 'Manual') ? `(${r.duration})` : '';
+                txt += pad(`[${r.time}] ${durStr} | ${r.type.toUpperCase()} | ${r.taxRate}% MwSt`);
+                txt += pad(`  Betrag: ${r.totalAmount.toFixed(2)}${settings.currency} (inkl. Tip: ${r.tip.toFixed(2)})`);
+                if(r.startAddress || r.endAddress) txt += pad(`  Route:  ${r.startAddress || '-'} -> ${r.endAddress || '-'}`);
+                if(r.note) txt += pad(`  Notiz:  ${r.note}`);
+                txt += pad(``); // Empty line spacer
             });
-            txt += `====================================\n\n`;
         });
 
-        txt += `GESAMTUMSATZ: ${totalGross.toFixed(2)}${settings.currency}\n`;
+        txt += sep;
+        txt += center(`GESAMTUMSATZ: ${totalGross.toFixed(2)}${settings.currency}`);
+        txt += bot;
 
         // Trigger Download
         const blob = new Blob([txt], { type: 'text/plain' });
